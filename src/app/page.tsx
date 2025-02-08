@@ -1,4 +1,6 @@
 import Head from 'next/head';
+import Image from 'next/image';
+import image from './Images/500px.jpg'
 
 export default function Home() {
   return (
@@ -9,42 +11,82 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div className="min-h-screen bg-gray-900 text-white">
+      <div className="min-h-screen bg-gray-950 text-white">
         {/* Header */}
         <header className="py-10 text-center">
-          <h1 className="text-4xl font-bold">Jack Keirnan</h1>
-          <p className="text-lg mt-2">Web Developer & Designer</p>
+
+          <div className='flex gap-8'>
+            
+            {/* Introductory Text */}
+            <div className="bg-gray-700 p-6 rounded-lg flex-1 flex flex-col justify-center items-center">
+              <h3 className="text-xl font-semibold text-white mb-4">Intro Text</h3>
+              <p className="text-gray-400">
+              Hey, I'm Jack and I'm an aspiring Software Developer.
+              <br>
+              </br>
+              This website serves as my Portfolio for all of my projects ranging from games, websites and more!
+              <br>
+              </br>
+              I'm currently working freelance but I'm looking for permanent work, if you would like to chat feel free to contact any of my socials.
+              </p>
+            </div>
+
+            {/* Dynamic Image */}
+            <div className="bg-gray-700 p-6 rounded-lg flex-1">
+              <Image className='mx-auto'src={image} alt='Image'></Image>
+              <p className="text-gray-400"></p>
+            </div>
+
+          </div>
+          
         </header>
 
         {/* About Section */}
         <section className="py-20 text-center">
-          <h2 className="text-3xl font-semibold mb-6">About Me</h2>
-          <p className="max-w-2xl mx-auto">
-            I'm a passionate web developer with a focus on front-end technologies like React and Next.js.
-            I love creating fast, accessible, and user-friendly websites.
-          </p>
+        <div className='flex gap-8'>
+
+            {/* Portrait */}
+            <div className="bg-gray-700 p-6 rounded-lg flex-1">
+              <Image className='mx-auto'src={image} alt='Image'></Image>
+              <p className="text-gray-400"></p>
+            </div>
+
+            {/* Explanation Text */}
+            <div className="bg-gray-700 p-6 rounded-lg flex-1 flex flex-col justify-center items-center">
+              <p className="text-gray-400">
+              I've been interested in computer science since I was 14, always taking my chances inside or outside of school to further my knowledge.
+              After graduating from university with a Bachelors in Computer Science, I set out to begin my work in freelance to occupy my time whilst I look for more permanent work. 
+              I not only take pride in what I create, but more importantly I strive to always improve on my work; a perfectionist at heart.
+              </p>
+            </div>
+
+          </div>
         </section>
 
         {/* Projects Section */}
-        <section className="bg-gray-800 py-20">
-          <h2 className="text-3xl font-semibold text-center mb-8 text-white">Projects</h2>
+        <section className="py-20">
+
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {/* Project 1 */}
             <div className="bg-gray-700 p-6 rounded-lg">
+              <Image className='mx-auto w-full h-1/2'src={image} alt='Image'></Image>
               <h3 className="text-xl font-semibold text-white mb-4">Project 1</h3>
               <p className="text-gray-400">A description of this awesome project.</p>
             </div>
             {/* Project 2 */}
             <div className="bg-gray-700 p-6 rounded-lg">
+              <Image className='mx-auto w-full h-1/2'src={image} alt='Image'></Image>
               <h3 className="text-xl font-semibold text-white mb-4">Project 2</h3>
               <p className="text-gray-400">A description of this awesome project.</p>
             </div>
             {/* Project 3 */}
             <div className="bg-gray-700 p-6 rounded-lg">
+              <Image className='mx-auto w-full h-1/2'src={image} alt='Image'></Image>
               <h3 className="text-xl font-semibold text-white mb-4">Project 3</h3>
               <p className="text-gray-400">A description of this awesome project.</p>
             </div>
           </div>
+
         </section>
 
         {/* Contact Section */}
@@ -54,7 +96,7 @@ export default function Home() {
             Feel free to reach out if you want to collaborate or just say hi!
           </p>
           <a
-            href="mailto:youremail@example.com"
+            href="jackkeirnan@gmail.com"
             className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700"
           >
             Email Me
@@ -63,7 +105,7 @@ export default function Home() {
 
         {/* Footer */}
         <footer className="bg-gray-800 py-6 text-center text-gray-400">
-          <p>&copy; 2025 John Doe. All rights reserved.</p>
+          <p>&copy; 2025 Jack Keirnan. All rights reserved.</p>
         </footer>
       </div>
     </>
