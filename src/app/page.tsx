@@ -1,6 +1,8 @@
 import Head from 'next/head';
 import Image from 'next/image';
-import image from './Images/500px.jpg'
+import image from '/public/Images/500px.jpg'
+import { ProjectType, projects } from './Components/projects'
+import Project from './Components/projects';
 
 export default function Home() {
   return (
@@ -13,12 +15,15 @@ export default function Home() {
 
       <div className="min-h-screen bg-gray-950 text-white">
         {/* Header */}
-        <header className="py-10 text-center">
+        <header className="bg-gray-800 py-5 text-center text-gray-400">
+        </header>
 
-          <div className='flex gap-8'>
+        {/* Intro Section */}
+        <section className='py-10 text-center'>
+        <div className='flex gap-8 p-5 h-screen'>
             
             {/* Introductory Text */}
-            <div className="bg-gray-700 p-6 rounded-lg flex-1 flex flex-col justify-center items-center">
+            <div className="p-6 rounded-lg flex-1 flex flex-col justify-center">
               <h3 className="text-xl font-semibold text-white mb-4">Intro Text</h3>
               <p className="text-gray-400">
               Hey, I'm Jack and I'm an aspiring Software Developer.
@@ -32,30 +37,33 @@ export default function Home() {
             </div>
 
             {/* Dynamic Image */}
-            <div className="bg-gray-700 p-6 rounded-lg flex-1">
+            <div className="p-6 rounded-lg flex-1 flex items-center">
               <Image className='mx-auto'src={image} alt='Image'></Image>
               <p className="text-gray-400"></p>
             </div>
 
           </div>
-          
-        </header>
+        </section>
 
         {/* About Section */}
         <section className="py-20 text-center">
-        <div className='flex gap-8'>
+        <div className='flex gap-8 p-5 h-screen'>
 
             {/* Portrait */}
-            <div className="bg-gray-700 p-6 rounded-lg flex-1">
+            <div className="p-5 rounded-lg flex-1 flex items-center">
               <Image className='mx-auto'src={image} alt='Image'></Image>
               <p className="text-gray-400"></p>
             </div>
 
             {/* Explanation Text */}
-            <div className="bg-gray-700 p-6 rounded-lg flex-1 flex flex-col justify-center items-center">
+            <div className="p-5 rounded-lg flex-1 flex flex-col justify-center items-center">
               <p className="text-gray-400">
               I've been interested in computer science since I was 14, always taking my chances inside or outside of school to further my knowledge.
+              <br>
+              </br>
               After graduating from university with a Bachelors in Computer Science, I set out to begin my work in freelance to occupy my time whilst I look for more permanent work. 
+              <br>
+              </br>
               I not only take pride in what I create, but more importantly I strive to always improve on my work; a perfectionist at heart.
               </p>
             </div>
@@ -64,26 +72,34 @@ export default function Home() {
         </section>
 
         {/* Projects Section */}
-        <section className="py-20">
+        <section className="py-20 p-5">
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 h-screen">
             {/* Project 1 */}
-            <div className="bg-gray-700 p-6 rounded-lg">
+            <div className="p-5 rounded-lg">
               <Image className='mx-auto w-full h-1/2'src={image} alt='Image'></Image>
               <h3 className="text-xl font-semibold text-white mb-4">Project 1</h3>
               <p className="text-gray-400">A description of this awesome project.</p>
             </div>
             {/* Project 2 */}
-            <div className="bg-gray-700 p-6 rounded-lg">
+            <div className="p-5 rounded-lg">
               <Image className='mx-auto w-full h-1/2'src={image} alt='Image'></Image>
               <h3 className="text-xl font-semibold text-white mb-4">Project 2</h3>
               <p className="text-gray-400">A description of this awesome project.</p>
             </div>
             {/* Project 3 */}
-            <div className="bg-gray-700 p-6 rounded-lg">
+            <div className="p-5 rounded-lg">
               <Image className='mx-auto w-full h-1/2'src={image} alt='Image'></Image>
               <h3 className="text-xl font-semibold text-white mb-4">Project 3</h3>
               <p className="text-gray-400">A description of this awesome project.</p>
+            </div>
+          </div>
+
+          <div className='sticky top-0 flex h-screen items-center overflow-hidden'>
+            <div className='flex gap-4'>
+              {projects.map((project: ProjectType) => {
+                return <Project project={project} key={project.id} />;
+              })}
             </div>
           </div>
 
