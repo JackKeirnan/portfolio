@@ -2,8 +2,10 @@
 
 import Head from 'next/head';
 import Image from 'next/image';
-import image from '/public/Images/500px.jpg'
+import portrait from '/public/Images/Jack.jpg'
 import { ProjectGrid } from './Components/projects';
+import Lottie from "lottie-react";
+import animationData from "./Lotties/BrickBuilding.json";
 
 export default function Home() {
   return (
@@ -14,18 +16,18 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div className="min-h-screen bg-gray-950 text-white">
+      <div className="min-h-screen bg-neutral-950">
         {/* Header */}
         <header className="py-5 text-center text-gray-400">
         </header>
 
         {/* Intro Section */}
-        <section className='py-10 text-center'>
-        <div className='flex gap-8 p-5 h-screen'>
+        <section className='py-10 text-center min-h-screen'>
+        <div className='md:flex gap-8 p-5 h-screen'>
             
             {/* Introductory Text */}
-            <div className="p-6 rounded-lg flex-1 flex flex-col justify-center text-lg">
-              <p className="text-gray-400">
+            <div className="p-5 rounded-lg flex-1 flex justify-center items-center text-lg">
+              <p className="text-gray-400 max-w-[50%]">
               Hey, I'm Jack and I'm an aspiring Software Developer.
               <br>
               </br>
@@ -37,27 +39,29 @@ export default function Home() {
             </div>
 
             {/* Dynamic Image */}
-            <div className="p-6 rounded-lg flex-1 flex items-center">
-              <Image className='mx-auto'src={image} alt='Image'></Image>
-              <p className="text-gray-400"></p>
+            <div className="p-6 rounded-lg flex-1 flex justify-center items-center">
+              <Lottie 
+              animationData={animationData} 
+              className='flex justify-center items-center w-[50%]'
+              loop={true}>
+              </Lottie>
             </div>
 
           </div>
         </section>
 
         {/* About Section */}
-        <section className="py-20 text-center">
-        <div className='flex gap-8 p-5 h-screen'>
+        <section className="py-10 text-center min-h-screen">
+        <div className='md:flex gap-8 p-5 h-screen'>
 
             {/* Portrait */}
             <div className="p-5 rounded-lg flex-1 flex items-center">
-              <Image className='mx-auto'src={image} alt='Image'></Image>
-              <p className="text-gray-400"></p>
+              <Image className='mx-auto w-[25%] h-[35%] rounded-md'src={portrait} alt='Image'></Image>
             </div>
 
             {/* Explanation Text */}
             <div className="p-5 rounded-lg flex-1 flex flex-col justify-center items-center text-lg">
-              <p className="text-gray-400">
+              <p className="text-gray-400 max-w-[50%]">
               I've been interested in computer science since I was 14, always taking my chances inside or outside of school to further my knowledge.
               <br>
               </br>
@@ -72,28 +76,26 @@ export default function Home() {
         </section>
 
         {/* Projects Section */}
-        <section>
+        <section className="py-10 text-center min-h-screen">
           <ProjectGrid />
         </section>
 
-
-
         {/* Contact Section */}
-        <section className="py-20 text-center">
+        <section className="py-20 text-center text-gray-400">
           <h2 className="text-3xl font-semibold mb-6">Contact</h2>
           <p className="max-w-2xl mx-auto mb-8">
             Feel free to reach out if you want to collaborate or just say hi!
           </p>
           <a
-            href="jackkeirnan@gmail.com"
-            className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700"
+            href="mailto:jackkeirnan@gmail.com"
+            className="bg-white text-black px-6 py-3 rounded-lg hover:bg-gray-400"
           >
             Email Me
           </a>
         </section>
 
         {/* Footer */}
-        <footer className="bg-gray-800 py-6 text-center text-gray-400">
+        <footer className="bg-neutral-600 py-6 text-center text-gray-400">
           <p>&copy; 2025 Jack Keirnan. All rights reserved.</p>
         </footer>
       </div>

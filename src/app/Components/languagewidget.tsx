@@ -1,34 +1,23 @@
-type LanguageType = {
-    languageName: string,
-    id: number
-    // add more informatino about languages here
-}
-
-const Language = ({language}: {language: LanguageType}) => {
-    return(
-        <div></div>
+const Language = ({ languageName }: { languageName: string }) => {    return(
+    <div className="p-2 bg-neutral-500 text-black rounded-md">
+        {languageName}
+    </div>
     )
 }
 
-export const languagewidget = (languageinput : string[]) => {
+interface LanguageWidgetProps {
+    languageinput: string[];
+  }
 
-    const foundList : LanguageType[] = [];
-
-    for (let i = 0; i < languageinput.length; i++){
-
-    }
-
-    return( 
-        <div className="py-20 p-5 relative h-[300vh]">
-            <div className='sticky top-0 flex h-screen items-center overflow-hidden w-full'>
-                <div className='bg-gray-500 flex gap-4 w-full'>
-                    {foundList.map((language: LanguageType ) => {
-                        return <Language language={language} key={language.id} />;
-                    })}
-                </div>
-            </div>
+  export const LanguageWidget: React.FC<LanguageWidgetProps> = ({ languageinput }) => {
+    return (
+      <div className="flex flex-col justify-end py-5 p-5 relative w-full">
+        <div className="flex flex-wrap gap-5">
+          {languageinput.map((language, index) => (
+            <Language languageName={language} key={index} />
+          ))}
         </div>
-
-
-
-)}
+      </div>
+    );
+  };
+  
