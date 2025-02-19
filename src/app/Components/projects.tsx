@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import { LanguageWidget } from './languagewidget';
+import { motion } from 'motion/react';
 
 
 type ProjectType = {
@@ -19,7 +20,7 @@ const projects: ProjectType[] = [
         languages : ["Java", "HTML", "CSS", "JavaScript", "React", "SpringBoot"]
     },
     {
-        image: '/Images/500px.jpg',
+        image: '/Images/AWS.png',
         title: "Aritifical Intelligence Internship",
         description: "I worked as an intern software developer at AuraVision, learning and experiencing all the aspects and qualities required to run a small-scale start-up tech company. I was given and completed tasks such as creating a meta-data parser to handle their large intake of information via email and parse it into their respective databases.",
         id: 2,
@@ -43,7 +44,10 @@ const projects: ProjectType[] = [
 
 const Project =({project}: {project: ProjectType}) => {
     return(
-        <div
+        <motion.div
+        initial={{opacity:0}}
+        whileInView={{opacity:1}}
+        transition={{duration:1, ease:"easeOut"}}
         key={project.id}
         className="flex flex-col flex-shrink-0 bg-neutral-800 max-w-[30rem] max-h-[50rem] overflow-hidden border border-white-5 rounded-md">
             <div>
@@ -63,7 +67,7 @@ const Project =({project}: {project: ProjectType}) => {
             <div className=''>
                 <LanguageWidget languageinput={project.languages} />
             </div>
-        </div>
+        </motion.div>
         
     )
   }

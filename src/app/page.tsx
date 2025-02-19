@@ -6,6 +6,8 @@ import portrait from '/public/Images/Jack.jpg'
 import { ProjectGrid } from './Components/projects';
 import dynamic from 'next/dynamic';
 import animationData from "./Lotties/BrickBuilding.json";
+import { motion } from 'motion/react';
+
 
 export default function Home() {
 
@@ -26,7 +28,10 @@ export default function Home() {
 
         {/* Intro Section */}
         <section className='py-10 text-center min-h-screen'>
-        <div className='md:flex gap-8 p-5 h-screen'>
+        <motion.div className='md:flex gap-8 p-5 h-screen'
+          initial={{opacity:0}}
+          whileInView={{opacity:1}}
+          transition={{duration:1, ease:"easeOut"}}>
             
             {/* Introductory Text */}
             <div className="p-5 rounded-lg flex-1 flex justify-center items-center text-lg">
@@ -50,14 +55,18 @@ export default function Home() {
               </Lottie>
             </div>
 
-          </div>
+          </motion.div>
         </section>
 
         {/* About Section */}
         <section className="py-10 text-center min-h-screen">
-        <div className='md:flex gap-8 p-5 h-screen'>
+        <motion.div className='md:flex gap-8 p-5 h-screen'
+          initial={{opacity:0}}
+          whileInView={{opacity:1}}
+          transition={{duration:1, ease:"easeOut"}}>
 
             {/* Portrait */}
+            
             <div className="p-5 rounded-lg flex-1 flex items-center">
               <Image className='mx-auto w-[25%] h-[35%] rounded-md'src={portrait} alt='Image'></Image>
             </div>
@@ -75,7 +84,7 @@ export default function Home() {
               </p>
             </div>
 
-          </div>
+          </motion.div>
         </section>
 
         {/* Projects Section */}
