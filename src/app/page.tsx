@@ -4,10 +4,13 @@ import Head from 'next/head';
 import Image from 'next/image';
 import portrait from '/public/Images/Jack.jpg'
 import { ProjectGrid } from './Components/projects';
-import Lottie from "lottie-react";
+import dynamic from 'next/dynamic';
 import animationData from "./Lotties/BrickBuilding.json";
 
 export default function Home() {
+
+  const Lottie = dynamic(() => import('lottie-react'), { ssr: false });
+
   return (
     <>
       <Head>
