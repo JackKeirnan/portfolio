@@ -1,5 +1,6 @@
-const Language = ({ languageName }: { languageName: string }) => {    return(
-    <div className="p-2 bg-neutral-500 text-black rounded-md">
+const Language = ({ languageName }: { languageName: string }) => {    
+  return(
+    <div className="p-2 bg-purple-900 text-white rounded-md">
         {languageName}
     </div>
     )
