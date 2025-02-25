@@ -13,7 +13,7 @@ const Project = ({ project, handleShowModal }: { project: ProjectType, handleSho
             whileInView={{ opacity: 1 }}
             transition={{ duration: 1, ease: "easeOut" }}
             key={project.id}
-            className="flex flex-col flex-shrink-0 bg-neutral-800 max-w-[30rem] max-h-[50rem] overflow-hidden border border-purple-900 rounded-md cursor-pointer hover:border-white"
+            className="flex flex-col flex-shrink-0 bg-neutral-800 max-w-[30rem] max-h-[55rem] overflow-hidden border border-purple-900 rounded-md cursor-pointer hover:border-white"
         >
             <div>
                 <Image
