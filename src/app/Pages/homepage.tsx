@@ -47,7 +47,7 @@ export default function homepage() {
                     My name's Jack and I'm an aspiring Software Developer.
                   <br />
                   <br />
-                    I've designed and created this website with the purpose that is to showcase my work in a more convinient and detailed way!
+                    I've designed and created this website with the purpose of showcasing my work in a more convinient and detailed way!
                   <br />
                   <br />
                     I'm currently working freelance but I'm looking for permanent work, if you would like to chat feel free to contact me on any of my socials.
