@@ -41,7 +41,7 @@ export default function homepage() {
             {/* Introductory Text */}
             <div className="p-5 rounded-lg flex-1 flex flex-col justify-center items-center ">
               <h1 className='text-6xl text-purple-900 text-bold'>Hi!</h1>
-              <div className="text-gray-400 max-w-[50%] text-xl">
+              <div className="text-gray-400 max-w-[50%] md:text-xl">
                 <p>
                   <br />
                     My name's Jack and I'm an aspiring Software Developer.
@@ -63,7 +63,7 @@ export default function homepage() {
 
         {/* About Section */}
         <section className="py-10 text-center ">
-        <motion.div className='md:flex gap-8 p-5 h-screen'
+        <motion.div className='md:flex gap-8 p-5 min-h-screen'
           initial={{opacity:0}}
           whileInView={{opacity:1}}
           transition={{duration:1, ease:"easeOut"}}>
@@ -80,7 +80,7 @@ export default function homepage() {
 
 
             {/* Explanation Text */}
-            <div className="p-5 rounded-lg flex-1 flex flex-col justify-center items-center text-xl">
+            <div className="p-5 rounded-lg flex-1 flex flex-col justify-center items-center md:text-xl">
               <p className="text-gray-400 max-w-[50%]">
                 Born in the UK but raised in the Middle East, I've lived a life of travel and vast experiences.
                 <br />
