@@ -19,7 +19,7 @@ export default function homepage() {
       <Head>
         <title>My Portfolio</title>
         <meta name="description" content="My portfolio built with Next.js and Tailwind CSS" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="" />
       </Head>
 
       <div className="min-h-screen bg-neutral-950">
@@ -35,7 +35,7 @@ export default function homepage() {
             
             {/* Dynamic Image */}
             <div className="p-5 rounded-lg flex-1 flex justify-center items-center">
-              <Image className='max-w-[15rem] max-h-[25rem] rounded-full'src={portrait} alt='Image'></Image>
+              <Image className='max-w-[15rem] max-h-[25rem] rounded-full' src={portrait} alt='Image'></Image>
             </div>
 
             {/* Introductory Text */}
