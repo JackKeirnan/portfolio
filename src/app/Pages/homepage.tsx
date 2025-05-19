@@ -3,11 +3,13 @@
 import Head from 'next/head';
 import Image from 'next/image';
 import portrait from '/public/Images/Jack.png'
-import { ProjectGrid } from '../Components/projects';
+//import { ProjectGrid } from '../Components/projects';
 import dynamic from 'next/dynamic';
 import animationData from "../Lotties/BrickBuilding.json";
 import { motion } from 'motion/react';
 import ContentSection from '../Components/contentSection';
+import SkillSection from "../Components/skillSection";
+import ContactSection from "../Components/contactSection";
 
 
 export default function homepage() {
@@ -39,7 +41,7 @@ export default function homepage() {
             </div>
 
             {/* Introductory Text */}
-            <div className="p-5 rounded-lg flex-1 flex flex-col justify-center items-center">
+            <div className="p-5 rounded-lg flex-1 flex flex-col justify-start items-center">
               <h1 className='text-6xl text-purple-900 text-bold'>Hi!</h1>
               <div className="text-gray-400 max-w-[50%] md:text-xl">
                 <p>
@@ -63,13 +65,13 @@ export default function homepage() {
 
         {/* About Section */}
         <section className="py-10 text-center">
-        <motion.div className='md:flex gap-8 p-5 min-h-screen'
+        <motion.div className='md:flex gap-8 p-5'
           initial={{opacity:0}}
           whileInView={{opacity:1}}
           transition={{duration:1, ease:"easeOut"}}>
 
             {/* Portrait */}
-            <div className="p-6 rounded-lg flex-1 flex justify-center items-center">
+            <div className="p-6 rounded-lg flex-1 flex justify-center items-center md:justify-end">
               <Lottie 
               animationData={animationData} 
               className='flex justify-center items-center w-[50%]'
@@ -79,7 +81,7 @@ export default function homepage() {
 
 
             {/* Explanation Text */}
-            <div className="p-5 rounded-lg flex-1 flex flex-col justify-center items-center md:text-xl">
+            <div className="p-5 rounded-lg flex-1 flex flex-col items-center md:text-xl md:items-start">
               <p className="text-gray-400 max-w-[50%]">
                 Born in the UK but raised in the Middle East, I've lived a life of travel and vast experiences.
                 <br />
@@ -94,10 +96,22 @@ export default function homepage() {
           </motion.div>
         </section>
 
-        {/* Newer Projects Section */}
+        {/* Skills Section */}
         <section>
           <div>
-            <ContentSection />
+            <SkillSection />
+          </div>
+        </section>
+
+
+        {/* Newer Projects Section */}
+        <section>
+          <div className={'text-center'}>
+            <h2 className="text-4xl text-purple-900 font-bold">Some of my Work</h2>
+          </div>
+          <ContentSection />
+          <div className="w-full flex justify-center my-8">
+            <div className="w-2/3 h-[1px] bg-purple-600 opacity-30" />
           </div>
         </section>
 
@@ -112,29 +126,21 @@ export default function homepage() {
         <section className='py-20 text-center text-gray-400'>
           <h2 className='text-3xl font-semibold mb-6'>Services</h2>
           <p className="max-w-2xl mx-auto mb-8">
-            I offer website creation services too! If you are interested please visit the page below to see the details
+            I offer website creation services too! If you are interested, please visit the page below to see the details
           </p>
           <a href="" className="btn w-[8rem] bg-purple-900 text-neutral-300 hover:bg-purple-900 hover:border-5 hover:border-white">Services Page</a>
         </section>
         */}
 
         {/* Contact Section */}
-        <section className="py-20 text-center text-gray-400">
-          <h2 className="text-3xl font-semibold mb-6">Contact</h2>
-          <p className="max-w-2xl mx-auto mb-8">
-            If you would like to get in touch with me, please feel free to contact me via any of the following methods.
-          </p>
-          <div className='flex justify-center gap-3'>
-            <a href="mailto:jackkeirnan@gmail.com" className="btn w-[8rem] bg-purple-900 text-neutral-300 hover:bg-purple-900 hover:border-5 hover:border-white">Email</a>
-            <a href="https://www.linkedin.com/in/jackkeirnan/" className="btn w-[8rem] bg-purple-900 text-neutral-300 hover:bg-purple-900 hover:border-5 hover:border-white">LinkedIn</a>
-            <a href="https://github.com/JackKeirnan" className="btn w-[8rem] bg-purple-900 text-neutral-300 hover:bg-purple-900 hover:border-5 hover:border-white">GitHub</a>
-          </div>
+        <section>
+          <ContactSection />
         </section>
 
 
         {/* Footer */}
         <footer className="py-6 text-center text-gray-400">
-          <p>&copy; 2025 Jack Keirnan. Built with NextJS and Tailwind, hosted by Vercel. Uses DaisyUI for some components.</p>
+          <p>&copy; 2025 Jack Keirnan. Built with NextJS and Tailwind, hosted by Vercel. Uses DaisyUI and MaterialUI.</p>
         </footer>
       </div>
     </>
