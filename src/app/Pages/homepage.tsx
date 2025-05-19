@@ -7,6 +7,7 @@ import { ProjectGrid } from '../Components/projects';
 import dynamic from 'next/dynamic';
 import animationData from "../Lotties/BrickBuilding.json";
 import { motion } from 'motion/react';
+import ContentSection from '../Components/contentSection';
 
 
 export default function homepage() {
@@ -23,11 +24,10 @@ export default function homepage() {
 
       <div className="min-h-screen bg-neutral-950">
         {/* Header */}
-        <header className="py-5 text-center text-gray-400">
-        </header>
+        <header className="py-5 text-center text-gray-400"></header>
 
         {/* Intro Section */}
-        <section className='py-10 text-center '>
+        <section className='py-10 text-center'>
         <motion.div className='gap-8 p-5'
           initial={{opacity:0}}
           whileInView={{opacity:1}}
@@ -39,7 +39,7 @@ export default function homepage() {
             </div>
 
             {/* Introductory Text */}
-            <div className="p-5 rounded-lg flex-1 flex flex-col justify-center items-center ">
+            <div className="p-5 rounded-lg flex-1 flex flex-col justify-center items-center">
               <h1 className='text-6xl text-purple-900 text-bold'>Hi!</h1>
               <div className="text-gray-400 max-w-[50%] md:text-xl">
                 <p>
@@ -47,7 +47,7 @@ export default function homepage() {
                     My name's Jack and I'm an aspiring Software Developer.
                   <br />
                   <br />
-                    I've designed and created this website with the purpose of showcasing my work in a more convinient and detailed way!
+                    I've designed and created this website with the purpose of showcasing my work in a more convenient and detailed way!
                   <br />
                   <br />
                     I'm currently working freelance but I'm looking for permanent work, if you would like to chat feel free to contact me on any of my socials.
@@ -62,14 +62,13 @@ export default function homepage() {
         </section>
 
         {/* About Section */}
-        <section className="py-10 text-center ">
+        <section className="py-10 text-center">
         <motion.div className='md:flex gap-8 p-5 min-h-screen'
           initial={{opacity:0}}
           whileInView={{opacity:1}}
           transition={{duration:1, ease:"easeOut"}}>
 
             {/* Portrait */}
-            
             <div className="p-6 rounded-lg flex-1 flex justify-center items-center">
               <Lottie 
               animationData={animationData} 
@@ -85,34 +84,53 @@ export default function homepage() {
                 Born in the UK but raised in the Middle East, I've lived a life of travel and vast experiences.
                 <br />
                 <br />
-              After graduating from university with a Bachelors in Computer Science, I set out to begin my work in freelance to occupy my time whilst I look for more permanent work. 
-              <br />
-              <br />
-              I not only take pride in what I create, but more importantly I strive to always improve on my work; a perfectionist at heart.
+                After graduating from university with a Bachelors in Computer Science, I set out to begin my work in freelance to occupy my time whilst I look for more permanent work. 
+                <br />
+                <br />
+                I not only take pride in what I create, but more importantly I strive to always improve on my work; a perfectionist at heart.
               </p>
             </div>
 
           </motion.div>
         </section>
 
-        {/* Projects Section */}
-        <section className="py-10 text-center min-h-screen">
+        {/* Newer Projects Section */}
+        <section>
+          <div>
+            <ContentSection />
+          </div>
+        </section>
+
+        {/* WIP Projects Section */}
+        {/*<section className="py-10 text-center min-h-screen">
           <ProjectGrid />
         </section>
+        */}
+
+        {/* WIP Services Section */}
+        {/*
+        <section className='py-20 text-center text-gray-400'>
+          <h2 className='text-3xl font-semibold mb-6'>Services</h2>
+          <p className="max-w-2xl mx-auto mb-8">
+            I offer website creation services too! If you are interested please visit the page below to see the details
+          </p>
+          <a href="" className="btn w-[8rem] bg-purple-900 text-neutral-300 hover:bg-purple-900 hover:border-5 hover:border-white">Services Page</a>
+        </section>
+        */}
 
         {/* Contact Section */}
         <section className="py-20 text-center text-gray-400">
           <h2 className="text-3xl font-semibold mb-6">Contact</h2>
           <p className="max-w-2xl mx-auto mb-8">
-            Feel free to reach out if you want to collaborate or just say hi!
+            If you would like to get in touch with me, please feel free to contact me via any of the following methods.
           </p>
           <div className='flex justify-center gap-3'>
-            <a href="mailto:jackkeirnan@gmail.com" className="btn w-[8rem] bg-purple-900 text-white hover:bg-purple-900 hover:border-5 hover:border-white">Email</a>
-            <a href="https://www.linkedin.com/in/jackkeirnan/" className="btn w-[8rem] bg-purple-900 text-white hover:bg-purple-900 hover:border-5 hover:border-white">LinkedIn</a>
-            <a href="https://github.com/JackKeirnan" className="btn w-[8rem] bg-purple-900 text-white hover:bg-purple-900 hover:border-5 hover:border-white">GitHub</a>
+            <a href="mailto:jackkeirnan@gmail.com" className="btn w-[8rem] bg-purple-900 text-neutral-300 hover:bg-purple-900 hover:border-5 hover:border-white">Email</a>
+            <a href="https://www.linkedin.com/in/jackkeirnan/" className="btn w-[8rem] bg-purple-900 text-neutral-300 hover:bg-purple-900 hover:border-5 hover:border-white">LinkedIn</a>
+            <a href="https://github.com/JackKeirnan" className="btn w-[8rem] bg-purple-900 text-neutral-300 hover:bg-purple-900 hover:border-5 hover:border-white">GitHub</a>
           </div>
-
         </section>
+
 
         {/* Footer */}
         <footer className="py-6 text-center text-gray-400">
