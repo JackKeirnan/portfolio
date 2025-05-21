@@ -46,15 +46,16 @@ export default function homepage() {
               <div className="text-gray-400 max-w-[50%] md:text-xl">
                 <p>
                   <br />
-                    My name's Jack and I'm an aspiring Software Developer.
+                    I'm Jack – a Software Developer passionate about building clean, effective solutions.
                   <br />
                   <br />
-                    I've designed and created this website with the purpose of showcasing my work in a more convenient and detailed way!
+                    This website is a space where I showcase my projects, skills, and development journey in more detail.
                   <br />
                   <br />
-                    I'm currently working freelance but I'm looking for permanent work, if you would like to chat feel free to contact me on any of my socials.
+                    Currently, I work as a freelance developer, offering a range of services to clients who need reliable, high-quality software solutions. I'm always open to new freelance opportunities — whether it’s building something from the ground up or jumping in to support an existing project.
                   <br />
                   <br />
+                  At the same time, I'm actively seeking a full-time role where I can contribute to a dynamic team, grow alongside experienced developers, and take on long-term challenges that push me to improve.
                 </p>
               </div>
             </div>
@@ -83,13 +84,13 @@ export default function homepage() {
             {/* Explanation Text */}
             <div className="p-5 rounded-lg flex-1 flex flex-col items-center md:text-xl md:items-start">
               <p className="text-gray-400 max-w-[50%]">
-                Born in the UK but raised in the Middle East, I've lived a life of travel and vast experiences.
+                  Originally from the UK and raised in the Middle East, my background has given me a broad perspective and adaptability — qualities I bring into every project I take on.
                 <br />
                 <br />
-                After graduating from university with a Bachelors in Computer Science, I set out to begin my work in freelance to occupy my time whilst I look for more permanent work. 
+                  With a BSc in Computer Science and hands-on experience in freelance development, I’m committed to continuous learning and refining my craft. I'm a perfectionist at heart, always looking for ways to make things better.
                 <br />
                 <br />
-                I not only take pride in what I create, but more importantly I strive to always improve on my work; a perfectionist at heart.
+                  If you're interested in working together — freelance or full-time — feel free to reach out through any of my socials or contact links.
               </p>
             </div>
 
@@ -107,7 +108,7 @@ export default function homepage() {
         {/* Newer Projects Section */}
         <section>
           <div className={'text-center'}>
-            <h2 className="text-4xl text-purple-900 font-bold">Some of my Work</h2>
+            <h2 className="text-4xl text-purple-900 font-bold">Examples of my Work</h2>
           </div>
           <ContentSection />
           <div className="w-full flex justify-center my-8">

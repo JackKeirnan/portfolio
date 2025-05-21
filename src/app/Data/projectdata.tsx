@@ -2,56 +2,64 @@ import { ProjectType } from "./types"
 
 export const projects: ProjectType[] = [
     {
-        image: '/Images/UniWebHome.png',
-        title: "University Website Project",
-        description: "A university project that tasked us with creating a website themed around a specific UN sustainability goal.",
+        image: '/Images/CalicoWebsite.png',
+        title: "Calico Business Consulting",
+        description: "Built a professional online home for a new consultancy — from blank canvas to launch-ready.",
         longdescription: [
-            "The task was distributed among a group of six university students, with the main goal being the full-stack development of a website themed around one of the UN’s sustainability goals. I took on a leading role in the group and guided us towards a consensus, resulting in the design of a recipe browsing website.",
-            "We delegated tasks using an Agile development methodology, which required us to create a backlog of ideas and tasks essential for the website. We organized weekly sprints and rotated the role of scrum master so that everyone had an equal experience of leading discussions in meetings.",
-            "For the development process, the university required us to use SpringBoot and Java for the backend, with a personal choice of database software. We selected MySQL for hosting purposes. For the front-end, we used React with JavaScript, HTML, and CSS, as these technologies were taught to us and we were most familiar with them.",
-            "Over a period of about four months, I developed key skills and gained a keen interest in web development—an area I hadn't been exposed to much in the past. I received a high grade for my role in the website’s development, as well as for my leadership skills in facing the challenges of a primarily online-based university project."
+            "Collaborated with a business and accounting consultancy start-up to design and launch a custom website tailored to their brand and needs.",
+            "This was my first freelance project, beginning in early 2024, and I continue to support them with site updates and feature additions. While there were some early challenges, the experience was invaluable in shaping my approach to client communication, project structuring, and real-world development.",
+            "We selected SquareSpace for its ease of use, cost-effectiveness, and low-maintenance requirements. After multiple design demos and feedback sessions, we delivered a clean, professional site aligned with their business goals.",
         ],
         id: 1,
-        languages : ["Java", "HTML", "CSS", "JavaScript", "React", "SpringBoot", "MySQL"]
+        languages : ["SquareSpace", "JavaScript", "HTML", "CSS"]
     },
     {
-        image: '/Images/AWS.png',
-        title: "Artificial Intelligence Internship",
-        description: "I worked as an intern software developer at AuraVision, learning and experiencing all the aspects and qualities required for working in a professional environment.",
+        image: '/Images/SeverinOne.png',
+        title: "Severin Hair Studio",
+        description: "Gave a growing salon a stylish digital storefront with custom functionality and flair.",
         longdescription: [
-            "During the autumn/winter of 2022, I worked as a part-time intern at a newly established AI startup called AuraVision. This was alongside my final year of university, and I worked there for three months.",
-            "My main task during that period was to create a parser to organize large amounts of metadata from several clients. This task was difficult to balance with my intensive university coursework, but I embraced the challenge.",
-            "The two primary platforms I was asked to learn and use were AWS (specifically Lambda functions to automate the process via the cloud) and Serverless to aid in automation. I received guidance from the lead software engineers at the company whenever I had questions.",
-            "Although I only had one year of experience with JavaScript at the time, I successfully completed the task with the help of my senior colleagues. I learned invaluable skills not only in using the provided frameworks but also in understanding industry-standard coding practices.",
-            "It was an amazing experience, and I even found time to visit their offices in London whenever I had a free day from university!"
+            "Severin approached me to create a website that would reflect their modern aesthetic and serve as a digital storefront for potential clients. The goal was to design a clean, welcoming platform that showcased their services, pricing, and a curated portfolio of past work.",
+            "I built the site using Wix for its ease of maintenance and quick deployment. To enhance functionality and interactivity beyond Wix’s default tools, I incorporated custom JavaScript, allowing for a more dynamic user experience.",
+            "The final site balanced form and function — maintaining the simplicity requested by the client in order to emphasise the detailed and intricate work that he has displayed. It helped the business improve their online presence, attract new clients, and present a more professional image in a highly competitive industry.",
         ],
         id: 2,
-        languages : ["JavaScript", "Serverless", "AWS"]
+        languages : ["Wix", "JavaScript", "HTML", "CSS"]
     },
     {
-        image: '/Images/CalicoWebsite.png',
-        title: "Freelance Web Development/Portfolio",
-        description: "Worked with several clients to design/redesign their websites according to their needs.",
+        image: '/Images/AtelierOne.png',
+        title: "Atelier Lavender",
+        description: "Transformed an architecture studio’s outdated site into a sleek, modern web experience.",
         longdescription: [
-            "After graduating in July 2023, I took around eight months off to travel and recharge. Upon returning to the UK and beginning my job search, I wanted to engage in something productive that would also allow me to further my skills in a field I'm passionate about.",
-            "I reached out to some potential clients through mutual connections and agreed to develop their websites from scratch, with some asking me to take on a more permanent role in maintaining them.",
-            "I worked with Calico Consultancy to create a detailed and interactive website to help launch the business. They requested the use of Squarespace to keep maintenance and adjustments simple, and although I hadn’t used the platform before, my experience in full-stack development allowed me to quickly succeed.",
-            "Another client, Severin Hair Studio, was found through a mutual connection. After discussing the requirements, we decided to use Wix for development. A mock-up was provided to guide the design, and I used my JavaScript knowledge to add custom snippets whenever Wix didn’t have a necessary feature. Once development was complete, I continued to make adjustments as requested and helped maintain the website.",
-            "For my portfolio, I spent time experimenting with different frameworks and services such as Webflow and WordPress. Many early versions of the site were built using Webflow, but I eventually rebuilt it using Next.js and Tailwind to have more control. It remains a work in progress, but I find it an invaluable way to showcase my web development skills in a dynamic manner."
+            "Partnered with a start-up architecture and project management firm to redesign and modernize their website from the ground up. The client wanted a digital presence that reflected their clean, design-first ethos — something both elegant and highly functional.",
+            "I migrated their existing site to a custom build using TypeScript and Tailwind CSS, improving load times, accessibility, and mobile responsiveness. The final product delivered a minimalist, refined UI that aligned with their brand while allowing for future scalability and updates.",
+            "The redesign not only modernized the look and feel but also enhanced usability, making it easier for potential clients to navigate services, view project galleries, and get in touch.",
         ],
         id: 3,
-        languages : ["SquareSpace", "Wix", "Webflow", "JavaScript", "NextJS", "Tailwind"]
+        languages : ["TypeScript", "NextJS", "TailwindCSS", "HTML", "React"]
+    },
+    {
+        image: '/Images/UniWebHome.png',
+        title: "University Website Project",
+        description: "Led a university team in building a full-stack recipe website inspired by a UN sustainability goal.",
+        longdescription: [
+            "As part of a university project, I worked in a team of six to develop a website themed around one of the UN's Sustainable Development Goals. I naturally took on a leadership role, guiding the team through initial planning and helping us converge on a concept: a recipe browsing platform that promotes sustainable eating habits.",
+            "We followed an Agile methodology, managing tasks through a shared backlog and running weekly sprints. We also rotated the Scrum Master role to ensure everyone gained experience leading team discussions.",
+            "On the technical side, we used Spring Boot with Java for the backend and chose MySQL for our database solution. The front-end was built with React, along with JavaScript, HTML, and CSS — tools we were familiar with from coursework.",
+            "This four-month project not only introduced me to full-stack development, but also sparked a deeper interest in web technologies. It challenged me to improve both my technical and leadership skills, and I was proud to receive strong marks for both my contributions and project coordination."
+        ],
+        id: 4,
+        languages : ["Java", "HTML", "CSS", "JavaScript", "React", "SpringBoot", "MySQL"]
     },
     {
         image: '/Images/UniGameSheet.png',
         title: "Personal Video Game Projects",
-        description: "Designed and developed video games, ranging from my University Dissertation to smaller-scale personal projects.",
+        description: "Blended creative design with technical development to build games in Unity — from university research to passion projects.",
         longdescription: [
-            "I’ve been an avid fan of video games since I was young and have maintained a keen interest in how they are developed. My final year of university provided a perfect opportunity to explore video game development. I took a module to help me learn the necessary skills and chose to focus my final-year project on making a game and documenting the process.",
-            "For my dissertation, I developed a strategy game that simulated the ramping effects of a health crisis (e.g., Covid-19) on the healthcare industry. I drew inspiration from games like Two Point Hospital and others in the genre. All the work was developed in Unity and C#, and I learned as I went due to my limited experience.",
-            "I documented the project in just under 15,000 words and received a high grade for my efforts. This result sparked my continued interest in video game development, and I began creating smaller-scale projects to further my understanding of Unity, even experimenting with Unity3D. I continue to develop these projects in my free time, especially when inspired by the new games that I play!"
+            "My interest in game development began as a lifelong passion for video games, and evolved into hands-on experience during my final year of university. For my dissertation, I designed and built a strategy game in Unity that simulated the escalating impact of a healthcare crisis — inspired by games like Two Point Hospital.",
+            "This project involved learning C# and Unity on the fly, as I had limited prior experience. Despite the steep learning curve, I successfully developed a working game and documented the entire process in a detailed 15,000-word dissertation, for which I earned a high grade.",
+            "Since then, I’ve continued to explore game development through smaller-scale personal projects, experimenting with features in Unity3D and pushing myself to improve both technically and creatively. Game development has remained a rewarding outlet for creative exploration and a way to sharpen my coding skills in a playful yet personal environment."
         ],
-        id: 4,
+        id: 5,
         languages : ["Unity", "C#", "Figma"]
     }
 ]
