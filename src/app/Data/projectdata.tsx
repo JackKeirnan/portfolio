@@ -2,6 +2,18 @@ import { ProjectType } from "./types"
 
 export const projects: ProjectType[] = [
     {
+        image: '/Images/Portfolio.png',
+        title: "Personal Portfolio Website",
+        description: "Crafted a personal portfolio to highlight my skills, projects, and growth as a developer.",
+        longdescription: [
+            "Started with detailed designs in Figma to establish a clear visual direction and user experience. Then built an initial version in WebFlow to quickly bring the design to life and get comfortable with web development fundamentals.",
+            "After gaining confidence and wanting more control over the codebase and performance, I ported the site into a custom Next.js application using TypeScript and Tailwind CSS. This final iteration allowed me to deepen my expertise with React, improve site speed, and implement a more maintainable, scalable structure.",
+            "This project showcases a deliberate progression from design to no-code prototyping, then to a fully custom-coded solution—reflecting both my design sensibility and technical growth.",
+        ],
+        id: 1,
+        languages : ["NextJS", "TypeScript", "HTML", "TailwindCSS", "Figma", "WebFlow"]
+    },
+    {
         image: '/Images/CalicoWebsite.png',
         title: "Calico Business Consulting",
         description: "Built a professional online home for a new consultancy — from blank canvas to launch-ready.",
@@ -10,7 +22,7 @@ export const projects: ProjectType[] = [
             "This was my first freelance project, beginning in early 2024, and I continue to support them with site updates and feature additions. While there were some early challenges, the experience was invaluable in shaping my approach to client communication, project structuring, and real-world development.",
             "We selected SquareSpace for its ease of use, cost-effectiveness, and low-maintenance requirements. After multiple design demos and feedback sessions, we delivered a clean, professional site aligned with their business goals.",
         ],
-        id: 1,
+        id: 2,
         languages : ["SquareSpace", "JavaScript", "HTML", "CSS"]
     },
     {
@@ -22,7 +34,7 @@ export const projects: ProjectType[] = [
             "I built the site using Wix for its ease of maintenance and quick deployment. To enhance functionality and interactivity beyond Wix’s default tools, I incorporated custom JavaScript, allowing for a more dynamic user experience.",
             "The final site balanced form and function — maintaining the simplicity requested by the client in order to emphasise the detailed and intricate work that he has displayed. It helped the business improve their online presence, attract new clients, and present a more professional image in a highly competitive industry.",
         ],
-        id: 2,
+        id: 3,
         languages : ["Wix", "JavaScript", "HTML", "CSS"]
     },
     {
@@ -34,7 +46,7 @@ export const projects: ProjectType[] = [
             "I migrated their existing site to a custom build using TypeScript and Tailwind CSS, improving load times, accessibility, and mobile responsiveness. The final product delivered a minimalist, refined UI that aligned with their brand while allowing for future scalability and updates.",
             "The redesign not only modernized the look and feel but also enhanced usability, making it easier for potential clients to navigate services, view project galleries, and get in touch.",
         ],
-        id: 3,
+        id: 4,
         languages : ["TypeScript", "NextJS", "TailwindCSS", "HTML", "React"]
     },
     {
@@ -47,7 +59,7 @@ export const projects: ProjectType[] = [
             "On the technical side, we used Spring Boot with Java for the backend and chose MySQL for our database solution. The front-end was built with React, along with JavaScript, HTML, and CSS — tools we were familiar with from coursework.",
             "This four-month project not only introduced me to full-stack development, but also sparked a deeper interest in web technologies. It challenged me to improve both my technical and leadership skills, and I was proud to receive strong marks for both my contributions and project coordination."
         ],
-        id: 4,
+        id: 5,
         languages : ["Java", "HTML", "CSS", "JavaScript", "React", "SpringBoot", "MySQL"]
     },
     {
@@ -59,7 +71,7 @@ export const projects: ProjectType[] = [
             "This project involved learning C# and Unity on the fly, as I had limited prior experience. Despite the steep learning curve, I successfully developed a working game and documented the entire process in a detailed 15,000-word dissertation, for which I earned a high grade.",
             "Since then, I’ve continued to explore game development through smaller-scale personal projects, experimenting with features in Unity3D and pushing myself to improve both technically and creatively. Game development has remained a rewarding outlet for creative exploration and a way to sharpen my coding skills in a playful yet personal environment."
         ],
-        id: 5,
+        id: 6,
         languages : ["Unity", "C#", "Figma"]
     }
 ]
