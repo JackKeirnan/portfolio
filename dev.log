@@ -1,0 +1,36 @@
+
+> portfolio@0.1.0 dev
+> next dev
+
+   ▲ Next.js 15.3.2
+   - Local:        http://localhost:3000
+   - Network:      http://192.168.87.242:3000
+
+ ✓ Starting...
+ ✓ Ready in 1610ms
+ ○ Compiling / ...
+
+🌼   [35mdaisyUI[39m [2m4.12.23[22m
+├─ [32m✔︎[39m 2 themes added[2m		https://daisyui.com/docs/themes[22m
+╰─ [32m★[39m [0mStar daisyUI on GitHub[0m	[2mhttps://github.com/saadeghi/daisyui[22m
+
+ ✓ Compiled / in 4.9s (2037 modules)
+ GET / 200 in 5209ms
+ GET / 200 in 24ms
+ ○ Compiling /about ...
+ ✓ Compiled /about in 2.2s (2776 modules)
+ GET /about 200 in 2323ms
+ ✓ Compiled /work in 416ms (2773 modules)
+ GET /work 200 in 488ms
+ ○ Compiling /work/[slug] ...
+ ✓ Compiled /work/[slug] in 783ms (2799 modules)
+ GET /work/portfolio-website 200 in 1316ms
+ GET /work 200 in 10ms
+ GET /work/calico-business-consulting 200 in 20ms
+ GET /work 200 in 10ms
+ GET /work/atelier-lavender 200 in 21ms
+ GET / 200 in 11ms
+ GET /about 200 in 16ms
+ GET /work 200 in 9ms
+ GET / 200 in 7ms
+ GET /about 200 in 12ms
