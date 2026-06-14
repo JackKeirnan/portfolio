@@ -22,9 +22,22 @@ export default function ProjectPage({ project }: { project: ProjectType }) {
 
       {/* Title + tagline */}
       <header className="text-center mt-10">
+        <span className="inline-block mb-3 px-2.5 py-0.5 text-xs font-medium uppercase tracking-wide text-purple-300 bg-purple-900/40 border border-purple-700/50 rounded-full">
+          {project.category}
+        </span>
         <h1 className="text-4xl md:text-5xl font-bold text-purple-900">{project.title}</h1>
         <div className="w-16 h-[2px] bg-purple-600/50 mx-auto mt-4" />
         <p className="text-lg italic text-gray-400 mt-4">{project.description}</p>
+        {project.liveUrl && (
+          <a
+            href={project.liveUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block mt-6 px-5 py-2 text-sm font-medium text-neutral-300 bg-purple-900 border-none rounded-md hover:bg-purple-800 transition"
+          >
+            Visit Live Site ↗
+          </a>
+        )}
       </header>
 
       {/* Body */}

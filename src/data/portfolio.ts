@@ -1,4 +1,4 @@
-import { Developer } from "./types";
+import { Developer, ProjectCategory } from "./types";
 
 // Single source of truth for all site copy and asset paths.
 // Components read from this object instead of hardcoding content.
@@ -12,8 +12,8 @@ export const developer: Developer = {
         paragraphs: [
             "I'm Jack – a Software Developer passionate about building clean, effective solutions.",
             "This website is a space where I showcase my projects, skills, and development journey in more detail.",
-            "Currently, I work as a freelance developer, offering a range of services to clients who need reliable, high-quality software solutions. I'm always open to new freelance opportunities — whether it's building something from the ground up or jumping in to support an existing project.",
-            "At the same time, I'm actively seeking a full-time role where I can contribute to a dynamic team, grow alongside experienced developers, and take on long-term challenges that push me to improve.",
+            "I currently work full-time as a Junior Software Engineer at Eseye, where I'm part of a professional team building real-world software and growing alongside experienced developers.",
+            "Outside of my day job, I continue to take on select freelance work — whether it's building something from the ground up or jumping in to support an existing project. I'm always happy to hear from people who need reliable, high-quality software.",
         ],
     },
 
@@ -21,7 +21,7 @@ export const developer: Developer = {
         paragraphs: [
             "Originally from the UK and raised in the Middle East, my background has given me a broad perspective and adaptability — qualities I bring into every project I take on.",
             "With a BSc in Computer Science and hands-on experience in freelance development, I'm committed to continuous learning and refining my craft. I'm a perfectionist at heart, always looking for ways to make things better.",
-            "If you're interested in working together — freelance or full-time — feel free to reach out through any of my socials or contact links.",
+            "If you're interested in working together on a freelance project or just want to connect, feel free to reach out through any of my socials or contact links.",
         ],
     },
 
@@ -55,6 +55,12 @@ export const developer: Developer = {
         subtitle: "Work I've done professionally and independently",
         items: [
             {
+                role: "Junior Software Engineer",
+                meta: "Eseye – July 2025 – Present",
+                description:
+                    "Working within a professional Agile engineering team at an IoT connectivity company, contributing to the development of customer-facing platform tooling and supporting day-to-day delivery.",
+            },
+            {
                 role: "Freelance Developer",
                 meta: "2024 – Present",
                 description:
@@ -87,6 +93,8 @@ export const developer: Developer = {
                 "This project showcases a deliberate progression from design to no-code prototyping, then to a fully custom-coded solution—reflecting both my design sensibility and technical growth.",
             ],
             languages: ["NextJS", "TypeScript", "HTML", "TailwindCSS", "Figma", "WebFlow"],
+            category: "Personal",
+            enabled: true,
         },
         {
             id: 2,
@@ -101,6 +109,8 @@ export const developer: Developer = {
                 "We selected SquareSpace for its ease of use, cost-effectiveness, and low-maintenance requirements. After multiple design demos and feedback sessions, we delivered a clean, professional site aligned with their business goals.",
             ],
             languages: ["SquareSpace", "JavaScript", "HTML", "CSS"],
+            category: "Freelance",
+            enabled: true,
         },
         {
             id: 3,
@@ -115,6 +125,8 @@ export const developer: Developer = {
                 "The final site balanced form and function — maintaining the simplicity requested by the client in order to emphasise the detailed and intricate work that he has displayed. It helped the business improve their online presence, attract new clients, and present a more professional image in a highly competitive industry.",
             ],
             languages: ["Wix", "JavaScript", "HTML", "CSS"],
+            category: "Freelance",
+            enabled: true,
         },
         {
             id: 4,
@@ -129,6 +141,42 @@ export const developer: Developer = {
                 "The redesign not only modernized the look and feel but also enhanced usability, making it easier for potential clients to navigate services, view project galleries, and get in touch.",
             ],
             languages: ["TypeScript", "NextJS", "TailwindCSS", "HTML", "React"],
+            category: "Freelance",
+            enabled: true,
+        },
+        {
+            id: 8,
+            slug: "fattoria-cercatoia",
+            image: "/Images/Fattoria.png",
+            title: "Fattoria Cercatoia",
+            description:
+                "Built a warm, welcoming site for an Italian agriturismo to showcase its character online.",
+            longdescription: [
+                "Fattoria Cercatoia needed a digital home that captured the charm and atmosphere of the property while staying simple for visitors to navigate. The goal was an inviting, image-led site that reflected the personality of the place.",
+                "I developed the site with TypeScript and React, using Tailwind CSS to create a clean, responsive layout that puts the photography and key information front and centre.",
+                "The site is deployed and live on Vercel at fattoria-cercatoia-website.vercel.app.",
+            ],
+            languages: ["TypeScript", "React", "TailwindCSS", "Vercel"],
+            category: "Freelance",
+            enabled: false,
+            liveUrl: "https://fattoria-cercatoia-website.vercel.app",
+        },
+        {
+            id: 9,
+            slug: "l-website",
+            image: "/Images/LWebsite.png",
+            title: "L Website",
+            description:
+                "Created a bespoke, interactive single-page site with playful, custom touches.",
+            longdescription: [
+                "For this freelance project I built a custom single-page website with a focus on interactivity and personality, going beyond a standard static layout to create something memorable for the client.",
+                "The site is built with React and TypeScript on Vite, styled with Tailwind CSS, and brought to life with details like an image lightbox gallery and celebratory confetti animations for a more engaging, hands-on feel.",
+                "It's deployed and live on Vercel at l-website-delta.vercel.app.",
+            ],
+            languages: ["TypeScript", "React", "Vite", "TailwindCSS"],
+            category: "Freelance",
+            enabled: false,
+            liveUrl: "https://l-website-delta.vercel.app",
         },
         {
             id: 5,
@@ -144,6 +192,8 @@ export const developer: Developer = {
                 "This four-month project not only introduced me to full-stack development, but also sparked a deeper interest in web technologies. It challenged me to improve both my technical and leadership skills, and I was proud to receive strong marks for both my contributions and project coordination.",
             ],
             languages: ["Java", "HTML", "CSS", "JavaScript", "React", "SpringBoot", "MySQL"],
+            category: "University",
+            enabled: true,
         },
         {
             id: 6,
@@ -158,6 +208,24 @@ export const developer: Developer = {
                 "Since then, I've continued to explore game development through smaller-scale personal projects, experimenting with features in Unity3D and pushing myself to improve both technically and creatively. Game development has remained a rewarding outlet for creative exploration and a way to sharpen my coding skills in a playful yet personal environment.",
             ],
             languages: ["Unity", "C#", "Figma"],
+            category: "Game Dev",
+            enabled: true,
+        },
+        {
+            id: 10,
+            slug: "pixel-card-game",
+            image: "/Images/WIP.png",
+            title: "Pixel Card Game — Scala Quaranta",
+            description:
+                "A 2D pixel-art implementation of Scala Quaranta, the Italian rummy card game, built in Unity.",
+            longdescription: [
+                "Pixel Card Game is a personal project recreating Scala Quaranta — a variant of Italian rummy — as a 2D pixel-art game. It's played with two 52-card decks plus four jokers (108 cards) and 13-card hands, where players draw and discard to build melds (sets and runs) and a player's first lay-down must total at least 40 points (\"quaranta\").",
+                "I built it in Unity 6 with C#, using the Universal Render Pipeline (URP) 2D renderer and the new Input System. The architecture cleanly separates the card model and rules engine from the UI: the game can run headless for logic testing, while the interactive table builds its entire interface (canvas, piles, cards, and buttons) at runtime.",
+                "The project let me deepen my C# skills and practise designing a non-trivial rules engine — meld detection, lay-offs, and turn flow — alongside building an interactive, drag-to-reorder card interface.",
+            ],
+            languages: ["Unity", "C#"],
+            category: "Game Dev",
+            enabled: true,
         },
     ],
 
@@ -174,7 +242,7 @@ export const developer: Developer = {
     },
 
     footer:
-        "© 2025 Jack Keirnan. Built with NextJS and Tailwind, hosted by Vercel. Uses DaisyUI and MaterialUI.",
+        "© 2026 Jack Keirnan. Built with NextJS and Tailwind, hosted by Vercel. Uses DaisyUI and MaterialUI.",
 };
 
 // Primary site navigation, shared by the Navbar.
@@ -185,8 +253,19 @@ export const navLinks = [
 ];
 
 // Convenience re-export for components that only need the project list.
-export const projects = developer.projects;
+// Filtered to projects that are enabled (enabled is true or omitted).
+export const projects = developer.projects.filter((project) => project.enabled !== false);
 
-// Look up a single project by its URL slug (used by the /work/[slug] route).
+// Order in which project categories are displayed on the Work page.
+// Categories with no projects are skipped automatically.
+export const projectCategories: ProjectCategory[] = [
+    "Freelance",
+    "University",
+    "Game Dev",
+    "Personal",
+];
+
+// Look up a single enabled project by its URL slug (used by the /work/[slug] route).
+// Disabled projects return undefined so their detail page 404s.
 export const getProjectBySlug = (slug: string) =>
-    developer.projects.find((project) => project.slug === slug);
+    projects.find((project) => project.slug === slug);

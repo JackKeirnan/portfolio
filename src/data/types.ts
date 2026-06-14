@@ -1,6 +1,9 @@
 // Icon keys map to MUI icons in the components that render them.
 export type IconKey = "code" | "web" | "design" | "storage" | "github" | "work";
 
+// Work is grouped under these headings on the Work page.
+export type ProjectCategory = "Freelance" | "University" | "Game Dev" | "Personal";
+
 export type ProjectType = {
     id: number;
     slug: string;
@@ -9,6 +12,12 @@ export type ProjectType = {
     description: string;
     longdescription: string[];
     languages: string[];
+    // Grouping/banner for the project (also shown as a badge on the detail page).
+    category: ProjectCategory;
+    // Optional live deployment link.
+    liveUrl?: string;
+    // Toggle visibility. Defaults to shown; set to false to hide everywhere.
+    enabled?: boolean;
 };
 
 export type SkillGroup = {

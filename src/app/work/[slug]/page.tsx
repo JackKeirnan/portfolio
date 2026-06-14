@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { developer, getProjectBySlug } from "@/data/portfolio";
+import { projects, getProjectBySlug } from "@/data/portfolio";
 import ProjectPage from "@/views/projectpage";
 
 type Params = { slug: string };
 
-// Pre-render a static page for every project at build time.
+// Pre-render a static page for every enabled project at build time.
 export function generateStaticParams(): Params[] {
-  return developer.projects.map((project) => ({ slug: project.slug }));
+  return projects.map((project) => ({ slug: project.slug }));
 }
 
 export async function generateMetadata(
