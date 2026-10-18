@@ -1,6 +1,5 @@
 "use client";
 
-import Head from 'next/head';
 import Image from 'next/image';
 import portrait from '/public/Images/Jack.png'
 //import { ProjectGrid } from './projects';
@@ -11,19 +10,12 @@ import ContentSection from './contentSection';
 import SkillSection from "./skillSection";
 import ContactSection from "./contactSection";
 
+// Declared once at module level so the player is not recreated on every render.
+const Lottie = dynamic(() => import('lottie-react'), { ssr: false });
 
 export default function homepage() {
-
-  const Lottie = dynamic(() => import('lottie-react'), { ssr: false });
-
   return (
     <>
-      <Head>
-        <title>My Portfolio</title>
-        <meta name="description" content="My portfolio built with Next.js and Tailwind CSS" />
-        <link rel="icon" href="" />
-      </Head>
-
       <div className="min-h-screen bg-neutral-950">
         {/* Header */}
         <header className="py-5 text-center text-gray-400"></header>
