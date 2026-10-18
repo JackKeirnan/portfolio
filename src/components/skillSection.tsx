@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { Code, Web, DesignServices, Storage, GitHub, School, Work } from "@mui/icons-material";
 
 export default function SkillSection() {

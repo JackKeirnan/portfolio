@@ -1,7 +1,7 @@
 'use client';
 import React, { useState } from 'react';
 import { projects } from '../data/projectdata';
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 
 export default function ProjectSection() {
     const [activeIndex, setActiveIndex] = useState(0);
