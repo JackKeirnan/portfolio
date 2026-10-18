@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import SectionHeader from "./SectionHeader";
 import Timeline from "./Timeline";
 import { developer } from "@/data/portfolio";
