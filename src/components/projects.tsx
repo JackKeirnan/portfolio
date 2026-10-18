@@ -2,8 +2,8 @@ import Image from 'next/image';
 import { LanguageWidget } from './languagewidget';
 import { motion } from 'motion/react';
 import { PopupModal } from './projectpopup';
-import { ProjectType } from '../Data/types';
-import { projects } from '../Data/projectdata';
+import { ProjectType } from '../data/types';
+import { projects } from '../data/projectdata';
 
 const Project = ({ project, handleShowModal }: { project: ProjectType, handleShowModal: (project: ProjectType) => void }) => {
     return (

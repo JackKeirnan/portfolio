@@ -1,6 +1,6 @@
 'use client';
 import React, { useState } from 'react';
-import { projects } from '../Data/projectdata';
+import { projects } from '../data/projectdata';
 import { motion } from 'framer-motion';
 
 export default function ProjectSection() {

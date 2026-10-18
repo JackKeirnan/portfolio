@@ -3,13 +3,13 @@
 import Head from 'next/head';
 import Image from 'next/image';
 import portrait from '/public/Images/Jack.png'
-//import { ProjectGrid } from '../Components/projects';
+//import { ProjectGrid } from './projects';
 import dynamic from 'next/dynamic';
-import animationData from "../Lotties/BrickBuilding.json";
+import animationData from "../lotties/BrickBuilding.json";
 import { motion } from 'motion/react';
-import ContentSection from '../Components/contentSection';
-import SkillSection from "../Components/skillSection";
-import ContactSection from "../Components/contactSection";
+import ContentSection from './contentSection';
+import SkillSection from "./skillSection";
+import ContactSection from "./contactSection";
 
 
 export default function homepage() {

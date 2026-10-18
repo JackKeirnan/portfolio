@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { LanguageWidget } from "./languagewidget";
-import type { ProjectType } from "../Data/types";
+import type { ProjectType } from "../data/types";
 
 
 export const PopupModal = ({ project }: { project: ProjectType }) => {
