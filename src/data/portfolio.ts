@@ -38,11 +38,11 @@ export const developer: Developer = {
         heading: "Skills",
         subtitle: "Tools and technologies I work with",
         groups: [
-            { label: "Languages", icon: "code", text: "JavaScript, TypeScript, Python, Java" },
-            { label: "Frameworks", icon: "web", text: "React, Next.js, Node.js" },
-            { label: "Design", icon: "design", text: "Tailwind CSS, Figma, Framer Motion" },
-            { label: "Data & Cloud", icon: "storage", text: "MySQL, AWS, SpringBoot" },
-            { label: "Tooling", icon: "github", text: "Git, GitHub, Serverless" },
+            { label: "Languages", text: "JavaScript, TypeScript, Python, Java" },
+            { label: "Frameworks", text: "React, Next.js, Node.js" },
+            { label: "Design", text: "Tailwind CSS, Figma, Framer Motion" },
+            { label: "Data & Cloud", text: "MySQL, AWS, SpringBoot" },
+            { label: "Tooling", text: "Git, GitHub, Serverless" },
         ],
     },
 
@@ -251,15 +251,8 @@ export const developer: Developer = {
     },
 
     footer:
-        "© 2026 Jack Keirnan. Built with NextJS and Tailwind, hosted by Vercel. Uses DaisyUI and MaterialUI.",
+        "© 2026 Jack Keirnan. Built with Next.js and hosted on Vercel.",
 };
-
-// Primary site navigation, shared by the Navbar.
-export const navLinks = [
-    { label: "Home", href: "/" },
-    { label: "Work", href: "/work" },
-    { label: "About", href: "/about" },
-];
 
 // Convenience re-export for components that only need the project list.
 // Filtered to projects that are enabled (enabled is true or omitted).

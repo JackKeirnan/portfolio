@@ -1,6 +1,3 @@
-// Icon keys map to MUI icons in the components that render them.
-export type IconKey = "code" | "web" | "design" | "storage" | "github" | "work";
-
 // Work is grouped under these headings on the Work page.
 export type ProjectCategory = "Freelance" | "University" | "Game Dev" | "Personal";
 
@@ -23,7 +20,6 @@ export type ProjectType = {
 export type SkillGroup = {
     // Short heading for the group, e.g. "Languages"; shown in About Me and /plain.
     label: string;
-    icon: IconKey;
     text: string;
 };
 

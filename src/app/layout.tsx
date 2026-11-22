@@ -1,27 +1,22 @@
-import type { Metadata } from "next";
-import "./globals.css";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
+import type { Metadata, Viewport } from "next";
+import "@/os/theme.css";
 
 export const metadata: Metadata = {
-  title: "Jack Keirnan's Portfolio",
-  description: "Showcase of my work",
+  title: "Jack Keirnan | JackOS",
+  description: "Jack Keirnan, software developer: work, experience and projects, presented as an early-2000s style desktop.",
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  themeColor: "#0f4596",
+};
+
+/** Root HTML shell shared by JackOS and the plain view. */
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
-      <body
-        className={"font-mono bg-neutral-950 text-gray-400 min-h-screen flex flex-col"}
-      >
-        <Navbar />
-        <main className="flex-1">{children}</main>
-        <Footer />
-      </body>
+      <body>{children}</body>
     </html>
   );
 }
