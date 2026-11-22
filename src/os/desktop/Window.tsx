@@ -47,10 +47,9 @@ export function Window({ win, focused, children }: { win: WindowState; focused: 
     trackDrag(event, (dx, dy) => wm.move(win.id, x + dx, y + dy));
   }
 
-  /** Resizes from the bottom-right handle. */
+  /** Resizes from the bottom-right handle; the press also bubbles up to focus the window. */
   function startResize(event: ReactPointerEvent<HTMLDivElement>) {
     if (event.button !== 0) return;
-    event.stopPropagation();
     const { w, h } = win;
     trackDrag(event, (dx, dy) => wm.resize(win.id, w + dx, h + dy));
   }
