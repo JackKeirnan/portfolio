@@ -48,7 +48,6 @@ function Shell({ isHome }: { isHome: boolean }) {
     showWelcomeAfterBoot.current = true;
     setPhase("boot");
     // Mount-only: isHome is fixed for the life of the page and wm.open is stable.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   /** Boot finished or skipped. */

@@ -1,4 +1,4 @@
-// Work is grouped under these headings on the Work page.
+// Projects are grouped under these headings in the My Projects window.
 export type ProjectCategory = "Freelance" | "University" | "Game Dev" | "Personal";
 
 export type ProjectType = {
@@ -9,7 +9,7 @@ export type ProjectType = {
     description: string;
     longdescription: string[];
     languages: string[];
-    // Grouping/banner for the project (also shown as a badge on the detail page).
+    // Grouping/banner for the project (shown in the My Projects window and on the project detail window).
     category: ProjectCategory;
     // Optional live deployment link.
     liveUrl?: string;
@@ -37,7 +37,6 @@ export type ExperienceType = {
 
 export type ContactLink = {
     label: string;
-    icon: "email" | "linkedin" | "github" | "whatsapp";
     href: string;
 };
 
@@ -60,21 +59,15 @@ export type Developer = {
     };
     skills: {
         heading: string;
-        subtitle: string;
         groups: SkillGroup[];
     };
     education: {
         heading: string;
-        subtitle: string;
         items: EducationType[];
     };
     experience: {
         heading: string;
-        subtitle: string;
         items: ExperienceType[];
-    };
-    work: {
-        heading: string;
     };
     projects: ProjectType[];
     contact: {

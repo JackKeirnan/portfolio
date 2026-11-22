@@ -36,7 +36,6 @@ export const developer: Developer = {
 
     skills: {
         heading: "Skills",
-        subtitle: "Tools and technologies I work with",
         groups: [
             { label: "Languages", text: "JavaScript, TypeScript, Python, Java" },
             { label: "Frameworks", text: "React, Next.js, Node.js" },
@@ -48,7 +47,6 @@ export const developer: Developer = {
 
     education: {
         heading: "Education",
-        subtitle: "Academic background and achievements",
         items: [
             {
                 degree: "BSc in Computer Science",
@@ -61,7 +59,6 @@ export const developer: Developer = {
 
     experience: {
         heading: "Experience",
-        subtitle: "Work I've done professionally and independently",
         items: [
             {
                 role: "Junior Software Engineer",
@@ -82,10 +79,6 @@ export const developer: Developer = {
                     "Built internal tools (e.g. AWS and Serverless) for data control alongside learning how to work with a team.",
             },
         ],
-    },
-
-    work: {
-        heading: "Examples of my Work",
     },
 
     projects: [
@@ -243,10 +236,10 @@ export const developer: Developer = {
         blurb:
             "Whether it be for a website, project, or just a chat, I'd love to hear from you! Please use the following methods to contact me.",
         links: [
-            { label: "Email", icon: "email", href: "mailto:jackkeirnan@gmail.com" },
-            { label: "LinkedIn", icon: "linkedin", href: "https://www.linkedin.com/in/jackkeirnan/" },
-            { label: "GitHub", icon: "github", href: "https://github.com/JackKeirnan" },
-            { label: "WhatsApp", icon: "whatsapp", href: "https://wa.me/+447306375586" },
+            { label: "Email", href: "mailto:jackkeirnan@gmail.com" },
+            { label: "LinkedIn", href: "https://www.linkedin.com/in/jackkeirnan/" },
+            { label: "GitHub", href: "https://github.com/JackKeirnan" },
+            { label: "WhatsApp", href: "https://wa.me/+447306375586" },
         ],
     },
 

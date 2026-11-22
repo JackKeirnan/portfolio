@@ -1,12 +1,9 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  // Local-only workaround: webpack's scope-hoisting (module concatenation) step
-  // fails with "Unexpected end of JSON input" when building the large vendor
-  // chunks (framer-motion / motion / MUI) from this OneDrive-synced path.
-  // Disabling concatenation makes `next build` work locally; bundle-size impact
-  // is negligible for this site. Cloud builds (Vercel) are unaffected, so this
-  // can be removed if you only ever build there.
+  // Local-only workaround: `next build` fails with "Unexpected end of JSON input"
+  // during module concatenation when built from a OneDrive-synced path.
+  // It does not affect Vercel builds; remove it if the repo leaves OneDrive.
   webpack: (config) => {
     config.optimization.concatenateModules = false;
     return config;
