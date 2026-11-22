@@ -62,7 +62,9 @@ test.describe("desktop", () => {
 
     await page.reload();
     await expect(page.getByRole("navigation", { name: "Desktop" })).toBeVisible();
-    await page.waitForTimeout(500);
+    // The clock and the boot decision are set in the same effect flush,
+    // so a filled clock proves boot was already decided.
+    await expect(page.locator("footer time")).not.toBeEmpty();
     await expect(boot).toHaveCount(0);
   });
 
