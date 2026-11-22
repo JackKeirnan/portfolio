@@ -92,6 +92,14 @@ describe("window manager", () => {
     expect(win(state, "contact")).toMatchObject({ w: viewport.width, h: viewport.height });
   });
 
+  it("keeps the title bar reachable when a window is resized after being dragged off-screen", () => {
+    let state = open(EMPTY_STATE, "contact");
+    state = wmReducer(state, { type: "move", id: "contact", x: -5000, y: 16, viewport });
+    expect(win(state, "contact").x).toBe(MIN_VISIBLE_WIDTH - 420);
+    state = wmReducer(state, { type: "resize", id: "contact", w: 240, h: 200, viewport });
+    expect(win(state, "contact").x + win(state, "contact").w).toBeGreaterThanOrEqual(MIN_VISIBLE_WIDTH);
+  });
+
   it("pulls windows back on screen when the viewport shrinks", () => {
     let state = open(EMPTY_STATE, "projects");
     state = wmReducer(state, { type: "move", id: "projects", x: 1100, y: 700, viewport });

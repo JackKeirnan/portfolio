@@ -163,12 +163,14 @@ export function wmReducer(state: WMState, action: WMAction): WMState {
     }
 
     case "resize": {
-      // Clamp the new size between the minimum and the viewport.
+      // Clamp the size, then re-clamp the position: a wider-to-narrower resize moves the left bound.
       return {
         ...state,
-        windows: state.windows.map((w) =>
-          w.id === action.id ? { ...w, ...clampSize(action.w, action.h, action.viewport) } : w,
-        ),
+        windows: state.windows.map((w) => {
+          if (w.id !== action.id) return w;
+          const size = clampSize(action.w, action.h, action.viewport);
+          return { ...w, ...size, ...clampPosition(w.x, w.y, size.w, action.viewport) };
+        }),
       };
     }
 
