@@ -5,6 +5,8 @@ export type ProjectType = {
     id: number;
     slug: string;
     image: string;
+    // Extra screenshots shown after `image` in the Project Viewer gallery.
+    gallery?: string[];
     title: string;
     description: string;
     longdescription: string[];

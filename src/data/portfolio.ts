@@ -1,4 +1,4 @@
-import { Developer, ProjectCategory } from "./types";
+import { Developer, ProjectCategory, ProjectType } from "./types";
 
 // Single source of truth for all site copy and asset paths.
 // Components read from this object instead of hardcoding content.
@@ -118,6 +118,7 @@ export const developer: Developer = {
             id: 3,
             slug: "severin-hair-studio",
             image: "/Images/SeverinOne.png",
+            gallery: ["/Images/SeverinTwo.png"],
             title: "Severin Hair Studio",
             description:
                 "Gave a growing salon a stylish digital storefront with custom functionality and flair.",
@@ -134,6 +135,7 @@ export const developer: Developer = {
             id: 4,
             slug: "atelier-lavender",
             image: "/Images/AtelierOne.png",
+            gallery: ["/Images/AtelierTwo.png", "/Images/AtelierThree.png"],
             title: "Atelier Lavender",
             description:
                 "Transformed an architecture studio's outdated site into a sleek, modern web experience.",
@@ -272,3 +274,7 @@ export const projectCategories: ProjectCategory[] = [
 // Disabled projects return undefined so their detail page 404s.
 export const getProjectBySlug = (slug: string) =>
     projects.find((project) => project.slug === slug);
+
+// Every screenshot of a project, main image first, for the Project Viewer gallery.
+export const projectScreenshots = (project: ProjectType): string[] =>
+    [project.image, ...(project.gallery ?? [])];

@@ -1,7 +1,7 @@
 import { existsSync } from "node:fs";
 import path from "node:path";
 import { describe, expect, it } from "vitest";
-import { developer, projects } from "./portfolio";
+import { developer, projects, projectScreenshots } from "./portfolio";
 
 // Guards the content file that every JackOS app reads from.
 describe("portfolio data", () => {
@@ -11,10 +11,23 @@ describe("portfolio data", () => {
     for (const slug of slugs) expect(slug).toMatch(/^[a-z0-9]+(-[a-z0-9]+)*$/);
   });
 
-  it("points every enabled project at an image in public/", () => {
+  it("points every enabled project's screenshots at images in public/", () => {
     for (const project of projects) {
-      expect(existsSync(path.join(process.cwd(), "public", project.image)), project.image).toBe(true);
+      for (const image of projectScreenshots(project)) {
+        expect(existsSync(path.join(process.cwd(), "public", image)), image).toBe(true);
+      }
     }
+  });
+
+  it("lists the main image first, then any gallery shots", () => {
+    const atelier = projects.find((project) => project.slug === "atelier-lavender")!;
+    expect(projectScreenshots(atelier)).toEqual([
+      "/Images/AtelierOne.png",
+      "/Images/AtelierTwo.png",
+      "/Images/AtelierThree.png",
+    ]);
+    const portfolio = projects.find((project) => project.slug === "portfolio-website")!;
+    expect(projectScreenshots(portfolio)).toEqual(["/Images/Portfolio.png"]);
   });
 
   it("labels every skill group", () => {
