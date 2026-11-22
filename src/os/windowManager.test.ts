@@ -65,6 +65,13 @@ describe("window manager", () => {
     expect(wmReducer(state, { type: "close", id: "nope" })).toBe(state);
   });
 
+  it("leaves state untouched when moving, resizing or minimising an unknown id", () => {
+    const state = open(EMPTY_STATE, "about");
+    expect(wmReducer(state, { type: "move", id: "nope", x: 5, y: 5, viewport })).toBe(state);
+    expect(wmReducer(state, { type: "resize", id: "nope", w: 300, h: 300, viewport })).toBe(state);
+    expect(wmReducer(state, { type: "minimize", id: "nope" })).toBe(state);
+  });
+
   it("moves focus off a minimised window, to nothing when none are left", () => {
     let state = open(EMPTY_STATE, "about");
     state = open(state, "contact");

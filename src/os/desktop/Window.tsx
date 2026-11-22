@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, type PointerEvent as ReactPointerEvent, type ReactNode } from "react";
+import { useEffect, useRef, type MouseEvent as ReactMouseEvent, type PointerEvent as ReactPointerEvent, type ReactNode } from "react";
 import { getAppMeta, windowTitle } from "../apps";
 import { PixelIcon } from "../PixelIcon";
 import { WindowErrorBoundary } from "../WindowErrorBoundary";
@@ -47,6 +47,12 @@ export function Window({ win, focused, children }: { win: WindowState; focused: 
     trackDrag(event, (dx, dy) => wm.move(win.id, x + dx, y + dy));
   }
 
+  /** Maximises or restores on a title-bar double-click, ignoring the control buttons. */
+  function onTitleBarDoubleClick(event: ReactMouseEvent<HTMLDivElement>) {
+    if ((event.target as HTMLElement).closest("button")) return;
+    wm.toggleMaximize(win.id);
+  }
+
   /** Resizes from the bottom-right handle; the press also bubbles up to focus the window. */
   function startResize(event: ReactPointerEvent<HTMLDivElement>) {
     if (event.button !== 0) return;
@@ -77,7 +83,7 @@ export function Window({ win, focused, children }: { win: WindowState; focused: 
         }
       }}
     >
-      <div className={styles.titleBar} data-titlebar onPointerDown={startMove} onDoubleClick={() => wm.toggleMaximize(win.id)}>
+      <div className={styles.titleBar} data-titlebar onPointerDown={startMove} onDoubleClick={onTitleBarDoubleClick}>
         <PixelIcon name={getAppMeta(win.appId).icon} size={16} />
         <span id={titleId} className={styles.title}>{title}</span>
         <div className={styles.controls}>

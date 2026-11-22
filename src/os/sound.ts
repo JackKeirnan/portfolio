@@ -24,6 +24,8 @@ export function playSound(name: SoundName): void {
   try {
     // Create the context on first use; browsers may reject it, which the catch handles.
     audioContext ??= new AudioContext();
+    // Browsers start the context suspended until a gesture (autoplay policy); wake it.
+    if (audioContext.state === "suspended") void audioContext.resume();
     // Schedule every note relative to now so the jingle plays in one go.
     const now = audioContext.currentTime;
     for (const note of SOUNDS[name]) {

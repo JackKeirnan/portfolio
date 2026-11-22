@@ -134,7 +134,9 @@ export function wmReducer(state: WMState, action: WMAction): WMState {
     }
 
     case "minimize": {
-      if (!state.windows.some((w) => w.id === action.id)) return state;
+      // Unknown or already-minimised windows change nothing.
+      const target = state.windows.find((w) => w.id === action.id);
+      if (!target || target.minimized) return state;
       // Hide the window, then move focus off it if it had focus.
       const windows = state.windows.map((w) => (w.id === action.id ? { ...w, minimized: true } : w));
       const focusedId = state.focusedId === action.id ? topVisibleId(windows) : state.focusedId;
@@ -153,6 +155,7 @@ export function wmReducer(state: WMState, action: WMAction): WMState {
     }
 
     case "move": {
+      if (!state.windows.some((w) => w.id === action.id)) return state;
       // Clamp the dragged position so the title bar stays reachable.
       return {
         ...state,
@@ -163,6 +166,7 @@ export function wmReducer(state: WMState, action: WMAction): WMState {
     }
 
     case "resize": {
+      if (!state.windows.some((w) => w.id === action.id)) return state;
       // Clamp the size, then re-clamp the position: a wider-to-narrower resize moves the left bound.
       return {
         ...state,
