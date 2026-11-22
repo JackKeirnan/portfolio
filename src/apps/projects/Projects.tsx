@@ -9,25 +9,24 @@ import styles from "../apps.module.css";
 
 type Filter = "All" | ProjectCategory;
 
-/** Folder view of every enabled project, with category tabs. */
+/** Folder view of every enabled project, with category filter buttons. */
 export function Projects() {
   const wm = useWindowManager();
   const [filter, setFilter] = useState<Filter>("All");
   const [selected, setSelected] = useState<string | null>(null);
 
-  // Only offer tabs for categories that have at least one project.
+  // Only offer filter buttons for categories that have at least one project.
   const tabs: Filter[] = ["All", ...projectCategories.filter((category) => projects.some((p) => p.category === category))];
   const shown = filter === "All" ? projects : projects.filter((p) => p.category === filter);
 
   return (
     <div>
-      <div role="tablist" aria-label="Project categories" className={styles.tabs}>
+      <div role="group" aria-label="Project categories" className={styles.tabs}>
         {tabs.map((tab) => (
           <button
             key={tab}
             type="button"
-            role="tab"
-            aria-selected={tab === filter}
+            aria-pressed={tab === filter}
             className={`os-raised ${styles.tab} ${tab === filter ? styles.tabActive : ""}`}
             onClick={() => setFilter(tab)}
           >
@@ -35,7 +34,7 @@ export function Projects() {
           </button>
         ))}
       </div>
-      <div role="tabpanel" aria-label={`${filter} projects`} className={styles.folder}>
+      <div role="region" aria-label={`${filter} projects`} className={styles.folder}>
         {shown.map((project) => (
           <IconButton
             key={project.slug}

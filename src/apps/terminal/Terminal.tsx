@@ -51,7 +51,10 @@ export function Terminal() {
   return (
     // Clicking anywhere in the terminal focuses the input, like a real console.
     <div className={styles.terminal} onClick={() => inputRef.current?.focus()}>
-      <pre className={styles.terminalOutput} aria-live="polite">{lines.join("\n")}</pre>
+      {/* role="log" announces only appended lines; blank lines keep their height. */}
+      <div className={styles.terminalOutput} role="log">
+        {lines.map((line, index) => <div key={index}>{line || " "}</div>)}
+      </div>
       <form className={styles.prompt} onSubmit={onSubmit}>
         <label htmlFor="terminal-input">{PROMPT}</label>
         <input
