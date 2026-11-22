@@ -28,6 +28,17 @@ test.describe("desktop", () => {
     await expect(page).toHaveURL(/\/work$/);
   });
 
+  test("a click with no mouse detail opens a folder icon", async ({ page }) => {
+    await skipFirstVisit(page);
+    await page.goto("/work");
+    // element.click() has detail 0, like a screen reader's synthesised click.
+    await page
+      .getByRole("dialog", { name: "My Projects" })
+      .getByRole("button", { name: "Atelier Lavender" })
+      .evaluate((el) => (el as HTMLElement).click());
+    await expect(page.getByRole("dialog", { name: "Atelier Lavender" })).toBeVisible();
+  });
+
   test("dragging a window keeps its title bar on screen", async ({ page }) => {
     await page.goto("/about");
     const dialog = page.getByRole("dialog", { name: "About Me" });

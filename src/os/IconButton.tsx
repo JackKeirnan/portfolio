@@ -16,22 +16,32 @@ type Props = {
   onOpen: () => void;
 };
 
-/** A desktop-style icon. Enter opens it from the keyboard; Space selects it. */
+/**
+ * A desktop-style icon. Enter and assistive-tech clicks (detail 0) open it; Space selects it.
+ * Mouse clicks select on desktop and open on phones.
+ */
 export function IconButton({ label, icon, variant, selected, openOnSingleClick, onSelect, onOpen }: Props) {
   // Combine base, variant and selected classes into one className.
   return (
     <button
       type="button"
       className={`${styles.icon} ${styles[variant]} ${selected ? styles.selected : ""}`}
-      onClick={() => (openOnSingleClick ? onOpen() : onSelect?.())}
+      // Screen readers click with detail 0 and no keydown, so treat that as "open".
+      onClick={(event) => (openOnSingleClick || event.detail === 0 ? onOpen() : onSelect?.())}
       onDoubleClick={() => {
         if (!openOnSingleClick) onOpen();
       }}
       onKeyDown={(event) => {
-        // Enter would normally fire click (select); make it open instead.
+        // Enter would normally fire click (select); make it open, once per press.
         if (event.key === "Enter") {
           event.preventDefault();
+          if (event.repeat) return;
           onOpen();
+        }
+        // Space only selects; cancel its synthesised click so it does not open.
+        if (event.key === " " && !openOnSingleClick) {
+          event.preventDefault();
+          onSelect?.();
         }
       }}
     >
