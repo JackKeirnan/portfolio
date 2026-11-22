@@ -9,6 +9,11 @@ import { useWindowManager } from "./WindowManagerProvider";
 // Saved in each history entry on phones so back/forward can restore the stack.
 type PhoneHistoryState = { jackosDepth?: number; jackosPushed?: boolean };
 
+/** Tab title for the visible window, or the site default when none is open. */
+function tabTitle(title: string | null): string {
+  return title ? `${title} | Jack Keirnan` : "Jack Keirnan | JackOS";
+}
+
 /**
  * Keeps the address bar and tab title in step with the visible window.
  * Next.js patches history.pushState/replaceState, so its own state is kept.
@@ -23,6 +28,9 @@ export function useUrlSync(): { back: () => void; home: () => void } {
   const topId = stack.at(-1)?.id ?? null;
   const depth = stack.length;
   const depthRef = useRef(depth);
+  // Latest render values, so the popstate handler never reads stale ones.
+  const latestRef = useRef({ depth, path, title });
+  latestRef.current = { depth, path, title };
 
   // Write URL and title whenever the visible window or stack depth changes.
   useEffect(() => {
@@ -36,15 +44,23 @@ export function useUrlSync(): { back: () => void; home: () => void } {
       const current = (window.history.state ?? {}) as PhoneHistoryState;
       window.history.replaceState(isPhone ? { ...current, jackosDepth: depth } : current, "", url);
     }
-    document.title = title ? `${title} | Jack Keirnan` : "Jack Keirnan | JackOS";
+    document.title = tabTitle(title);
   }, [isPhone, path, title, depth]);
 
   // Phone: browser back/forward restores the stack depth saved in that entry.
   useEffect(() => {
     if (!isPhone) return;
+    /** Truncates to the entry's saved depth; if that cannot shrink the stack, re-syncs the URL and title. */
     const onPopState = (event: PopStateEvent) => {
       const saved = (event.state ?? {}) as PhoneHistoryState;
-      truncate(saved.jackosDepth ?? 0);
+      const savedDepth = saved.jackosDepth ?? 0;
+      truncate(savedDepth);
+      // Shrinking is handled by the sync effect; only a stale entry needs fixing here.
+      const latest = latestRef.current;
+      if (savedDepth > latest.depth) {
+        window.history.replaceState({ ...(event.state ?? {}), jackosDepth: latest.depth }, "", latest.path ?? window.location.pathname);
+        document.title = tabTitle(latest.title);
+      }
     };
     window.addEventListener("popstate", onPopState);
     return () => window.removeEventListener("popstate", onPopState);
