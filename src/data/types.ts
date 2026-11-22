@@ -21,6 +21,8 @@ export type ProjectType = {
 };
 
 export type SkillGroup = {
+    // Short heading for the group, e.g. "Languages"; shown in About Me and /plain.
+    label: string;
     icon: IconKey;
     text: string;
 };
@@ -47,6 +49,12 @@ export type Developer = {
     name: string;
     title: string;
     portrait: string;
+    // Path under public/ to the downloadable CV. Unset hides the download button.
+    cvPdf?: string;
+    terminal: {
+        // Lines printed by the Terminal app's `whoami` command.
+        whoami: string[];
+    };
     intro: {
         heading: string;
         paragraphs: string[];

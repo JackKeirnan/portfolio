@@ -6,6 +6,15 @@ export const developer: Developer = {
     name: "Jack Keirnan",
     title: "Software Developer",
     portrait: "/Images/Jack.png",
+    terminal: {
+        whoami: [
+            "jack keirnan - software developer",
+            "Junior Software Engineer at Eseye (July 2025 - present).",
+            "Freelance web developer since 2024.",
+            "BSc Computer Science, Brunel University London.",
+            "Type 'open about' for more, or 'contact' to get in touch.",
+        ],
+    },
 
     intro: {
         heading: "Hi!",
@@ -29,11 +38,11 @@ export const developer: Developer = {
         heading: "Skills",
         subtitle: "Tools and technologies I work with",
         groups: [
-            { icon: "code", text: "JavaScript, TypeScript, Python, Java" },
-            { icon: "web", text: "React, Next.js, Node.js" },
-            { icon: "design", text: "Tailwind CSS, Figma, Framer Motion" },
-            { icon: "storage", text: "MySQL, AWS, SpringBoot" },
-            { icon: "github", text: "Git, GitHub, Serverless" },
+            { label: "Languages", icon: "code", text: "JavaScript, TypeScript, Python, Java" },
+            { label: "Frameworks", icon: "web", text: "React, Next.js, Node.js" },
+            { label: "Design", icon: "design", text: "Tailwind CSS, Figma, Framer Motion" },
+            { label: "Data & Cloud", icon: "storage", text: "MySQL, AWS, SpringBoot" },
+            { label: "Tooling", icon: "github", text: "Git, GitHub, Serverless" },
         ],
     },
 
