@@ -8,6 +8,7 @@ const SECTION_ROUTES: Record<string, AppId> = {
   "/contact": "contact",
 };
 
+// Matches /work/<slug>; the slug is decoded separately because it may be malformed.
 const PROJECT_ROUTE = /^\/work\/([^/]+)$/;
 
 /** Decodes a URL segment; malformed escapes (e.g. "%E0%A4%A") return null. */

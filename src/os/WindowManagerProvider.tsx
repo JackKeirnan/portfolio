@@ -13,6 +13,7 @@ export function getViewport(): Viewport {
   return { width: window.innerWidth, height: window.innerHeight - TASKBAR_HEIGHT };
 }
 
+/** The window-changing calls apps can make; each dispatches one reducer action. */
 type Actions = {
   open(request: OpenRequest): void;
   close(id: string): void;

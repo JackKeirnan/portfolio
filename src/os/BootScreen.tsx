@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import styles from "./BootScreen.module.css";
 
+/** Which sequence to show, whether the boot is the short returning-visitor one, and the completion callback. */
 type Props = { mode: "boot" | "shutdown"; short: boolean; onDone: () => void };
 
 /** Full-screen boot or shutdown sequence. Boot can be skipped with any key, click or tap. */

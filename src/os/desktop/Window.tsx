@@ -42,7 +42,9 @@ export function Window({ win, focused, children }: { win: WindowState; focused: 
 
   /** Drags the window by its title bar; buttons in the bar are excluded. */
   function startMove(event: ReactPointerEvent<HTMLDivElement>) {
+    // Ignore maximised windows, non-primary buttons and presses on the controls.
     if (win.maximized || event.button !== 0 || (event.target as HTMLElement).closest("button")) return;
+    // Move relative to where the window was when the drag began.
     const { x, y } = win;
     trackDrag(event, (dx, dy) => wm.move(win.id, x + dx, y + dy));
   }
@@ -55,7 +57,9 @@ export function Window({ win, focused, children }: { win: WindowState; focused: 
 
   /** Resizes from the bottom-right handle; the press also bubbles up to focus the window. */
   function startResize(event: ReactPointerEvent<HTMLDivElement>) {
+    // Primary button only.
     if (event.button !== 0) return;
+    // Resize relative to the size when the drag began.
     const { w, h } = win;
     trackDrag(event, (dx, dy) => wm.resize(win.id, w + dx, h + dy));
   }

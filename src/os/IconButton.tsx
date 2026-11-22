@@ -4,6 +4,7 @@ import { PixelIcon } from "./PixelIcon";
 import type { PixelIconName } from "./pixelIcons";
 import styles from "./IconButton.module.css";
 
+/** Icon label and look, selection state, and how it opens (single tap on phones, double-click on desktops). */
 type Props = {
   label: string;
   icon: PixelIconName;

@@ -7,6 +7,7 @@ import styles from "../apps.module.css";
 /** Shown for unknown URLs and missing projects. */
 export function NotFound() {
   const wm = useWindowManager();
+  // Error message plus a way back to the project list.
   return (
     <div role="alert" className={styles.alert}>
       <PixelIcon name="error" size={32} />

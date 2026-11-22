@@ -4,7 +4,9 @@ import { Component, type ReactNode } from "react";
 import styles from "@/apps/apps.module.css";
 import { PixelIcon } from "./PixelIcon";
 
+/** The window title shown in the error, how to close the window, and the app to guard. */
 type Props = { title: string; onClose: () => void; children: ReactNode };
+/** Whether a child has thrown and the error view should show. */
 type State = { failed: boolean };
 
 /**

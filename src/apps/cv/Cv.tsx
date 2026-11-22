@@ -4,7 +4,9 @@ import styles from "../apps.module.css";
 
 /** Experience timeline, education and the PDF download (hidden until a PDF is set). */
 export function Cv() {
+  // Pull the sections out of the shared portfolio data.
   const { experience, education, cvPdf } = developer;
+  // Download button (only when a PDF is set), experience, then education.
   return (
     <div className={styles.page}>
       <h1 className={styles.heading}>Curriculum Vitae</h1>

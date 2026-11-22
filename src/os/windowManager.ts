@@ -48,6 +48,7 @@ const CASCADE_STEP = 24;
 
 /** Window id: the app id, plus the instance key's value for per-item apps. */
 export function windowId(request: OpenRequest): string {
+  // Per-item apps (like projects) name the param that makes each window unique.
   const key = getAppMeta(request.appId).instanceKey;
   const value = key ? request.params?.[key] : undefined;
   return value ? `${request.appId}:${value}` : request.appId;
@@ -155,6 +156,7 @@ export function wmReducer(state: WMState, action: WMAction): WMState {
     }
 
     case "move": {
+      // Unknown ids change nothing.
       if (!state.windows.some((w) => w.id === action.id)) return state;
       // Clamp the dragged position so the title bar stays reachable.
       return {
@@ -166,6 +168,7 @@ export function wmReducer(state: WMState, action: WMAction): WMState {
     }
 
     case "resize": {
+      // Unknown ids change nothing.
       if (!state.windows.some((w) => w.id === action.id)) return state;
       // Clamp the size, then re-clamp the position: a wider-to-narrower resize moves the left bound.
       return {

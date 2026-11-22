@@ -33,13 +33,16 @@ export function StartMenu({ onClose, onShutDown }: { onClose: () => void; onShut
 
   /** Arrow keys move between items; Esc closes and returns focus. */
   function onKeyDown(event: KeyboardEvent<HTMLDivElement>) {
+    // Work out which menu item has focus now.
     const items = Array.from(menuRef.current?.querySelectorAll<HTMLElement>("[role='menuitem']") ?? []);
     const index = items.indexOf(document.activeElement as HTMLElement);
     if (event.key === "ArrowDown" || event.key === "ArrowUp") {
+      // Move focus one item, wrapping at both ends.
       event.preventDefault();
       const step = event.key === "ArrowDown" ? 1 : -1;
       items[(index + step + items.length) % items.length]?.focus();
     } else if (event.key === "Escape") {
+      // Close the menu and give focus back to the Start button.
       onClose();
       focusStartButton();
     }

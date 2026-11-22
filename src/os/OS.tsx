@@ -21,8 +21,10 @@ function useWindowSounds() {
   const count = state.windows.length;
   const previous = useRef(count);
   useEffect(() => {
+    // More windows than last time means one opened; fewer means one closed.
     if (count > previous.current) play("open");
     else if (count < previous.current) play("close");
+    // Remember this count for the next change.
     previous.current = count;
   }, [count, play]);
 }
@@ -52,8 +54,10 @@ function Shell({ isHome }: { isHome: boolean }) {
 
   /** Boot finished or skipped. */
   const finishBoot = useCallback(() => {
+    // Show the desktop and play the startup jingle.
     setPhase("desktop");
     play("startup");
+    // Only the first-ever boot opens Welcome, and only once.
     if (showWelcomeAfterBoot.current) {
       showWelcomeAfterBoot.current = false;
       wm.open({ appId: "welcome" });
@@ -62,6 +66,7 @@ function Shell({ isHome }: { isHome: boolean }) {
 
   /** Shutdown joke finished: clear the desktop and boot again. */
   const finishShutdown = useCallback(() => {
+    // Close every window so the reboot starts from an empty desktop.
     wm.closeAll();
     setPhase("boot");
   }, [wm]);

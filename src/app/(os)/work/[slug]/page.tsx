@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getProjectBySlug, projects } from "@/data/portfolio";
 
+/** Route params for /work/[slug]. */
 type Params = { slug: string };
 
 /** Pre-renders every enabled project at build time. */

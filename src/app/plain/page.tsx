@@ -9,7 +9,9 @@ export const metadata: Metadata = {
 
 /** Fallback for screen readers and hurried recruiters: everything, no desktop. */
 export default function PlainPage() {
+  // Pull every section out of the shared portfolio data.
   const { name, title, intro, about, cvPdf, experience, education, skills, contact, footer } = developer;
+  // One flat page: header and intro, then each section as a heading and list.
   return (
     <div className={styles.scroll}>
       <main className={styles.page}>

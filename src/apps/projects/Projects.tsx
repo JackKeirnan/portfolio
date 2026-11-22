@@ -7,6 +7,7 @@ import { IconButton } from "@/os/IconButton";
 import { useWindowManager } from "@/os/WindowManagerProvider";
 import styles from "../apps.module.css";
 
+/** The active category tab: every project, or one category. */
 type Filter = "All" | ProjectCategory;
 
 /** Folder view of every enabled project, with category filter buttons. */

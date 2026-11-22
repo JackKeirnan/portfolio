@@ -3,6 +3,7 @@ import styles from "../apps.module.css";
 
 /** Education entries as a small timeline. */
 export function EducationList() {
+  // One timeline entry per education item.
   return (
     <>
       {developer.education.items.map((item) => (

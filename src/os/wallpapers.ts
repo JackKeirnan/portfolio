@@ -6,6 +6,7 @@ export const WALLPAPERS = [
   { id: "plum", label: "Plum" },
 ] as const;
 
+/** Union of the wallpaper ids above, so a bad id fails to compile. */
 export type WallpaperId = (typeof WALLPAPERS)[number]["id"];
 
 export const DEFAULT_WALLPAPER: WallpaperId = "aurora";
