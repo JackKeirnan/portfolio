@@ -243,6 +243,14 @@ export const developer: Developer = {
         ],
     },
 
+    credits: [
+        { label: "Design and build", detail: "Jack Keirnan" },
+        { label: "Icons, sounds and wallpapers", detail: "Made for JackOS. Sounds are generated in the browser." },
+        { label: "Fonts", detail: "Tahoma and Verdana from your own system; no webfonts are downloaded." },
+        { label: "Next.js", detail: "MIT licence, Vercel", href: "https://github.com/vercel/next.js/blob/canary/license.md" },
+        { label: "React", detail: "MIT licence, Meta Platforms", href: "https://github.com/facebook/react/blob/main/LICENSE" },
+    ],
+
     footer:
         "© 2026 Jack Keirnan. Built with Next.js and hosted on Vercel.",
 };

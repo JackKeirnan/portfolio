@@ -5,6 +5,7 @@ import { About } from "@/apps/about/About";
 import { Contact } from "@/apps/contact/Contact";
 import { Cv } from "@/apps/cv/Cv";
 import { DisplaySettings } from "@/apps/display/DisplaySettings";
+import { Credits } from "@/apps/credits/Credits";
 import { NotFound } from "@/apps/notFound/NotFound";
 import { ProjectViewer } from "@/apps/projectViewer/ProjectViewer";
 import { Projects } from "@/apps/projects/Projects";
@@ -22,6 +23,7 @@ const COMPONENTS: Record<AppId, ComponentType<AppProps>> = {
   contact: Contact,
   terminal: Terminal,
   display: DisplaySettings,
+  credits: Credits,
   notFound: NotFound,
 };
 

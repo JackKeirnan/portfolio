@@ -30,4 +30,13 @@ describe("portfolio data", () => {
       expect(existsSync(path.join(process.cwd(), "public", developer.cvPdf))).toBe(true);
     }
   });
+
+  it("lists credits, each with a label, detail and an https link when linked", () => {
+    expect(developer.credits.length).toBeGreaterThan(0);
+    for (const credit of developer.credits) {
+      expect(credit.label.length).toBeGreaterThan(0);
+      expect(credit.detail.length).toBeGreaterThan(0);
+      if (credit.href) expect(credit.href).toMatch(/^https:\/\//);
+    }
+  });
 });

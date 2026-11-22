@@ -81,4 +81,9 @@ describe("terminal commands", () => {
   it("explains unknown commands", () => {
     expect(runCommand("rm -rf /", context).lines[0]).toBe("'rm' is not recognised. Type 'help' for a list of commands.");
   });
+
+  it("opens About JackOS for credits", () => {
+    expect(runCommand("credits", context).action).toEqual({ type: "open", request: { appId: "credits" } });
+    expect(runCommand("help", context).lines.join("\n")).toContain("credits");
+  });
 });

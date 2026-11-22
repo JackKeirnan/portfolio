@@ -20,6 +20,7 @@ const HELP_LINES = [
   "  ls projects     List my projects",
   "  open <name>     Open an app or project (try: open about, open cv)",
   "  contact         Show contact details",
+  "  credits         Open About JackOS",
   "  clear           Clear the screen",
 ];
 
@@ -76,6 +77,9 @@ export function runCommand(input: string, context: TerminalContext): TerminalRes
     case "contact":
       // Strip the mailto: prefix so the address reads as plain text.
       return { lines: context.contact.map((c) => `  ${c.label.padEnd(10)} ${c.href.replace(/^mailto:/, "")}`) };
+    case "credits":
+      // Same as `open credits`, so the window opens from one short word.
+      return openCommand("credits", context);
     case "clear":
       return { lines: [], action: { type: "clear" } };
     default:

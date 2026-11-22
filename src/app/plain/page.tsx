@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 /** Fallback for screen readers and hurried recruiters: everything, no desktop. */
 export default function PlainPage() {
   // Pull every section out of the shared portfolio data.
-  const { name, title, intro, about, cvPdf, experience, education, skills, contact, footer } = developer;
+  const { name, title, intro, about, cvPdf, experience, education, skills, contact, credits, footer } = developer;
   // One flat page: header and intro, then each section as a heading and list.
   return (
     <div className={styles.scroll}>
@@ -50,6 +50,16 @@ export default function PlainPage() {
         <h2>{contact.heading}</h2>
         <ul>
           {contact.links.map((link) => <li key={link.label}><a href={link.href}>{link.label}</a></li>)}
+        </ul>
+
+        <h2>Credits</h2>
+        <ul>
+          {credits.map((credit) => (
+            <li key={credit.label}>
+              <strong>{credit.label}:</strong>{" "}
+              {credit.href ? <a href={credit.href}>{credit.detail}</a> : credit.detail}
+            </li>
+          ))}
         </ul>
 
         <footer className={styles.footer}>{footer}</footer>

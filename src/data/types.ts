@@ -40,6 +40,13 @@ export type ContactLink = {
     href: string;
 };
 
+/** One line in the About JackOS credits; href links to the source or licence. */
+export type Credit = {
+    label: string;
+    detail: string;
+    href?: string;
+};
+
 export type Developer = {
     name: string;
     title: string;
@@ -75,5 +82,7 @@ export type Developer = {
         blurb: string;
         links: ContactLink[];
     };
+    // Shown in About JackOS and on /plain. Add any third-party asset here.
+    credits: Credit[];
     footer: string;
 };

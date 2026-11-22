@@ -4,7 +4,7 @@ import type { PixelIconName } from "./pixelIcons";
 /** Every program JackOS can open. */
 export type AppId =
   | "welcome" | "about" | "projects" | "projectViewer" | "cv"
-  | "contact" | "terminal" | "display" | "notFound";
+  | "contact" | "terminal" | "display" | "credits" | "notFound";
 
 /** Extra data a window needs, e.g. { slug } for a project. */
 export type AppParams = Record<string, string>;
@@ -37,6 +37,7 @@ export const APPS: readonly AppMeta[] = [
   { id: "contact", title: "Contact", icon: "contact", defaultSize: { w: 420, h: 320 }, onDesktop: true, inStartMenu: true },
   { id: "terminal", title: "Terminal", icon: "terminal", defaultSize: { w: 580, h: 360 }, onDesktop: true, inStartMenu: true },
   { id: "display", title: "Display Settings", icon: "display", defaultSize: { w: 380, h: 340 }, onDesktop: false, inStartMenu: true },
+  { id: "credits", title: "About JackOS", icon: "welcome", defaultSize: { w: 440, h: 380 }, onDesktop: false, inStartMenu: true },
   { id: "notFound", title: "File not found", icon: "error", defaultSize: { w: 440, h: 240 }, onDesktop: false, inStartMenu: false },
 ];
 
@@ -53,6 +54,7 @@ export const APP_ALIASES: Record<string, AppId> = {
   terminal: "terminal",
   display: "display",
   settings: "display",
+  credits: "credits",
 };
 
 /** Looks up an app. AppId is a closed union, so a miss is a programming error. */
