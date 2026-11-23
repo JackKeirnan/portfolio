@@ -29,7 +29,7 @@ export function Projects() {
             type="button"
             aria-pressed={tab === filter}
             data-label={tab}
-            className={`os-raised ${styles.tab} ${tab === filter ? styles.tabActive : ""}`}
+            className={`os-raised os-steady-bold ${styles.tab} ${tab === filter ? styles.tabActive : ""}`}
             onClick={() => setFilter(tab)}
           >
             {tab}

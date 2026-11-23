@@ -65,6 +65,11 @@ a { color: var(--os-link); }
   border-color: var(--os-chrome-dark) var(--os-chrome-light) var(--os-chrome-light) var(--os-chrome-dark);
 }
 
+/* Steady bold: for labels that turn bold when selected. An invisible bold copy
+   (from data-label) reserves the bold width, so selecting never shifts neighbours. */
+.os-steady-bold { display: inline-grid; justify-items: center; }
+.os-steady-bold::after { content: attr(data-label); font-weight: bold; height: 0; overflow: hidden; visibility: hidden; }
+
 /* Wallpapers, chosen in Display Settings and applied via data-wallpaper. */
 [data-wallpaper="aurora"] { background: linear-gradient(180deg, #0b1f4a 0%, #1a5f9e 55%, #2fa8b8 85%, #3fd0c9 100%); }
 [data-wallpaper="lagoon"] { background: linear-gradient(180deg, #0b3a4a 0%, #136a74 60%, #2f9c94 100%); }

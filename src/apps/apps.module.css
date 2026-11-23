@@ -12,9 +12,7 @@
 .tags { display: flex; flex-wrap: wrap; gap: 4px; margin: 6px 0 12px; }
 .tag { padding: 1px 6px; font-size: 11px; background: var(--os-chrome); border: 1px solid var(--os-chrome-dark); }
 .tabs { display: flex; gap: 2px; padding: 6px 8px 0; border-bottom: 2px solid var(--os-chrome-dark); }
-.tab { display: inline-grid; justify-items: center; padding: 3px 10px; font: inherit; color: var(--os-text); cursor: pointer; border-bottom: 0; }
-/* Invisible bold copy of the label reserves the bold width, so selecting a tab never shifts its neighbours. */
-.tab::after { content: attr(data-label); font-weight: bold; height: 0; overflow: hidden; visibility: hidden; }
+.tab { padding: 3px 10px; font: inherit; color: var(--os-text); cursor: pointer; border-bottom: 0; }
 .tabActive { position: relative; top: 2px; font-weight: bold; background: var(--os-panel); }
 .folder { display: flex; flex-wrap: wrap; gap: 8px; padding: 12px; }
 .shot { display: block; width: 100%; height: auto; margin-bottom: 10px; border: 1px solid var(--os-chrome-dark); }

@@ -15,7 +15,8 @@
 }
 .start { height: 100%; padding: 0 12px; background: var(--os-start); color: #ffffff; font: bold 13px var(--os-font); cursor: pointer; }
 .tasks { display: flex; flex: 1; gap: 4px; min-width: 0; height: 100%; }
-.task { display: flex; align-items: center; gap: 6px; min-width: 0; max-width: 180px; padding: 0 8px; font: inherit; color: var(--os-text); cursor: pointer; }
+/* Fixed-width task buttons: bolding the active one changes no widths, and long titles ellipsise. */
+.task { display: flex; flex: 0 1 170px; align-items: center; gap: 6px; min-width: 0; padding: 0 8px; font: inherit; color: var(--os-text); cursor: pointer; }
 .task span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .active { background: #f4f0e6; font-weight: bold; border-color: var(--os-chrome-dark) var(--os-chrome-light) var(--os-chrome-light) var(--os-chrome-dark); }
 .tray { display: flex; align-items: center; gap: 8px; height: 100%; padding: 0 8px; background: var(--os-chrome); }
