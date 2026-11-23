@@ -3,6 +3,7 @@
 import { useCallback, useState } from "react";
 import { getAppMeta, windowTitle } from "../apps";
 import { PixelIcon } from "../PixelIcon";
+import { useSettings } from "../settings";
 import { Clock, SoundToggle } from "../Tray";
 import { useWindowManager } from "../WindowManagerProvider";
 import { StartMenu } from "./StartMenu";
@@ -11,6 +12,7 @@ import styles from "./Taskbar.module.css";
 /** Bottom bar: JackOS menu button, one button per open window, and the tray. */
 export function Taskbar({ onShutDown }: { onShutDown: () => void }) {
   const wm = useWindowManager();
+  const { play } = useSettings();
   const [menuOpen, setMenuOpen] = useState(false);
   // Stable so StartMenu's outside-click effect is not re-subscribed every render.
   const closeMenu = useCallback(() => setMenuOpen(false), []);
@@ -23,7 +25,11 @@ export function Taskbar({ onShutDown }: { onShutDown: () => void }) {
         className={`${styles.start} os-raised`}
         aria-haspopup="menu"
         aria-expanded={menuOpen}
-        onClick={() => setMenuOpen((open) => !open)}
+        onClick={() => {
+          // Tick only when the menu opens, not when it closes.
+          if (!menuOpen) play("menu");
+          setMenuOpen(!menuOpen);
+        }}
       >
         JackOS
       </button>
