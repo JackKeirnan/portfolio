@@ -30,6 +30,21 @@ describe("portfolio data", () => {
     expect(projectScreenshots(portfolio)).toEqual(["/Images/Portfolio.png"]);
   });
 
+  it("links the dissertation game's public repo", () => {
+    const games = projects.find((project) => project.slug === "video-game-projects")!;
+    expect(games.repoUrl).toBe("https://github.com/JackKeirnan/Hospital-Game-FYP");
+  });
+
+  it("uses https for every project link", () => {
+    for (const project of projects) {
+      for (const url of [project.liveUrl, project.repoUrl]) if (url) expect(url).toMatch(/^https:\/\//);
+    }
+  });
+
+  it("lists Stain Game as a Game Dev project", () => {
+    expect(projects.find((project) => project.slug === "stain-game")?.category).toBe("Game Dev");
+  });
+
   it("labels every skill group", () => {
     for (const group of developer.skills.groups) expect(group.label.length).toBeGreaterThan(0);
   });

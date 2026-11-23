@@ -37,11 +37,12 @@ export const developer: Developer = {
     skills: {
         heading: "Skills",
         groups: [
-            { label: "Languages", text: "JavaScript, TypeScript, Python, Java" },
-            { label: "Frameworks", text: "React, Next.js, Node.js" },
+            { label: "Languages", text: "JavaScript, TypeScript, Python, Java, C#, Lua" },
+            { label: "Frameworks", text: "React, Next.js, Node.js, Vite" },
+            { label: "Game Dev", text: "Unity, Yarn Spinner, Aseprite" },
             { label: "Design", text: "Tailwind CSS, Figma, Framer Motion" },
-            { label: "Data & Cloud", text: "MySQL, AWS, SpringBoot" },
-            { label: "Tooling", text: "Git, GitHub, Serverless" },
+            { label: "Data & Cloud", text: "MySQL, AWS, SpringBoot, Sanity CMS" },
+            { label: "Tooling", text: "Git, GitHub, Serverless, Vitest" },
         ],
     },
 
@@ -214,6 +215,7 @@ export const developer: Developer = {
             languages: ["Unity", "C#", "Figma"],
             category: "Game Dev",
             enabled: true,
+            repoUrl: "https://github.com/JackKeirnan/Hospital-Game-FYP",
         },
         {
             id: 10,
@@ -228,6 +230,23 @@ export const developer: Developer = {
                 "The project let me deepen my C# skills and practise designing a non-trivial rules engine — meld detection, lay-offs, and turn flow — alongside building an interactive, drag-to-reorder card interface.",
             ],
             languages: ["Unity", "C#"],
+            category: "Game Dev",
+            enabled: true,
+        },
+        {
+            id: 11,
+            slug: "stain-game",
+            image: "/Images/WIP.png",
+            title: "Stain Game",
+            description:
+                "A top-down pixel-art game about running a stain-cleaning business, being reshaped into a rogue-lite.",
+            longdescription: [
+                "Stain Game is a work-in-progress team project: a top-down pixel-art game where you build up a stain-cleaning business, starting from a food truck.",
+                "It's built in Unity 6 with the URP 2D renderer and C#, with NPC dialogue written in Yarn Spinner. The tech demo has player movement with directional animation, a tutorial level, scene transitions with doors and spawn points, and title, pause and settings menus.",
+                "Behind it sits a tooling pipeline: Git LFS for art, an Aseprite import step for 32 pixels-per-unit sprites, a custom scene validator, and EditMode tests split into runtime, editor and test assemblies.",
+                "The design is now moving to a rogue-lite loop, where stains act as enemies and cleaning supplies are played like a hand of cards.",
+            ],
+            languages: ["Unity", "C#", "Yarn Spinner", "Aseprite"],
             category: "Game Dev",
             enabled: true,
         },
@@ -247,7 +266,9 @@ export const developer: Developer = {
 
     credits: [
         { label: "Design and build", detail: "Jack Keirnan" },
-        { label: "Icons, sounds and wallpapers", detail: "Made for JackOS. Sounds are generated in the browser." },
+        { label: "Icons", detail: "Pixel-Art Icons by T. Stamborski (CC0)", href: "https://github.com/tstamborski/pixelart-icons" },
+        { label: "Sounds", detail: "Interface Sounds by Kenney (CC0)", href: "https://kenney.nl/assets/interface-sounds" },
+        { label: "Startup chime and wallpapers", detail: "Made for JackOS; the chime is generated in the browser." },
         { label: "Fonts", detail: "Tahoma and Verdana from your own system; no webfonts are downloaded." },
         { label: "Next.js", detail: "MIT licence, Vercel", href: "https://github.com/vercel/next.js/blob/canary/license.md" },
         { label: "React", detail: "MIT licence, Meta Platforms", href: "https://github.com/facebook/react/blob/main/LICENSE" },

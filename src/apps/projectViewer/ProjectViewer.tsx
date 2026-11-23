@@ -67,9 +67,15 @@ export function ProjectViewer({ params }: AppProps) {
         {project.languages.map((language) => <span key={language} className={styles.tag}>{language}</span>)}
       </div>
       {project.longdescription.map((paragraph) => <p key={paragraph} className={styles.paragraph}>{paragraph}</p>)}
-      {project.liveUrl && (
+      {/* Links only appear for projects that have them; both open in a new tab. */}
+      {(project.liveUrl || project.repoUrl) && (
         <div className={styles.buttons}>
-          <a className="os-raised os-button" href={project.liveUrl} target="_blank" rel="noopener noreferrer">Visit site</a>
+          {project.liveUrl && (
+            <a className="os-raised os-button" href={project.liveUrl} target="_blank" rel="noopener noreferrer">Visit site</a>
+          )}
+          {project.repoUrl && (
+            <a className="os-raised os-button" href={project.repoUrl} target="_blank" rel="noopener noreferrer">View on GitHub</a>
+          )}
         </div>
       )}
     </article>

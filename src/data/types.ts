@@ -15,6 +15,8 @@ export type ProjectType = {
     category: ProjectCategory;
     // Optional live deployment link.
     liveUrl?: string;
+    // Optional public source repo; shown as "View on GitHub".
+    repoUrl?: string;
     // Toggle visibility. Defaults to shown; set to false to hide everywhere.
     enabled?: boolean;
 };
