@@ -1,18 +1,18 @@
+import type { CSSProperties } from "react";
 import { PIXEL_ICONS, type PixelIconName } from "./pixelIcons";
+import styles from "./PixelIcon.module.css";
 
-/** Renders a JackOS pixel icon, kept crisp when scaled. Decorative: labels carry the meaning. */
+/** Renders an icon as a white pixel glyph on a bevelled, coloured tile. Decorative: labels carry the meaning. */
 export function PixelIcon({ name, size = 32 }: { name: PixelIconName; size?: number }) {
+  const icon = PIXEL_ICONS[name];
+  // Thinner bevel on small icons (title bars, taskbar) so the glyph keeps its room.
+  const bevel = size >= 24 ? 2 : 1;
+  const style = { width: size, height: size, borderWidth: bevel, background: icon.tile } as CSSProperties;
   return (
-    // Plain img: the PNGs are tiny and pre-sized, so next/image optimisation adds nothing.
-    // eslint-disable-next-line @next/next/no-img-element
-    <img
-      src={PIXEL_ICONS[name]}
-      alt=""
-      aria-hidden="true"
-      width={size}
-      height={size}
-      draggable={false}
-      style={{ imageRendering: "pixelated", objectFit: "contain" }}
-    />
+    <span className={styles.tile} style={style} aria-hidden="true">
+      <svg viewBox="0 0 24 24" width="75%" height="75%" fill="#ffffff" shapeRendering="crispEdges" focusable="false">
+        <path d={icon.path} />
+      </svg>
+    </span>
   );
 }

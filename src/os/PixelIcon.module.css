@@ -1,0 +1,9 @@
+/* Raised tile: light top-left edge, dark bottom-right, like the window bevels. */
+.tile {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  border-style: solid;
+  border-color: #ffffff99 #00000099 #00000099 #ffffff99;
+}

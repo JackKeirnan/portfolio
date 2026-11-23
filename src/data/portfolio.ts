@@ -266,7 +266,7 @@ export const developer: Developer = {
 
     credits: [
         { label: "Design and build", detail: "Jack Keirnan" },
-        { label: "Icons", detail: "Pixel-Art Icons by T. Stamborski (CC0)", href: "https://github.com/tstamborski/pixelart-icons" },
+        { label: "Icons", detail: "pixelarticons by Gerrit Halfmann (MIT licence)", href: "https://github.com/halfmage/pixelarticons" },
         { label: "Sounds", detail: "Interface Sounds by Kenney (CC0)", href: "https://kenney.nl/assets/interface-sounds" },
         { label: "Startup chime and wallpapers", detail: "Made for JackOS; the chime is generated in the browser." },
         { label: "Fonts", detail: "Tahoma and Verdana from your own system; no webfonts are downloaded." },
