@@ -63,7 +63,7 @@ export function StartMenu({ onClose, onShutDown }: { onClose: () => void; onShut
               onClose();
             }}
           >
-            <PixelIcon name={app.icon} size={20} />
+            <PixelIcon name={app.icon} size={16} />
             {app.title}
           </button>
         ))}

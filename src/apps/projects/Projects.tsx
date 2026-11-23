@@ -40,7 +40,8 @@ export function Projects() {
           <IconButton
             key={project.slug}
             variant="folder"
-            icon="document"
+            // Games get a controller icon so they stand out in the folder.
+            icon={project.category === "Game Dev" ? "gamepad" : "document"}
             label={project.title}
             selected={selected === project.slug}
             openOnSingleClick={wm.isPhone}

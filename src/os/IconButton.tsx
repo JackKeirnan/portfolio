@@ -46,7 +46,7 @@ export function IconButton({ label, icon, variant, selected, openOnSingleClick, 
         }
       }}
     >
-      <PixelIcon name={icon} size={36} />
+      <PixelIcon name={icon} size={32} />
       <span className={styles.label}>{label}</span>
     </button>
   );
