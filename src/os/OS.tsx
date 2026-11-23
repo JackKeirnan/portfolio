@@ -12,21 +12,21 @@ import { SettingsProvider, useSettings } from "./settings";
 import { readSetting, STORAGE_KEYS, writeSetting } from "./storage";
 import { useUrlSync } from "./useUrlSync";
 import { useWindowManager, WindowManagerProvider } from "./WindowManagerProvider";
+import { windowSoundFor } from "./windowSounds";
 import styles from "./OS.module.css";
 
-/** Plays open/close sounds as windows come and go (silent unless sound is on). */
+/** Plays a sound for each window open, close, minimise or maximise (silent unless sound is on). */
 function useWindowSounds() {
   const { state } = useWindowManager();
   const { play } = useSettings();
-  const count = state.windows.length;
-  const previous = useRef(count);
+  const previous = useRef(state);
   useEffect(() => {
-    // More windows than last time means one opened; fewer means one closed.
-    if (count > previous.current) play("open");
-    else if (count < previous.current) play("close");
-    // Remember this count for the next change.
-    previous.current = count;
-  }, [count, play]);
+    // Compare with the last state so each change gets its own sound (or none).
+    const sound = windowSoundFor(previous.current, state);
+    if (sound) play(sound);
+    // Remember this state for the next change.
+    previous.current = state;
+  }, [state, play]);
 }
 
 /** Picks the desktop or phone shell and runs boot, shutdown and URL sync. */
