@@ -28,6 +28,7 @@ export function Projects() {
             key={tab}
             type="button"
             aria-pressed={tab === filter}
+            data-label={tab}
             className={`os-raised ${styles.tab} ${tab === filter ? styles.tabActive : ""}`}
             onClick={() => setFilter(tab)}
           >
