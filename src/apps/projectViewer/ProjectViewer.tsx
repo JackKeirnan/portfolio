@@ -62,7 +62,20 @@ export function ProjectViewer({ params }: AppProps) {
       )}
 
       <h1 className={styles.heading}>{project.title}</h1>
-      <p className={styles.meta}>{project.category}</p>
+      <p className={styles.meta}>
+        {project.category}
+        {/* Credit whoever it was made with, linking their site when there is one. */}
+        {project.collaborator && (
+          <>
+            {" · Made with "}
+            {project.collaborator.href ? (
+              <a href={project.collaborator.href} target="_blank" rel="noopener noreferrer">{project.collaborator.name}</a>
+            ) : (
+              project.collaborator.name
+            )}
+          </>
+        )}
+      </p>
       <div className={styles.tags}>
         {project.languages.map((language) => <span key={language} className={styles.tag}>{language}</span>)}
       </div>

@@ -8,11 +8,10 @@ export const developer: Developer = {
     portrait: "/Images/Jack.png",
     terminal: {
         whoami: [
-            "jack keirnan - software developer",
-            "Junior Software Engineer at Eseye (July 2025 - present).",
-            "Freelance web developer since 2024.",
-            "BSc Computer Science, Brunel University London.",
-            "Type 'open about' for more, or 'contact' to get in touch.",
+            "I'm Jack – a software developer based in the UK.",
+            "By day I'm a Junior Software Engineer at Eseye; on the side I take on freelance web projects.",
+            "I studied Computer Science at Brunel University London and still make games for fun.",
+            "Try 'open about' to read more, or 'contact' to say hello.",
         ],
     },
 
@@ -239,13 +238,14 @@ export const developer: Developer = {
             image: "/Images/WIP.png",
             title: "Stain Game",
             description:
-                "A top-down pixel-art game about running a stain-cleaning business, being reshaped into a rogue-lite.",
+                "A pixel-art game about running a stain-cleaning business, made with my friend Liyah.",
             longdescription: [
-                "Stain Game is a work-in-progress team project: a top-down pixel-art game where you build up a stain-cleaning business, starting from a food truck.",
-                "It's built in Unity 6 with the URP 2D renderer and C#, with NPC dialogue written in Yarn Spinner. The tech demo has player movement with directional animation, a tutorial level, scene transitions with doors and spawn points, and title, pause and settings menus.",
-                "Behind it sits a tooling pipeline: Git LFS for art, an Aseprite import step for 32 pixels-per-unit sprites, a custom scene validator, and EditMode tests split into runtime, editor and test assemblies.",
-                "The design is now moving to a rogue-lite loop, where stains act as enemies and cleaning supplies are played like a hand of cards.",
+                "Stain Game is a work-in-progress game I'm making with my friend Liyah. You start out with a food truck and build up a stain-cleaning business, one messy job at a time.",
+                "I'm building it in Unity 6 with C# and the URP 2D renderer, with Yarn Spinner handling the NPC dialogue. So far there's a playable tech demo — movement, a tutorial level, doors between scenes and the usual menus.",
+                "A lot of the early work has gone into the foundations: an import pipeline for the pixel art, a scene checker that catches mistakes before they reach the game, and tests so new changes don't quietly break old ones.",
+                "We're now reshaping it into a rogue-lite, where stains become enemies and your cleaning supplies are played like a hand of cards.",
             ],
+            collaborator: { name: "Liyah", href: "https://liyahalikhan.art/" },
             languages: ["Unity", "C#", "Yarn Spinner", "Aseprite"],
             category: "Game Dev",
             enabled: true,

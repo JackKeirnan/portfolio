@@ -43,7 +43,13 @@ export default function PlainPage() {
         <h2>Projects</h2>
         <ul>
           {projects.map((project) => (
-            <li key={project.slug}><a href={`/work/${project.slug}`}>{project.title}</a>: {project.description}</li>
+            <li key={project.slug}>
+              <a href={`/work/${project.slug}`}>{project.title}</a>: {project.description}
+              {/* Link the collaborator's site, matching the project window. */}
+              {project.collaborator?.href && (
+                <> (<a href={project.collaborator.href}>{project.collaborator.name}&apos;s site</a>)</>
+              )}
+            </li>
           ))}
         </ul>
 

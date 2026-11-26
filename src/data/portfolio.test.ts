@@ -41,8 +41,16 @@ describe("portfolio data", () => {
     }
   });
 
-  it("lists Stain Game as a Game Dev project", () => {
-    expect(projects.find((project) => project.slug === "stain-game")?.category).toBe("Game Dev");
+  it("lists Stain Game as a Game Dev project made with Liyah", () => {
+    const stain = projects.find((project) => project.slug === "stain-game");
+    expect(stain?.category).toBe("Game Dev");
+    expect(stain?.collaborator).toEqual({ name: "Liyah", href: "https://liyahalikhan.art/" });
+  });
+
+  it("uses https for every collaborator link", () => {
+    for (const project of projects) {
+      if (project.collaborator?.href) expect(project.collaborator.href).toMatch(/^https:\/\//);
+    }
   });
 
   it("labels every skill group", () => {

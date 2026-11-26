@@ -17,6 +17,8 @@ export type ProjectType = {
     liveUrl?: string;
     // Optional public source repo; shown as "View on GitHub".
     repoUrl?: string;
+    // Someone the project was made with; shown as "Made with <name>" and linked when href is set.
+    collaborator?: { name: string; href?: string };
     // Toggle visibility. Defaults to shown; set to false to hide everywhere.
     enabled?: boolean;
 };
