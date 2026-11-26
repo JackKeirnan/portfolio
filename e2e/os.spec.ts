@@ -84,6 +84,16 @@ test.describe("desktop", () => {
     await expect(boot).toHaveCount(0);
   });
 
+  test("shared links get a social preview image", async ({ page, request }) => {
+    // The home page advertises a large preview card and its image.
+    await page.goto("/");
+    await expect(page.locator('meta[name="twitter:card"]')).toHaveAttribute("content", "summary_large_image");
+    const imageUrl = await page.locator('meta[property="og:image"]').getAttribute("content");
+    // The image itself is served as a PNG.
+    const image = await request.get(new URL(imageUrl!).pathname + new URL(imageUrl!).search);
+    expect(image.headers()["content-type"]).toBe("image/png");
+  });
+
   test("plain view lists the CV", async ({ page }) => {
     // Open the plain text page.
     await page.goto("/plain");
