@@ -80,8 +80,10 @@ export function Window({ win, focused, children }: { win: WindowState; focused: 
         if (!focused) wm.focus(win.id);
       }}
       onKeyDown={(event) => {
-        // Esc closes the focused window.
-        if (event.key === "Escape") {
+        // Esc closes the focused window, but not while typing: fields keep Esc for themselves.
+        const target = event.target as HTMLElement;
+        const typing = target.isContentEditable || ["INPUT", "TEXTAREA", "SELECT"].includes(target.tagName);
+        if (event.key === "Escape" && !typing) {
           event.stopPropagation();
           wm.close(win.id);
         }

@@ -47,11 +47,16 @@ export function useUrlSync(): { back: () => void; home: () => void } {
     document.title = tabTitle(title);
   }, [isPhone, path, title, depth]);
 
-  // Browser back/forward: phones restore the saved stack depth; desktops just re-sync.
+  // Browser back/forward: phones restore the saved stack depth; desktops skip phone entries and re-sync.
   useEffect(() => {
-    /** Phone: truncates to the entry's saved depth; if that cannot shrink the stack, re-syncs the URL and title. */
+    /** Phone: truncates to the entry's saved depth. Desktop: skips dead phone entries, then re-syncs URL and title. */
     const onPopState = (event: PopStateEvent) => {
-      // Desktop may still hold phone-pushed entries; keep the URL and title in step.
+      // Desktop never pushes; entries left from phone mode are dead, so skip back past them.
+      if (!isPhone && (event.state as PhoneHistoryState | null)?.jackosPushed) {
+        window.history.back();
+        return;
+      }
+      // Desktop on a real entry: keep the URL and title on the focused window.
       if (!isPhone) {
         const latest = latestRef.current;
         window.history.replaceState(window.history.state, "", latest.path ?? window.location.pathname);

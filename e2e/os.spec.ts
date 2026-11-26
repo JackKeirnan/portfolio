@@ -93,6 +93,38 @@ test.describe("desktop", () => {
   });
 });
 
+test.describe("tablet", () => {
+  test.use({ viewport: { width: 1024, height: 768 }, hasTouch: true });
+
+  test("a single tap opens a desktop icon", async ({ page }) => {
+    // Desktop layout on a touch screen, where double-tap can't be relied on.
+    await skipFirstVisit(page);
+    await page.goto("/");
+    // One tap on the icon opens its window.
+    await page.getByRole("navigation", { name: "Desktop" }).getByRole("button", { name: "My Projects" }).tap();
+    await expect(page.getByRole("dialog", { name: "My Projects" })).toBeVisible();
+  });
+});
+
+test.describe("keyboard", () => {
+  test.use({ viewport: { width: 1280, height: 800 } });
+
+  test("Esc in the terminal input keeps the window open", async ({ page }) => {
+    // Open the Terminal and type into it.
+    await skipFirstVisit(page);
+    await page.goto("/");
+    await page.getByRole("navigation", { name: "Desktop" }).getByRole("button", { name: "Terminal" }).dblclick();
+    const terminal = page.getByRole("dialog", { name: "Terminal" });
+    await terminal.getByLabel("jack@jackos ~ $").fill("whoami");
+    // Esc while typing leaves the window open; Esc on the window itself closes it.
+    await page.keyboard.press("Escape");
+    await expect(terminal).toBeVisible();
+    await terminal.focus();
+    await page.keyboard.press("Escape");
+    await expect(terminal).toHaveCount(0);
+  });
+});
+
 test.describe("phone", () => {
   test.use({ viewport: { width: 390, height: 844 }, hasTouch: true });
 

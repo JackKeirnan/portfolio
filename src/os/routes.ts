@@ -36,8 +36,8 @@ export function initialWindowsForPath(pathname: string): OpenRequest[] {
   const slug = match ? safeDecode(match[1]) : null;
   if (slug && getProjectBySlug(slug)) return [{ appId: "projectViewer", params: { slug } }];
 
-  // Anything else, including malformed or disabled slugs, shows File not found.
-  return [{ appId: "notFound" }];
+  // Anything else shows File not found, remembering the URL so refocusing it restores that URL.
+  return [{ appId: "notFound", params: { path: pathname } }];
 }
 
 /** URL that represents a window, so copying the address bar shares it. Null keeps the current URL. */
@@ -55,7 +55,8 @@ export function pathForWindow(request: OpenRequest | null): string | null {
     case "projectViewer":
       return request.params?.slug ? `/work/${encodeURIComponent(request.params.slug)}` : "/work";
     case "notFound":
-      return null;
+      // The URL it was opened for; null (keep current) when opened from inside the app.
+      return request.params?.path ?? null;
     default:
       return "/";
   }
