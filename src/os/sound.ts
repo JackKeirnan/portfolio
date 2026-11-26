@@ -2,6 +2,7 @@ import { ZZFX_SAMPLE_RATE, zzfxGenerate, type ZzfxParams } from "./vendor/zzfx";
 
 /** Every interface sound JackOS plays, one per kind of action. */
 export const SOUND_NAMES = ["open", "close", "minimize", "maximize", "error", "menu", "startup"] as const;
+/** Name of one interface sound; each has a preset in SOUND_PRESETS. */
 export type SoundName = (typeof SOUND_NAMES)[number];
 
 /** One synthesised note: ZzFX parameters, started `at` seconds into the sound. */

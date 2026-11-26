@@ -1,19 +1,11 @@
-/*!
- * ZzFX - Zuper Zmall Zound Zynth v1.3.0 (sample generator only)
- * MIT License - Copyright (c) 2019 Frank Force - https://github.com/KilledByAPixel/ZzFX
- * Full licence text: public/licenses/zzfx.txt. Ported to TypeScript for JackOS; playback
- * lives in ../sound.ts so no AudioContext is created at import (keeps server rendering safe).
- */
+/*! ZzFX v1.3.0 sample generator, MIT, (c) 2019 Frank Force (github.com/KilledByAPixel/ZzFX); licence in public/licenses/zzfx.txt.
+    Ported to TypeScript; playback lives in ../sound.ts so importing never creates an AudioContext. */
 
 /** Output sample rate, matching ZzFX's default. */
 export const ZZFX_SAMPLE_RATE = 44100;
 const ZZFX_VOLUME = 0.3;
 
-/**
- * ZzFX parameter list, in ZzFX's own order: volume, randomness, frequency, attack,
- * sustain, release, shape, shapeCurve, slide, deltaSlide, pitchJump, pitchJumpTime,
- * repeatTime, noise, modulation, bitCrush, delay, sustainVolume, decay, tremolo, filter.
- */
+/** ZzFX parameter list in ZzFX's own order; names and defaults are in zzfxGenerate's first statement. */
 export type ZzfxParams = readonly (number | undefined)[];
 
 /** Generates one sound's samples from ZzFX parameters (ZzFX's zzfxG, unchanged in behaviour). */
