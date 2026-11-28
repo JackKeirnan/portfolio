@@ -32,6 +32,7 @@ export function IconButton({ label, icon, variant, selected, openOnSingleClick, 
     <button
       type="button"
       className={`${styles.icon} ${styles[variant]} ${selected ? styles.selected : ""}`}
+      data-selected={selected || undefined}
       onPointerDown={(event) => {
         pointerType.current = event.pointerType;
       }}
