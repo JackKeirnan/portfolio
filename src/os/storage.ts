@@ -1,7 +1,7 @@
 /** keys for everything JackOS remembers between visits */
 export const STORAGE_KEYS = {
   visited: "jackos.visited",
-  wallpaper: "jackos.wallpaper",
+  dark: "jackos.dark",
   sound: "jackos.sound",
 } as const;
 

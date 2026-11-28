@@ -9,7 +9,7 @@ const BOOT_TIPS = [
   "right-click the desktop for more options.",
   "type 'help' in the Terminal.",
   "turn on sound from the taskbar tray.",
-  "pick a new wallpaper in Display Settings.",
+  "switch on dark mode in Display Settings.",
 ];
 
 /** which sequence to show, whether it's the short returning-visitor boot, and the done callback */

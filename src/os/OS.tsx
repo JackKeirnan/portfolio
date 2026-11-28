@@ -40,7 +40,7 @@ function useWindowFeedback(): boolean {
 /** picks the desktop or phone shell, runs boot, shutdown and URL sync */
 function Shell({ isHome }: { isHome: boolean }) {
   const wm = useWindowManager();
-  const { wallpaper, play } = useSettings();
+  const { dark, play } = useSettings();
   const { back, home } = useUrlSync();
   const [phase, setPhase] = useState<"desktop" | "boot" | "shutdown">("desktop");
   // Welcome only opens after the very first boot, not after a joke reboot
@@ -81,7 +81,7 @@ function Shell({ isHome }: { isHome: boolean }) {
   }, [wm]);
 
   return (
-    <div className={styles.root} data-wallpaper={wallpaper} data-busy={busy}>
+    <div className={styles.root} data-theme={dark ? "dark" : "light"} data-busy={busy}>
       <a className={styles.skipLink} href="/plain">Skip to plain text version</a>
       {wm.isPhone ? (
         <PhoneShell onBack={back} onHome={home} />

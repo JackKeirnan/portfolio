@@ -18,5 +18,5 @@
 /* fixed-width task buttons so bolding the active one doesn't change widths, long titles ellipsise */
 .task { display: flex; flex: 0 1 170px; align-items: center; gap: 6px; min-width: 0; padding: 0 8px; font: inherit; color: var(--os-text); cursor: var(--os-cursor); }
 .task span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.active { background: #f3eefa; font-weight: bold; border-color: var(--os-chrome-dark) var(--os-chrome-light) var(--os-chrome-light) var(--os-chrome-dark); }
+.active { background: var(--os-panel-raised); font-weight: bold; border-color: var(--os-chrome-dark) var(--os-chrome-light) var(--os-chrome-light) var(--os-chrome-dark); }
 .tray { display: flex; align-items: center; gap: 8px; height: 100%; padding: 0 8px; background: var(--os-chrome); }

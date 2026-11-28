@@ -13,9 +13,12 @@
   --os-start: #6a2c9e;
   --os-close: #d23a1c;
   --os-panel: #ffffff;
+  --os-panel-raised: #f3eefa;
   --os-text: #221a30;
   --os-muted: #54486a;
   --os-link: #5a2a96;
+  /* headings inside windows; separate from title bars so dark mode can lighten them */
+  --os-heading: #4b1f7a;
   --os-focus: #f2c14e;
   --os-terminal-bg: #10141c;
   --os-terminal-text: #8fe3a6;
@@ -23,14 +26,17 @@
   --os-mono: "Lucida Console", "Courier New", monospace;
   --os-font-size: 13px;
   --os-taskbar-height: 36px;
-  /* pixel cursors from pixelarticons (MIT) with white fills; hotspot at the arrow tip / hourglass centre */
-  --os-cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 24 24' shape-rendering='crispEdges'%3E%3Cpath fill='white' d='M8 6h2v2h2v2h2v2h2v2h-4v2h-2v2H8z'/%3E%3Cpath d='M6 4h2v16H6zm2 0h2v2H8zm2 2h2v2h-2zm2 2h2v2h-2zm2 2h2v2h-2zm2 2h2v2h-2zm-8 6h2v2H8zm2-2h2v2h-2zm2-2h6v2h-6z'/%3E%3C/svg%3E") 8 5, default;
-  --os-cursor-busy: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 24 24' shape-rendering='crispEdges'%3E%3Cpath fill='white' d='M10 14v-4H8V8H6V4h2V2h8v2h2v4h-2v2h-2v4h2v2h2v4h-2v2H8v-2H6v-4h2v-2h2Z'/%3E%3Cpath d='M16 22H8v-2h8v2Zm-8-2H6v-4h2v4Zm10 0h-2v-4h2v4Zm-8-4H8v-2h2v2Zm6 0h-2v-2h2v2Zm-6-6h4v4h-4v-4Zm0 0H8V8h2v2Zm6 0h-2V8h2v2ZM8 8H6V4h2v4Zm10 0h-2V4h2v4Zm-2-4H8V2h8v2Z'/%3E%3C/svg%3E") 16 16, wait;
+  /* pixel cursors from Kenney's Cursor Pixel Pack (CC0), scaled 2x; hotspots sit on the tip / centre */
+  --os-cursor: url("/cursors/arrow.png") 4 0, default;
+  --os-cursor-hand: url("/cursors/hand.png") 11 0, pointer;
+  --os-cursor-busy: url("/cursors/wait.png") 16 16, wait;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
 html, body { margin: 0; height: 100%; }
 html { cursor: var(--os-cursor); }
+/* links get the pointing hand, like old browsers */
+a[href] { cursor: var(--os-cursor-hand); }
 /* hourglass while a window opens; text fields keep their I-beam */
 [data-busy="true"], [data-busy="true"] * { cursor: var(--os-cursor-busy) !important; }
 body {
@@ -76,15 +82,27 @@ a { color: var(--os-link); }
 .os-steady-bold { display: inline-grid; justify-items: center; }
 .os-steady-bold::after { content: attr(data-label); font-weight: bold; height: 0; overflow: hidden; visibility: hidden; }
 
-/* wallpapers, picked in Display Settings and applied via data-wallpaper */
-[data-wallpaper="aurora"] { background: linear-gradient(180deg, #0b1f4a 0%, #1a5f9e 55%, #2fa8b8 85%, #3fd0c9 100%); }
-[data-wallpaper="lagoon"] { background: linear-gradient(180deg, #0b3a4a 0%, #136a74 60%, #2f9c94 100%); }
-[data-wallpaper="midnight"] {
-  background-color: #0b1f4a;
-  background-image: linear-gradient(#ffffff14 1px, transparent 1px), linear-gradient(90deg, #ffffff14 1px, transparent 1px);
-  background-size: 24px 24px;
+/* re-apply text colour inside the desktop: body's colour was resolved before dark mode swapped the tokens */
+[data-theme] { color: var(--os-text); }
+
+/* light mode desktop: the plum wallpaper */
+[data-theme="light"] { background: linear-gradient(180deg, #24103a 0%, #4b2a6b 60%, #7a4f9e 100%); }
+
+/* dark mode: same purple title bars, night-time chrome and panels, darker wallpaper */
+[data-theme="dark"] {
+  --os-chrome: #2e2440;
+  --os-chrome-light: #4c3f63;
+  --os-chrome-dark: #0e0a16;
+  --os-chrome-shadow: #1a1426;
+  --os-panel: #1c1628;
+  --os-panel-raised: #3a2e50;
+  --os-text: #ece6f5;
+  --os-muted: #b7aacb;
+  --os-link: #c9a3f0;
+  --os-heading: #d6b8f5;
+  background: linear-gradient(180deg, #0a0512 0%, #1c0d2e 60%, #33194d 100%);
+  color-scheme: dark;
 }
-[data-wallpaper="plum"] { background: linear-gradient(180deg, #24103a 0%, #4b2a6b 60%, #7a4f9e 100%); }
 
 /* respect reduced-motion - no window or boot animations */
 @media (prefers-reduced-motion: reduce) {

@@ -144,6 +144,29 @@ test.describe("retro extras", () => {
     await expect(menu).toHaveCount(0);
   });
 
+  test("dark mode switches on from Display Settings and is remembered", async ({ page }) => {
+    await skipFirstVisit(page);
+    await page.emulateMedia({ colorScheme: "light" });
+    await page.goto("/");
+    const desktop = page.locator("[data-theme]");
+    await expect(desktop).toHaveAttribute("data-theme", "light");
+    // open Display Settings from the desktop menu and tick Dark mode
+    await page.mouse.click(700, 400, { button: "right" });
+    await page.getByRole("menuitem", { name: "Display Settings..." }).click();
+    await page.getByRole("dialog", { name: "Display Settings" }).getByLabel("Dark mode").check();
+    await expect(desktop).toHaveAttribute("data-theme", "dark");
+    // the choice survives a reload
+    await page.reload();
+    await expect(desktop).toHaveAttribute("data-theme", "dark");
+  });
+
+  test("dark mode follows the system setting until the visitor picks one", async ({ page }) => {
+    await skipFirstVisit(page);
+    await page.emulateMedia({ colorScheme: "dark" });
+    await page.goto("/");
+    await expect(page.locator("[data-theme]")).toHaveAttribute("data-theme", "dark");
+  });
+
   test("dragging on the wallpaper selects the icons it covers", async ({ page }) => {
     await skipFirstVisit(page);
     await page.goto("/");
