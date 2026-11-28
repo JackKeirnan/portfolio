@@ -1,11 +1,9 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/app/pageMetadata";
 import { developer, projects } from "@/data/portfolio";
 import styles from "./plain.module.css";
 
-export const metadata: Metadata = {
-  title: "Plain view | Jack Keirnan",
-  description: "Jack Keirnan's CV, projects and contact details as a simple text page.",
-};
+export const metadata: Metadata = pageMetadata("Plain view | Jack Keirnan", "Jack Keirnan's CV, projects and contact details as a simple text page.");
 
 /** Fallback for screen readers and hurried recruiters: everything, no desktop. */
 export default function PlainPage() {
@@ -45,9 +43,12 @@ export default function PlainPage() {
           {projects.map((project) => (
             <li key={project.slug}>
               <a href={`/work/${project.slug}`}>{project.title}</a>: {project.description}
-              {/* Link the collaborator's site, matching the project window. */}
-              {project.collaborator?.href && (
-                <> (<a href={project.collaborator.href}>{project.collaborator.name}&apos;s site</a>)</>
+              {/* Credit the collaborator like the project window does, linking their site when there is one. */}
+              {project.collaborator && (
+                <>
+                  {" Made with "}
+                  {project.collaborator.href ? <a href={project.collaborator.href}>{project.collaborator.name}</a> : project.collaborator.name}.
+                </>
               )}
             </li>
           ))}

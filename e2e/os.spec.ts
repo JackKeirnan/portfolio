@@ -94,6 +94,14 @@ test.describe("desktop", () => {
     expect(image.headers()["content-type"]).toBe("image/png");
   });
 
+  test("a shared project link previews as that project", async ({ page }) => {
+    // Project pages set their own card text and keep the site-wide image.
+    await page.goto("/work/stain-game");
+    await expect(page.locator('meta[property="og:title"]')).toHaveAttribute("content", "Stain Game | Jack Keirnan");
+    await expect(page.locator('meta[name="twitter:title"]')).toHaveAttribute("content", "Stain Game | Jack Keirnan");
+    await expect(page.locator('meta[property="og:image"]')).toHaveCount(1);
+  });
+
   test("plain view lists the CV", async ({ page }) => {
     // Open the plain text page.
     await page.goto("/plain");
