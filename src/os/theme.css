@@ -97,6 +97,9 @@ a { color: var(--os-link); }
 /* tall screens: cover would zoom in too far, so the scene sits at the bottom under plum */
 @media (max-aspect-ratio: 1/1) { [data-theme] body::before { background-size: auto, auto, auto 55%; background-position: 0 0, 0 0, 40% bottom; background-repeat: no-repeat; } }
 
+/* still wallpaper: first frame, no steam. Display Settings switch, defaults to the system reduced-motion setting */
+[data-wallpaper="still"] { --os-wallpaper-art: url("/art/fudge-and-ginger.png"); }
+
 /* dark mode: same purple title bars, night-time chrome and panels, darker wallpaper */
 [data-theme="dark"] {
   --os-chrome: #2e2440;
@@ -116,7 +119,7 @@ a { color: var(--os-link); }
 
 /* respect reduced-motion - no window or boot animations */
 @media (prefers-reduced-motion: reduce) {
-  /* first frame only, no steam */
-  :root { --os-wallpaper-art: url("/art/fudge-and-ginger.png"); }
+  /* without JS there's no data-wallpaper, so fall back to the still here */
+  :root:not([data-wallpaper]) { --os-wallpaper-art: url("/art/fudge-and-ginger.png"); }
   *, *::before, *::after { animation: none !important; transition: none !important; }
 }
