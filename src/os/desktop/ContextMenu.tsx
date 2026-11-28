@@ -20,13 +20,14 @@ export function ContextMenu({ x, y, items, onClose }: { x: number; y: number; it
     menu.querySelector<HTMLElement>("[role='menuitem']")?.focus();
   }, [x, y]);
 
-  // any press outside the menu closes it
+  // any press outside the menu closes it; capture phase so it runs before the desktop
+  // handles the same press (its re-render would otherwise swap this listener mid-event)
   useEffect(() => {
     const onPointerDown = (event: PointerEvent) => {
       if (!menuRef.current?.contains(event.target as Node)) onClose();
     };
-    document.addEventListener("pointerdown", onPointerDown);
-    return () => document.removeEventListener("pointerdown", onPointerDown);
+    document.addEventListener("pointerdown", onPointerDown, true);
+    return () => document.removeEventListener("pointerdown", onPointerDown, true);
   }, [onClose]);
 
   /** arrow keys move between items, Esc closes */

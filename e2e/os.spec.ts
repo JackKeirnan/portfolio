@@ -128,6 +128,22 @@ test.describe("retro extras", () => {
     await expect(menu).toHaveCount(0);
   });
 
+  test("a left-click anywhere else closes the desktop menu", async ({ page }) => {
+    await skipFirstVisit(page);
+    await page.goto("/");
+    const menu = page.getByRole("menu", { name: "Desktop menu" });
+    // wallpaper click
+    await page.mouse.click(700, 400, { button: "right" });
+    await expect(menu).toBeVisible();
+    await page.mouse.click(400, 600);
+    await expect(menu).toHaveCount(0);
+    // taskbar click
+    await page.mouse.click(700, 400, { button: "right" });
+    await expect(menu).toBeVisible();
+    await page.getByRole("button", { name: /♪/ }).click();
+    await expect(menu).toHaveCount(0);
+  });
+
   test("dragging on the wallpaper selects the icons it covers", async ({ page }) => {
     await skipFirstVisit(page);
     await page.goto("/");

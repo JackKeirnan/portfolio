@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState, type PointerEvent as ReactPointerEvent } from "react";
+import { useCallback, useRef, useState, type PointerEvent as ReactPointerEvent } from "react";
 import { AppContent } from "../appComponents";
 import { APPS } from "../apps";
 import { boxesOverlap, boxFromPoints, type Box } from "../geometry";
@@ -19,6 +19,8 @@ export function Desktop() {
   const [menu, setMenu] = useState<{ x: number; y: number } | null>(null);
   const [lasso, setLasso] = useState<Box | null>(null);
   const navRef = useRef<HTMLElement>(null);
+  // stable so the menu's outside-click listener isn't re-subscribed on every render
+  const closeMenu = useCallback(() => setMenu(null), []);
 
   const desktopApps = APPS.filter((app) => app.onDesktop);
   const icons = byName ? [...desktopApps].sort((a, b) => a.title.localeCompare(b.title)) : desktopApps;
@@ -104,7 +106,7 @@ export function Desktop() {
           <AppContent appId={win.appId} params={win.params} />
         </Window>
       ))}
-      {menu && <ContextMenu x={menu.x} y={menu.y} items={menuItems} onClose={() => setMenu(null)} />}
+      {menu && <ContextMenu x={menu.x} y={menu.y} items={menuItems} onClose={closeMenu} />}
     </div>
   );
 }
