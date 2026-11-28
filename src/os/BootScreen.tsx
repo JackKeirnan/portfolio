@@ -7,7 +7,6 @@ import styles from "./BootScreen.module.css";
 const BOOT_TIPS = [
   "double-click a desktop icon to open it.",
   "right-click the desktop for more options.",
-  "type 'help' in the Terminal.",
   "turn on sound from the taskbar tray.",
   "switch on dark mode in Display Settings.",
 ];

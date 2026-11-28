@@ -9,7 +9,6 @@ import { Credits } from "@/apps/credits/Credits";
 import { NotFound } from "@/apps/notFound/NotFound";
 import { ProjectViewer } from "@/apps/projectViewer/ProjectViewer";
 import { Projects } from "@/apps/projects/Projects";
-import { Terminal } from "@/apps/terminal/Terminal";
 import { Welcome } from "@/apps/welcome/Welcome";
 import type { AppId, AppParams, AppProps } from "./apps";
 
@@ -21,7 +20,6 @@ const COMPONENTS: Record<AppId, ComponentType<AppProps>> = {
   projectViewer: ProjectViewer,
   cv: Cv,
   contact: Contact,
-  terminal: Terminal,
   display: DisplaySettings,
   credits: Credits,
   notFound: NotFound,

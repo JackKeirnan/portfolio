@@ -20,8 +20,6 @@
   /* headings inside windows; separate from title bars so dark mode can lighten them */
   --os-heading: #4b1f7a;
   --os-focus: #f2c14e;
-  --os-terminal-bg: #10141c;
-  --os-terminal-text: #8fe3a6;
   --os-font: Tahoma, Verdana, "Segoe UI", sans-serif;
   --os-mono: "Lucida Console", "Courier New", monospace;
   --os-font-size: 13px;

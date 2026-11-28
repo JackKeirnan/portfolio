@@ -6,14 +6,6 @@ export const developer: Developer = {
     name: "Jack Keirnan",
     title: "Software Developer",
     portrait: "/Images/Jack.png",
-    terminal: {
-        whoami: [
-            "I'm Jack – a software developer based in the UK.",
-            "By day I'm a Junior Software Engineer at Eseye; on the side I take on freelance web projects.",
-            "I studied Computer Science at Brunel University London and still make games for fun.",
-            "Try 'open about' to read more, or 'contact' to say hello.",
-        ],
-    },
 
     intro: {
         heading: "Hi!",

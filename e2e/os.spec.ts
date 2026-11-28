@@ -278,19 +278,13 @@ test.describe("tablet", () => {
 test.describe("keyboard", () => {
   test.use({ viewport: { width: 1280, height: 800 } });
 
-  test("Esc in the terminal input keeps the window open", async ({ page }) => {
-    // open the Terminal and type in it
+  test("Esc closes the focused window", async ({ page }) => {
     await skipFirstVisit(page);
-    await page.goto("/");
-    await page.getByRole("navigation", { name: "Desktop" }).getByRole("button", { name: "Terminal" }).dblclick();
-    const terminal = page.getByRole("dialog", { name: "Terminal" });
-    await terminal.getByLabel("jack@jackos ~ $").fill("whoami");
-    // Esc while typing leaves the window open, Esc on the window itself closes it
+    await page.goto("/about");
+    const about = page.getByRole("dialog", { name: "About Me" });
+    await about.focus();
     await page.keyboard.press("Escape");
-    await expect(terminal).toBeVisible();
-    await terminal.focus();
-    await page.keyboard.press("Escape");
-    await expect(terminal).toHaveCount(0);
+    await expect(about).toHaveCount(0);
   });
 });
 

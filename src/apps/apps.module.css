@@ -23,11 +23,6 @@
 .shotFallback { display: flex; align-items: center; justify-content: center; height: 160px; margin-bottom: 10px; background: var(--os-chrome); }
 .timelineItem { margin: 0 0 12px; padding-left: 10px; border-left: 3px solid var(--os-title-to); }
 .timelineItem h3 { margin: 0; font-size: 13px; }
-.terminal { display: flex; flex-direction: column; min-height: 100%; padding: 8px; background: var(--os-terminal-bg); color: var(--os-terminal-text); font: 13px/1.4 var(--os-mono); }
-.terminalOutput { flex: 1; margin: 0; white-space: pre-wrap; font: inherit; }
-.prompt { display: flex; gap: 6px; }
-.terminalInput { flex: 1; background: transparent; border: 0; color: inherit; font: inherit; outline: none; caret-color: var(--os-terminal-text); }
-.commandBar { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
 .alert { display: flex; gap: 12px; align-items: flex-start; padding: 14px; }
 .fieldset { margin: 0 0 12px; padding: 8px 12px; border: 2px groove var(--os-chrome); }
 .option { display: flex; align-items: center; gap: 6px; padding: 3px 0; }

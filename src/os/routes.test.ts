@@ -28,7 +28,7 @@ describe("routes", () => {
   });
 
   it("gives app windows without a route the home path, and leaves 404s alone", () => {
-    expect(pathForWindow({ appId: "terminal" })).toBe("/");
+    expect(pathForWindow({ appId: "display" })).toBe("/");
     expect(pathForWindow(null)).toBe("/");
     expect(pathForWindow({ appId: "notFound" })).toBeNull();
     // a 404 window remembers the URL it was opened for, so refocusing it puts that URL back

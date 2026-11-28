@@ -36,9 +36,9 @@ describe("window manager", () => {
 
   it("cascades new windows", () => {
     let state = open(EMPTY_STATE, "contact");
-    state = open(state, "terminal");
-    expect(win(state, "terminal").x - win(state, "contact").x).toBe(24);
-    expect(win(state, "terminal").y - win(state, "contact").y).toBe(24);
+    state = open(state, "cv");
+    expect(win(state, "cv").x - win(state, "contact").x).toBe(24);
+    expect(win(state, "cv").y - win(state, "contact").y).toBe(24);
   });
 
   it("fits a new window inside a small viewport", () => {
