@@ -5,3 +5,6 @@
 .bar { width: 0; height: 100%; background: repeating-linear-gradient(90deg, #c9a3f0 0 10px, transparent 10px 13px); animation: boot-fill linear forwards; }
 @keyframes boot-fill { to { width: 100%; } }
 .message { margin: 0; color: #e4d6f5; }
+/* BIOS-style memory line pinned to the top-left, in the monospace font */
+.bios { position: absolute; top: 16px; left: 20px; margin: 0; font: 14px var(--os-mono); color: #c9a3f0; }
+.tip { margin: 0; font-size: 12px; color: #b9a6d6; }

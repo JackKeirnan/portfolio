@@ -53,6 +53,8 @@ test.describe("desktop", () => {
     // open About and grab its title bar
     await page.goto("/about");
     const dialog = page.getByRole("dialog", { name: "About Me" });
+    // wait for the zoom-open animation to finish so the window is at its real size and place
+    await page.waitForFunction(() => document.getAnimations().every((animation) => animation.playState !== "running"));
     const bar = dialog.locator("[data-titlebar]");
     const start = (await bar.boundingBox())!;
     // drag the bar almost off the right edge of the screen
@@ -108,6 +110,55 @@ test.describe("desktop", () => {
     // name and section headings are there
     await expect(page.getByRole("heading", { level: 1, name: "Jack Keirnan" })).toBeVisible();
     await expect(page.getByRole("heading", { name: "Experience" })).toBeVisible();
+  });
+});
+
+test.describe("retro extras", () => {
+  test.use({ viewport: { width: 1280, height: 800 } });
+
+  test("right-clicking the wallpaper opens the desktop menu", async ({ page }) => {
+    await skipFirstVisit(page);
+    await page.goto("/");
+    await page.mouse.click(700, 400, { button: "right" });
+    const menu = page.getByRole("menu", { name: "Desktop menu" });
+    await expect(menu).toBeVisible();
+    // its Display Settings item opens that window and closes the menu
+    await menu.getByRole("menuitem", { name: "Display Settings..." }).click();
+    await expect(page.getByRole("dialog", { name: "Display Settings" })).toBeVisible();
+    await expect(menu).toHaveCount(0);
+  });
+
+  test("dragging on the wallpaper selects the icons it covers", async ({ page }) => {
+    await skipFirstVisit(page);
+    await page.goto("/");
+    const icons = page.getByRole("navigation", { name: "Desktop" }).getByRole("button");
+    const first = (await icons.nth(0).boundingBox())!;
+    const second = (await icons.nth(1).boundingBox())!;
+    // start right of the icon column and sweep left across the first two icons
+    await page.mouse.move(first.x + first.width + 40, first.y + 5);
+    await page.mouse.down();
+    await page.mouse.move(first.x + 10, second.y + second.height - 5, { steps: 5 });
+    await page.mouse.up();
+    await expect(page.locator("[data-selected]")).toHaveCount(2);
+  });
+
+  test("the screensaver starts after a minute idle and any key wakes the screen", async ({ page }) => {
+    await page.clock.install();
+    await skipFirstVisit(page);
+    await page.goto("/");
+    await expect(page.getByRole("navigation", { name: "Desktop" })).toBeVisible();
+    await page.clock.fastForward(61_000);
+    const saver = page.getByTestId("screensaver");
+    await expect(saver).toBeVisible();
+    await page.keyboard.press("Shift");
+    await expect(saver).toHaveCount(0);
+  });
+
+  test("first boot shows the BIOS memory line and a tip", async ({ page }) => {
+    await page.goto("/");
+    const boot = page.getByTestId("boot-screen");
+    await expect(boot.getByText(/JackOS BIOS v1\.0 - Memory test/)).toBeVisible();
+    await expect(boot.getByText(/^Tip: /)).toBeVisible();
   });
 });
 
