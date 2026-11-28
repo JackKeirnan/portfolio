@@ -41,7 +41,7 @@ export const SOUND_PRESETS: Record<SoundName, Note[]> = {
 };
 
 /** master level on top of each preset's own volume; square waves sound loud, so keep it low and subtle */
-export const MASTER_VOLUME = 0.3;
+const MASTER_VOLUME = 0.3;
 
 // created on first play so visitors who keep sound off never allocate audio
 let audioContext: AudioContext | null = null;

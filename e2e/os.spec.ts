@@ -22,6 +22,9 @@ test.describe("desktop", () => {
     // server gives a 404 and the desktop shows the themed dialog
     expect(response?.status()).toBe(404);
     await expect(page.getByRole("dialog", { name: "File not found" })).toBeVisible();
+    // 404s skip the (os) layout but still get the theme and wallpaper
+    await expect(page.locator("html")).toHaveAttribute("data-theme", /^(light|dark)$/);
+    await expect(page.locator("html")).toHaveAttribute("data-wallpaper", /^(animated|still)$/);
   });
 
   test("double-clicking a desktop icon opens its window and updates the URL", async ({ page }) => {
@@ -110,6 +113,8 @@ test.describe("desktop", () => {
     // name and section headings are there
     await expect(page.getByRole("heading", { level: 1, name: "Jack Keirnan" })).toBeVisible();
     await expect(page.getByRole("heading", { name: "Experience" })).toBeVisible();
+    // no JackOS theme or wallpaper on the plain page
+    await expect(page.locator("html")).not.toHaveAttribute("data-theme");
   });
 });
 

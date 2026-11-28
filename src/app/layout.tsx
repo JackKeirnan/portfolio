@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import "@/os/theme.css";
+import { THEME_SCRIPT } from "@/os/storage";
 import { pageMetadata } from "./pageMetadata";
 
 const description = "I'm Jack, a software developer. Have a look at my work, experience and projects on an early-2000s style desktop.";
@@ -18,8 +19,11 @@ export const viewport: Viewport = {
 /** root html shell for JackOS and the plain view */
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    // the (os) layout's theme script sets data-theme before React hydrates
+    // THEME_SCRIPT sets data-theme before React hydrates; in <head> so every route's HTML has it, 404s included
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: THEME_SCRIPT }} />
+      </head>
       <body>{children}</body>
     </html>
   );

@@ -261,7 +261,7 @@ export const developer: Developer = {
         { label: "Icons", detail: "pixelarticons by Gerrit Halfmann (MIT licence)", href: "https://github.com/halfmage/pixelarticons" },
         { label: "Cursors", detail: "Cursor Pixel Pack by Kenney (CC0)", href: "https://kenney.nl/assets/cursor-pixel-pack" },
         { label: "Sounds", detail: "Generated in the browser with ZzFX by Frank Force (MIT licence)", href: "https://github.com/KilledByAPixel/ZzFX" },
-        { label: "Wallpaper", detail: "Fudge and Ginger, pixel art made for Jack" },
+        { label: "Wallpaper", detail: "Fudge and Ginger, pixel art by Liyah", href: "https://liyahalikhan.art/" },
         { label: "Fonts", detail: "Tahoma and Verdana from your own system; no webfonts are downloaded." },
         { label: "Next.js", detail: "MIT licence, Vercel", href: "https://github.com/vercel/next.js/blob/canary/license.md" },
         { label: "React", detail: "MIT licence, Meta Platforms", href: "https://github.com/facebook/react/blob/main/LICENSE" },
