@@ -21,8 +21,8 @@ function contrast(a: string, b: string): number {
 }
 
 describe("theme contrast (WCAG AA, 4.5:1)", () => {
-  it("keeps white title text readable on both ends of the title bar", () => {
-    for (const end of ["title-from", "title-to"]) expect(contrast("#ffffff", token(end)), end).toBeGreaterThanOrEqual(4.5);
+  it("keeps white title text readable on active and inactive title bars (title-to also backs selected icon labels)", () => {
+    for (const end of ["title-from", "title-to", "title-inactive-from", "title-inactive-to"]) expect(contrast("#ffffff", token(end)), end).toBeGreaterThanOrEqual(4.5);
   });
 
   it("keeps white JackOS button text readable", () => {

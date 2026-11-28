@@ -5,7 +5,7 @@ export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 export const alt = "JackOS – Jack Keirnan's portfolio as an early-2000s desktop";
 
-/** social preview for every page - a JackOS window on the aurora wallpaper, made at build time */
+/** social preview for every page - a JackOS window on the plum wallpaper, made at build time */
 export default function OpenGraphImage() {
   // window chrome reuses the theme colours so the preview looks like the site
   const bevel = { borderStyle: "solid", borderWidth: 4, borderColor: "#ffffff #3a2a4f #3a2a4f #ffffff" } as const;
@@ -37,7 +37,7 @@ export default function OpenGraphImage() {
           </div>
           <div style={{ display: "flex", flexDirection: "column", margin: 12, padding: "36px 40px", background: "#ffffff" }}>
             <div style={{ display: "flex", fontSize: 64, fontWeight: 700, color: "#4b1f7a" }}>Hi! I&apos;m Jack.</div>
-            <div style={{ display: "flex", marginTop: 16, fontSize: 34, color: "#1a2633" }}>
+            <div style={{ display: "flex", marginTop: 16, fontSize: 34, color: "#221a30" }}>
               Software developer – web, freelance and games
             </div>
           </div>
