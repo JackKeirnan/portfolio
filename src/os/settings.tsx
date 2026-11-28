@@ -24,9 +24,8 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
 
   // load saved choices after mount, storage only exists in the browser
   useEffect(() => {
-    // a saved choice wins; otherwise follow the visitor's system dark mode
-    const saved = readSetting<unknown>(STORAGE_KEYS.dark, null);
-    setDarkState(typeof saved === "boolean" ? saved : window.matchMedia("(prefers-color-scheme: dark)").matches);
+    // THEME_SCRIPT already picked the theme before first paint, just mirror it
+    setDarkState(document.documentElement.dataset.theme === "dark");
     // sound stays off unless it was explicitly saved as true
     setSoundOnState(readSetting<unknown>(STORAGE_KEYS.sound, false) === true);
   }, []);
@@ -37,6 +36,7 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
       soundOn,
       setDark(on) {
         setDarkState(on);
+        document.documentElement.dataset.theme = on ? "dark" : "light";
         writeSetting(STORAGE_KEYS.dark, on);
       },
       setSoundOn(on) {

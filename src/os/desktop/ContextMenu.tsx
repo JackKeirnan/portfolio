@@ -30,7 +30,7 @@ export function ContextMenu({ x, y, items, onClose }: { x: number; y: number; it
     return () => document.removeEventListener("pointerdown", onPointerDown, true);
   }, [onClose]);
 
-  /** arrow keys move between items, Esc closes */
+  /** arrow keys move between items, Esc or Tab closes */
   function onKeyDown(event: KeyboardEvent<HTMLDivElement>) {
     const buttons = Array.from(menuRef.current?.querySelectorAll<HTMLElement>("[role='menuitem']") ?? []);
     const index = buttons.indexOf(document.activeElement as HTMLElement);
@@ -38,7 +38,8 @@ export function ContextMenu({ x, y, items, onClose }: { x: number; y: number; it
       event.preventDefault();
       const step = event.key === "ArrowDown" ? 1 : -1;
       buttons[(index + step + buttons.length) % buttons.length]?.focus();
-    } else if (event.key === "Escape") {
+    } else if (event.key === "Escape" || event.key === "Tab") {
+      event.preventDefault();
       onClose();
     }
   }

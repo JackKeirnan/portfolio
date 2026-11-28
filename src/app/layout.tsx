@@ -18,7 +18,8 @@ export const viewport: Viewport = {
 /** root html shell for JackOS and the plain view */
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en">
+    // the (os) layout's theme script sets data-theme before React hydrates
+    <html lang="en" suppressHydrationWarning>
       <body>{children}</body>
     </html>
   );

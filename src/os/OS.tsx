@@ -16,31 +16,31 @@ import { useWindowManager, WindowManagerProvider } from "./WindowManagerProvider
 import { windowSoundFor } from "./windowSounds";
 import styles from "./OS.module.css";
 
-/**
- * plays a sound on every window open, close, minimise or maximise (silent unless sound is on)
- * and returns true for a moment after a window opens, so the hourglass cursor shows
- */
+/** window sounds, plus a brief busy flag after an open so the hourglass shows */
 function useWindowFeedback(): boolean {
   const { state } = useWindowManager();
   const { play } = useSettings();
   const previous = useRef(state);
   const [busy, setBusy] = useState(false);
+  // in a ref so a move or focus right after the open can't cancel the reset
+  const busyTimer = useRef<ReturnType<typeof setTimeout>>(undefined);
   useEffect(() => {
     const sound = windowSoundFor(previous.current, state);
     if (sound) play(sound);
     previous.current = state;
     if (sound !== "open" && sound !== "error") return;
     setBusy(true);
-    const timer = setTimeout(() => setBusy(false), 350);
-    return () => clearTimeout(timer);
+    clearTimeout(busyTimer.current);
+    busyTimer.current = setTimeout(() => setBusy(false), 350);
   }, [state, play]);
+  useEffect(() => () => clearTimeout(busyTimer.current), []);
   return busy;
 }
 
 /** picks the desktop or phone shell, runs boot, shutdown and URL sync */
 function Shell({ isHome }: { isHome: boolean }) {
   const wm = useWindowManager();
-  const { dark, play } = useSettings();
+  const { play } = useSettings();
   const { back, home } = useUrlSync();
   const [phase, setPhase] = useState<"desktop" | "boot" | "shutdown">("desktop");
   // Welcome only opens after the very first boot, not after a joke reboot
@@ -81,7 +81,7 @@ function Shell({ isHome }: { isHome: boolean }) {
   }, [wm]);
 
   return (
-    <div className={styles.root} data-theme={dark ? "dark" : "light"} data-busy={busy}>
+    <div className={styles.root} data-busy={busy}>
       <a className={styles.skipLink} href="/plain">Skip to plain text version</a>
       {wm.isPhone ? (
         <PhoneShell onBack={back} onHome={home} />

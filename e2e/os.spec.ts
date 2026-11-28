@@ -167,6 +167,38 @@ test.describe("retro extras", () => {
     await expect(page.locator("[data-theme]")).toHaveAttribute("data-theme", "dark");
   });
 
+  test("a saved dark mode applies before the app's JavaScript runs", async ({ page }) => {
+    await skipFirstVisit(page);
+    await page.addInitScript(() => window.localStorage.setItem("jackos.dark", "true"));
+    // block the app bundles so only the inline theme script can set the theme
+    await page.route("**/_next/static/chunks/**", (route) => route.abort());
+    await page.goto("/");
+    await expect(page.locator("html")).toHaveAttribute("data-theme", "dark");
+  });
+
+  test("the hourglass clears even if the new window is dragged straight away", async ({ page }) => {
+    await skipFirstVisit(page);
+    await page.goto("/");
+    await page.getByRole("navigation", { name: "Desktop" }).getByRole("button", { name: "My Projects" }).dblclick();
+    const bar = page.getByRole("dialog", { name: "My Projects" }).locator("[data-titlebar]");
+    const start = (await bar.boundingBox())!;
+    await page.mouse.move(start.x + 40, start.y + 10);
+    await page.mouse.down();
+    await page.mouse.move(start.x + 80, start.y + 40, { steps: 3 });
+    await page.mouse.up();
+    await expect(page.locator("[data-busy]")).toHaveAttribute("data-busy", "false");
+  });
+
+  test("Tab out of the desktop menu closes it", async ({ page }) => {
+    await skipFirstVisit(page);
+    await page.goto("/");
+    await page.mouse.click(700, 400, { button: "right" });
+    const menu = page.getByRole("menu", { name: "Desktop menu" });
+    await expect(menu).toBeVisible();
+    await page.keyboard.press("Tab");
+    await expect(menu).toHaveCount(0);
+  });
+
   test("dragging on the wallpaper selects the icons it covers", async ({ page }) => {
     await skipFirstVisit(page);
     await page.goto("/");
@@ -191,6 +223,20 @@ test.describe("retro extras", () => {
     await expect(saver).toBeVisible();
     await page.keyboard.press("Shift");
     await expect(saver).toHaveCount(0);
+  });
+
+  test("the key that wakes the screensaver doesn't reach the page", async ({ page }) => {
+    await page.clock.install();
+    await skipFirstVisit(page);
+    await page.goto("/about");
+    const about = page.getByRole("dialog", { name: "About Me" });
+    await about.focus();
+    await page.clock.fastForward(61_000);
+    await expect(page.getByTestId("screensaver")).toBeVisible();
+    // Esc would close the focused window if it got through
+    await page.keyboard.press("Escape");
+    await expect(page.getByTestId("screensaver")).toHaveCount(0);
+    await expect(about).toBeVisible();
   });
 
   test("first boot shows the BIOS memory line and a tip", async ({ page }) => {

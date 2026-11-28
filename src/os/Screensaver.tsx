@@ -15,16 +15,29 @@ export function useIdle(ms: number, enabled: boolean): boolean {
   const [idle, setIdle] = useState(false);
   useEffect(() => {
     if (!enabled) return;
-    let timer = setTimeout(() => setIdle(true), ms);
-    const wake = () => {
+    let asleep = false;
+    const sleep = () => {
+      asleep = true;
+      setIdle(true);
+    };
+    let timer = setTimeout(sleep, ms);
+    const wake = (event: Event) => {
+      // the key or press that wakes the screen shouldn't also reach the page underneath
+      if (asleep && (event.type === "keydown" || event.type === "pointerdown")) {
+        event.preventDefault();
+        event.stopPropagation();
+      }
+      asleep = false;
       setIdle(false);
       clearTimeout(timer);
-      timer = setTimeout(() => setIdle(true), ms);
+      timer = setTimeout(sleep, ms);
     };
-    for (const name of ACTIVITY) window.addEventListener(name, wake, { passive: true });
+    // capture on window so the wake runs before any element sees the event
+    for (const name of ACTIVITY) window.addEventListener(name, wake, true);
     return () => {
       clearTimeout(timer);
-      for (const name of ACTIVITY) window.removeEventListener(name, wake);
+      for (const name of ACTIVITY) window.removeEventListener(name, wake, true);
+      setIdle(false);
     };
   }, [ms, enabled]);
   return enabled && idle;
