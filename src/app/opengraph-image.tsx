@@ -8,7 +8,7 @@ export const alt = "JackOS – Jack Keirnan's portfolio as an early-2000s deskto
 /** social preview for every page - a JackOS window on the aurora wallpaper, made at build time */
 export default function OpenGraphImage() {
   // window chrome reuses the theme colours so the preview looks like the site
-  const bevel = { borderStyle: "solid", borderWidth: 4, borderColor: "#ffffff #3b3326 #3b3326 #ffffff" } as const;
+  const bevel = { borderStyle: "solid", borderWidth: 4, borderColor: "#ffffff #3a2a4f #3a2a4f #ffffff" } as const;
   return new ImageResponse(
     (
       <div
@@ -18,16 +18,16 @@ export default function OpenGraphImage() {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          background: "linear-gradient(180deg, #0b1f4a 0%, #1a5f9e 55%, #2fa8b8 85%, #3fd0c9 100%)",
+          background: "linear-gradient(180deg, #24103a 0%, #4b2a6b 60%, #7a4f9e 100%)",
           fontFamily: "sans-serif",
         }}
       >
-        <div style={{ display: "flex", flexDirection: "column", width: 860, background: "#e8e2d4", padding: 6, ...bevel }}>
+        <div style={{ display: "flex", flexDirection: "column", width: 860, background: "#e6dff0", padding: 6, ...bevel }}>
           <div
             style={{
               display: "flex",
               padding: "12px 18px",
-              background: "linear-gradient(90deg, #0f4596, #1d7f8c)",
+              background: "linear-gradient(90deg, #4b1f7a, #8a4fc0)",
               color: "#ffffff",
               fontSize: 30,
               fontWeight: 700,
@@ -36,7 +36,7 @@ export default function OpenGraphImage() {
             JackOS – Welcome
           </div>
           <div style={{ display: "flex", flexDirection: "column", margin: 12, padding: "36px 40px", background: "#ffffff" }}>
-            <div style={{ display: "flex", fontSize: 64, fontWeight: 700, color: "#0f4596" }}>Hi! I&apos;m Jack.</div>
+            <div style={{ display: "flex", fontSize: 64, fontWeight: 700, color: "#4b1f7a" }}>Hi! I&apos;m Jack.</div>
             <div style={{ display: "flex", marginTop: 16, fontSize: 34, color: "#1a2633" }}>
               Software developer – web, freelance and games
             </div>
