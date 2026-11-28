@@ -12,7 +12,7 @@ export const metadata: Metadata = { metadataBase: new URL(siteUrl), ...pageMetad
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#0f4596",
+  themeColor: "#4b1f7a",
 };
 
 /** root html shell for JackOS and the plain view */

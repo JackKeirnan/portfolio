@@ -15,4 +15,4 @@
 .desktop .label { text-shadow: 1px 1px 0 #000000aa; }
 .folder { color: var(--os-text); }
 .selected { border-color: var(--os-focus); }
-.selected .label { background: var(--os-title-from); color: #ffffff; text-shadow: none; }
+.selected .label { background: var(--os-title-to); color: #ffffff; text-shadow: none; }

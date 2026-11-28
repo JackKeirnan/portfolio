@@ -1,21 +1,21 @@
 /* JackOS theme. every colour, bevel and font is a token here so new
    themes and wallpapers are just token swaps, not component edits */
 :root {
-  --os-chrome: #e8e2d4;
+  --os-chrome: #e6dff0;
   --os-chrome-light: #ffffff;
-  --os-chrome-dark: #3b3326;
-  --os-chrome-shadow: #8c8371;
-  --os-title-from: #0f4596;
-  --os-title-to: #1d7f8c;
-  --os-title-inactive-from: #5d6773;
-  --os-title-inactive-to: #7f8893;
+  --os-chrome-dark: #3a2a4f;
+  --os-chrome-shadow: #8a7ca0;
+  --os-title-from: #4b1f7a;
+  --os-title-to: #8a4fc0;
+  --os-title-inactive-from: #625870;
+  --os-title-inactive-to: #746a87;
   --os-title-text: #ffffff;
-  --os-start: #187a3c;
+  --os-start: #6a2c9e;
   --os-close: #d23a1c;
   --os-panel: #ffffff;
-  --os-text: #1a2633;
-  --os-muted: #4a5563;
-  --os-link: #0f4596;
+  --os-text: #221a30;
+  --os-muted: #54486a;
+  --os-link: #5a2a96;
   --os-focus: #f2c14e;
   --os-terminal-bg: #10141c;
   --os-terminal-text: #8fe3a6;
