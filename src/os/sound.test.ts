@@ -13,6 +13,16 @@ describe("sounds", () => {
     for (const name of SOUND_NAMES) expect(SOUND_PRESETS[name]?.length, name).toBeGreaterThan(0);
   });
 
+  it("uses retro square waves, sitting at full level most of the time", () => {
+    for (const name of SOUND_NAMES) {
+      const samples = zzfxGenerate(...SOUND_PRESETS[name][0].params);
+      const peak = Math.max(...samples.map(Math.abs));
+      // A square wave sits at +/- peak outside its short release; a sine almost never does.
+      const atPeak = samples.filter((value) => Math.abs(Math.abs(value) - peak) < 1e-9).length;
+      expect(atPeak / samples.length, name).toBeGreaterThan(0.5);
+    }
+  });
+
   it("gives each action its own sound", () => {
     const fingerprints = SOUND_NAMES.map((name) => JSON.stringify(SOUND_PRESETS[name]));
     expect(new Set(fingerprints).size).toBe(SOUND_NAMES.length);
