@@ -1,4 +1,4 @@
-import { Developer, ProjectCategory } from "./types";
+import { Developer, ProjectCategory, ProjectType } from "./types";
 
 // Single source of truth for all site copy and asset paths.
 // Components read from this object instead of hardcoding content.
@@ -6,6 +6,14 @@ export const developer: Developer = {
     name: "Jack Keirnan",
     title: "Software Developer",
     portrait: "/Images/Jack.png",
+    terminal: {
+        whoami: [
+            "I'm Jack – a software developer based in the UK.",
+            "By day I'm a Junior Software Engineer at Eseye; on the side I take on freelance web projects.",
+            "I studied Computer Science at Brunel University London and still make games for fun.",
+            "Try 'open about' to read more, or 'contact' to say hello.",
+        ],
+    },
 
     intro: {
         heading: "Hi!",
@@ -27,19 +35,18 @@ export const developer: Developer = {
 
     skills: {
         heading: "Skills",
-        subtitle: "Tools and technologies I work with",
         groups: [
-            { icon: "code", text: "JavaScript, TypeScript, Python, Java" },
-            { icon: "web", text: "React, Next.js, Node.js" },
-            { icon: "design", text: "Tailwind CSS, Figma, Framer Motion" },
-            { icon: "storage", text: "MySQL, AWS, SpringBoot" },
-            { icon: "github", text: "Git, GitHub, Serverless" },
+            { label: "Languages", text: "JavaScript, TypeScript, Python, Java, C#, Lua" },
+            { label: "Frameworks", text: "React, Next.js, Node.js, Vite" },
+            { label: "Game Dev", text: "Unity, Yarn Spinner, Aseprite" },
+            { label: "Design", text: "Tailwind CSS, Figma, Framer Motion" },
+            { label: "Data & Cloud", text: "MySQL, AWS, SpringBoot, Sanity CMS" },
+            { label: "Tooling", text: "Git, GitHub, Serverless, Vitest" },
         ],
     },
 
     education: {
         heading: "Education",
-        subtitle: "Academic background and achievements",
         items: [
             {
                 degree: "BSc in Computer Science",
@@ -52,7 +59,6 @@ export const developer: Developer = {
 
     experience: {
         heading: "Experience",
-        subtitle: "Work I've done professionally and independently",
         items: [
             {
                 role: "Junior Software Engineer",
@@ -73,10 +79,6 @@ export const developer: Developer = {
                     "Built internal tools (e.g. AWS and Serverless) for data control alongside learning how to work with a team.",
             },
         ],
-    },
-
-    work: {
-        heading: "Examples of my Work",
     },
 
     projects: [
@@ -116,6 +118,7 @@ export const developer: Developer = {
             id: 3,
             slug: "severin-hair-studio",
             image: "/Images/SeverinOne.png",
+            gallery: ["/Images/SeverinTwo.png"],
             title: "Severin Hair Studio",
             description:
                 "Gave a growing salon a stylish digital storefront with custom functionality and flair.",
@@ -132,6 +135,7 @@ export const developer: Developer = {
             id: 4,
             slug: "atelier-lavender",
             image: "/Images/AtelierOne.png",
+            gallery: ["/Images/AtelierTwo.png", "/Images/AtelierThree.png"],
             title: "Atelier Lavender",
             description:
                 "Transformed an architecture studio's outdated site into a sleek, modern web experience.",
@@ -210,6 +214,7 @@ export const developer: Developer = {
             languages: ["Unity", "C#", "Figma"],
             category: "Game Dev",
             enabled: true,
+            repoUrl: "https://github.com/JackKeirnan/Hospital-Game-FYP",
         },
         {
             id: 10,
@@ -227,6 +232,24 @@ export const developer: Developer = {
             category: "Game Dev",
             enabled: true,
         },
+        {
+            id: 11,
+            slug: "stain-game",
+            image: "/Images/WIP.png",
+            title: "Stain Game",
+            description:
+                "A pixel-art game about running a stain-cleaning business, made with my friend Liyah.",
+            longdescription: [
+                "Stain Game is a work-in-progress game I'm making with my friend Liyah. You start out with a food truck and build up a stain-cleaning business, one messy job at a time.",
+                "I'm building it in Unity 6 with C# and the URP 2D renderer, with Yarn Spinner handling the NPC dialogue. So far there's a playable tech demo — movement, a tutorial level, doors between scenes and the usual menus.",
+                "A lot of the early work has gone into the foundations: an import pipeline for the pixel art, a scene checker that catches mistakes before they reach the game, and tests so new changes don't quietly break old ones.",
+                "We're now reshaping it into a rogue-lite, where stains become enemies and your cleaning supplies are played like a hand of cards.",
+            ],
+            collaborator: { name: "Liyah", href: "https://liyahalikhan.art/" },
+            languages: ["Unity", "C#", "Yarn Spinner", "Aseprite"],
+            category: "Game Dev",
+            enabled: true,
+        },
     ],
 
     contact: {
@@ -234,23 +257,26 @@ export const developer: Developer = {
         blurb:
             "Whether it be for a website, project, or just a chat, I'd love to hear from you! Please use the following methods to contact me.",
         links: [
-            { label: "Email", icon: "email", href: "mailto:jackkeirnan@gmail.com" },
-            { label: "LinkedIn", icon: "linkedin", href: "https://www.linkedin.com/in/jackkeirnan/" },
-            { label: "GitHub", icon: "github", href: "https://github.com/JackKeirnan" },
-            { label: "WhatsApp", icon: "whatsapp", href: "https://wa.me/+447306375586" },
+            { label: "Email", href: "mailto:jackkeirnan@gmail.com" },
+            { label: "LinkedIn", href: "https://www.linkedin.com/in/jackkeirnan/" },
+            { label: "GitHub", href: "https://github.com/JackKeirnan" },
+            { label: "WhatsApp", href: "https://wa.me/+447306375586" },
         ],
     },
 
-    footer:
-        "© 2026 Jack Keirnan. Built with NextJS and Tailwind, hosted by Vercel. Uses DaisyUI and MaterialUI.",
-};
+    credits: [
+        { label: "Design and build", detail: "Jack Keirnan" },
+        { label: "Icons", detail: "pixelarticons by Gerrit Halfmann (MIT licence)", href: "https://github.com/halfmage/pixelarticons" },
+        { label: "Sounds", detail: "Generated in the browser with ZzFX by Frank Force (MIT licence)", href: "https://github.com/KilledByAPixel/ZzFX" },
+        { label: "Wallpapers", detail: "Made for JackOS" },
+        { label: "Fonts", detail: "Tahoma and Verdana from your own system; no webfonts are downloaded." },
+        { label: "Next.js", detail: "MIT licence, Vercel", href: "https://github.com/vercel/next.js/blob/canary/license.md" },
+        { label: "React", detail: "MIT licence, Meta Platforms", href: "https://github.com/facebook/react/blob/main/LICENSE" },
+    ],
 
-// Primary site navigation, shared by the Navbar.
-export const navLinks = [
-    { label: "Home", href: "/" },
-    { label: "Work", href: "/work" },
-    { label: "About", href: "/about" },
-];
+    footer:
+        "© 2026 Jack Keirnan. Built with Next.js and hosted on Vercel.",
+};
 
 // Convenience re-export for components that only need the project list.
 // Filtered to projects that are enabled (enabled is true or omitted).
@@ -269,3 +295,7 @@ export const projectCategories: ProjectCategory[] = [
 // Disabled projects return undefined so their detail page 404s.
 export const getProjectBySlug = (slug: string) =>
     projects.find((project) => project.slug === slug);
+
+// every screenshot of a project, main image first, for the Project Viewer gallery
+export const projectScreenshots = (project: ProjectType): string[] =>
+    [project.image, ...(project.gallery ?? [])];

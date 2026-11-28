@@ -1,0 +1,86 @@
+/* JackOS theme. every colour, bevel and font is a token here so new
+   themes and wallpapers are just token swaps, not component edits */
+:root {
+  --os-chrome: #e8e2d4;
+  --os-chrome-light: #ffffff;
+  --os-chrome-dark: #3b3326;
+  --os-chrome-shadow: #8c8371;
+  --os-title-from: #0f4596;
+  --os-title-to: #1d7f8c;
+  --os-title-inactive-from: #5d6773;
+  --os-title-inactive-to: #7f8893;
+  --os-title-text: #ffffff;
+  --os-start: #187a3c;
+  --os-close: #d23a1c;
+  --os-panel: #ffffff;
+  --os-text: #1a2633;
+  --os-muted: #4a5563;
+  --os-link: #0f4596;
+  --os-focus: #f2c14e;
+  --os-terminal-bg: #10141c;
+  --os-terminal-text: #8fe3a6;
+  --os-font: Tahoma, Verdana, "Segoe UI", sans-serif;
+  --os-mono: "Lucida Console", "Courier New", monospace;
+  --os-font-size: 13px;
+  --os-taskbar-height: 36px;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; }
+body {
+  font-family: var(--os-font);
+  font-size: var(--os-font-size);
+  color: var(--os-text);
+  background: var(--os-title-from);
+  overflow: hidden;
+}
+a { color: var(--os-link); }
+:focus-visible { outline: 2px dotted var(--os-focus); outline-offset: 1px; }
+
+/* raised - window frames, bars, buttons. light top-left edge, dark bottom-right */
+.os-raised {
+  background: var(--os-chrome);
+  border: 2px solid;
+  border-color: var(--os-chrome-light) var(--os-chrome-dark) var(--os-chrome-dark) var(--os-chrome-light);
+}
+
+/* sunken - content panels and fields, bevel reversed */
+.os-sunken {
+  background: var(--os-panel);
+  border: 2px solid;
+  border-color: var(--os-chrome-dark) var(--os-chrome-light) var(--os-chrome-light) var(--os-chrome-dark);
+}
+
+.os-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 14px;
+  font: inherit;
+  color: var(--os-text);
+  text-decoration: none;
+  cursor: pointer;
+}
+.os-button:active {
+  border-color: var(--os-chrome-dark) var(--os-chrome-light) var(--os-chrome-light) var(--os-chrome-dark);
+}
+
+/* steady bold for labels that go bold when selected. an invisible bold copy
+   (from data-label) reserves the bold width so selecting never shifts neighbours */
+.os-steady-bold { display: inline-grid; justify-items: center; }
+.os-steady-bold::after { content: attr(data-label); font-weight: bold; height: 0; overflow: hidden; visibility: hidden; }
+
+/* wallpapers, picked in Display Settings and applied via data-wallpaper */
+[data-wallpaper="aurora"] { background: linear-gradient(180deg, #0b1f4a 0%, #1a5f9e 55%, #2fa8b8 85%, #3fd0c9 100%); }
+[data-wallpaper="lagoon"] { background: linear-gradient(180deg, #0b3a4a 0%, #136a74 60%, #2f9c94 100%); }
+[data-wallpaper="midnight"] {
+  background-color: #0b1f4a;
+  background-image: linear-gradient(#ffffff14 1px, transparent 1px), linear-gradient(90deg, #ffffff14 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+[data-wallpaper="plum"] { background: linear-gradient(180deg, #24103a 0%, #4b2a6b 60%, #7a4f9e 100%); }
+
+/* respect reduced-motion - no window or boot animations */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}

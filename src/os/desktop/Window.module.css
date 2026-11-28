@@ -1,0 +1,26 @@
+.window { position: absolute; display: flex; flex-direction: column; padding: 2px; box-shadow: 2px 2px 0 #00000040; outline: none; }
+.window[hidden] { display: none; }
+.maximized { inset: 0; }
+.titleBar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 4px 3px 6px;
+  background: linear-gradient(90deg, var(--os-title-inactive-from), var(--os-title-inactive-to));
+  color: var(--os-title-text);
+  font-weight: bold;
+  user-select: none;
+  touch-action: none;
+}
+.focused .titleBar { background: linear-gradient(90deg, var(--os-title-from), var(--os-title-to)); }
+.title { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.controls { display: flex; gap: 2px; }
+.controls button { width: 22px; height: 20px; padding: 0; font: bold 12px/1 var(--os-font); color: var(--os-text); cursor: pointer; }
+.controls .close { margin-left: 4px; background: var(--os-close); color: #ffffff; }
+.body { flex: 1; min-height: 0; display: flex; padding: 6px; }
+.panel { flex: 1; min-height: 0; overflow: auto; }
+.resizeHandle { position: absolute; right: 0; bottom: 0; width: 16px; height: 16px; cursor: nwse-resize; touch-action: none; }
+@media (prefers-reduced-motion: no-preference) {
+  .window { animation: window-open 120ms ease-out; }
+}
+@keyframes window-open { from { transform: scale(0.96); opacity: 0; } }

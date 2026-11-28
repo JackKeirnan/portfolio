@@ -1,0 +1,2 @@
+.desktop { position: absolute; inset: 0 0 var(--os-taskbar-height) 0; overflow: hidden; }
+.icons { display: flex; flex-direction: column; flex-wrap: wrap; align-content: flex-start; gap: 8px; height: 100%; width: max-content; padding: 12px; }

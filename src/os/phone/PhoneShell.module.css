@@ -1,0 +1,12 @@
+.phone { position: absolute; inset: 0; display: flex; flex-direction: column; }
+.statusBar { display: flex; justify-content: space-between; align-items: center; padding: 4px 10px; font-weight: bold; border-top: 0; border-right: 0; border-left: 0; }
+.screen { position: relative; flex: 1; min-height: 0; }
+.grid { display: grid; grid-template-columns: repeat(3, 1fr); justify-items: center; gap: 16px 8px; padding: 20px 12px; }
+.app { position: absolute; inset: 0; display: flex; flex-direction: column; background: var(--os-chrome); }
+.grid[hidden], .app[hidden] { display: none; }
+.appTitle { display: flex; align-items: center; gap: 8px; padding: 6px; background: linear-gradient(90deg, var(--os-title-from), var(--os-title-to)); color: #ffffff; font-weight: bold; }
+.back { min-width: 36px; min-height: 32px; font: bold 14px var(--os-font); color: var(--os-text); cursor: pointer; }
+.appBody { flex: 1; min-height: 0; display: flex; padding: 6px; }
+.panel { flex: 1; min-height: 0; overflow: auto; }
+.bottomBar { display: flex; justify-content: space-around; align-items: center; padding: 4px; border-right: 0; border-bottom: 0; border-left: 0; }
+.home { min-height: 32px; padding: 0 20px; background: var(--os-start); color: #ffffff; font: bold 13px var(--os-font); cursor: pointer; }

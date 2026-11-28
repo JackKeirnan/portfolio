@@ -1,0 +1,7 @@
+.screen { position: fixed; inset: 0; z-index: 20000; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 24px; background: #0b1f4a; color: #ffffff; }
+.logo { font: bold 48px var(--os-font); letter-spacing: 1px; }
+.logo span { color: #3fd0c9; }
+.progress { width: 220px; height: 18px; padding: 2px; border: 2px solid; border-color: #061230 #5a8cc8 #5a8cc8 #061230; }
+.bar { width: 0; height: 100%; background: repeating-linear-gradient(90deg, #3fd0c9 0 10px, transparent 10px 13px); animation: boot-fill linear forwards; }
+@keyframes boot-fill { to { width: 100%; } }
+.message { margin: 0; color: #cfe3f5; }

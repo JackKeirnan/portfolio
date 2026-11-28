@@ -1,0 +1,26 @@
+.menu { position: absolute; left: 2px; bottom: var(--os-taskbar-height); z-index: 1; display: flex; min-width: 220px; }
+.banner {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  padding: 8px 4px;
+  background: linear-gradient(0deg, var(--os-title-from), var(--os-title-to));
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: bold;
+}
+.items { display: flex; flex: 1; flex-direction: column; padding: 2px; }
+.item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  background: none;
+  border: 0;
+  font: inherit;
+  color: var(--os-text);
+  text-align: left;
+  text-decoration: none;
+  cursor: pointer;
+}
+.item:hover, .item:focus-visible { background: var(--os-title-from); color: #ffffff; outline: none; }
+.divider { margin: 4px 2px; border: 0; border-top: 1px solid var(--os-chrome-shadow); border-bottom: 1px solid var(--os-chrome-light); }
