@@ -36,6 +36,10 @@ export function IconButton({ label, icon, variant, selected, openOnSingleClick, 
       onPointerDown={(event) => {
         pointerType.current = event.pointerType;
       }}
+      onMouseDown={(event) => {
+        // stop a double-click from selecting text around the icon as its window opens
+        if (event.detail > 1) event.preventDefault();
+      }}
       onClick={(event) => {
         // a click from Space only selects, whatever its detail says
         const fromSpace = spacePressed.current;
