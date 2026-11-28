@@ -66,6 +66,10 @@ export function IconButton({ label, icon, variant, selected, openOnSingleClick, 
         // Clear the Space mark after Firefox's keyup click has been handled (or never came).
         if (event.key === " ") setTimeout(() => (spacePressed.current = false), 0);
       }}
+      onBlur={() => {
+        // Focus left mid-press, so this icon's keyup will never arrive; drop the mark.
+        spacePressed.current = false;
+      }}
     >
       <PixelIcon name={icon} size={32} />
       <span className={styles.label}>{label}</span>

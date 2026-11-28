@@ -82,7 +82,9 @@ export function Window({ win, focused, children }: { win: WindowState; focused: 
       onKeyDown={(event) => {
         // Esc closes the focused window, but not while typing: fields keep Esc for themselves.
         const target = event.target as HTMLElement;
-        const typing = target.isContentEditable || ["INPUT", "TEXTAREA", "SELECT"].includes(target.tagName);
+        // Only text-entry fields count; radios, checkboxes and buttons still let Esc close.
+        const textInput = target instanceof HTMLInputElement && !["checkbox", "radio", "button", "submit", "reset", "range", "color"].includes(target.type);
+        const typing = target.isContentEditable || textInput || ["TEXTAREA", "SELECT"].includes(target.tagName);
         if (event.key === "Escape" && !typing) {
           event.stopPropagation();
           wm.close(win.id);

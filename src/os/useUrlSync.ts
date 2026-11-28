@@ -28,6 +28,8 @@ export function useUrlSync(): { back: () => void; home: () => void } {
   const topId = stack.at(-1)?.id ?? null;
   const depth = stack.length;
   const depthRef = useRef(depth);
+  // Saved depth of the history entry we are on, so popstate can tell Back from Forward.
+  const entryDepthRef = useRef(0);
   // Latest render values, so the popstate handler never reads stale ones.
   const latestRef = useRef({ depth, path, title });
   latestRef.current = { depth, path, title };
@@ -45,26 +47,32 @@ export function useUrlSync(): { back: () => void; home: () => void } {
       window.history.replaceState(isPhone ? { ...current, jackosDepth: depth } : current, "", url);
     }
     document.title = tabTitle(title);
+    // Remember where this entry sits; Next.js keeps our keys when it patches history.state.
+    entryDepthRef.current = ((window.history.state ?? {}) as PhoneHistoryState).jackosDepth ?? 0;
   }, [isPhone, path, title, depth]);
 
   // Browser back/forward: phones restore the saved stack depth; desktops skip phone entries and re-sync.
   useEffect(() => {
     /** Phone: truncates to the entry's saved depth. Desktop: skips dead phone entries, then re-syncs URL and title. */
     const onPopState = (event: PopStateEvent) => {
-      // Desktop never pushes; entries left from phone mode are dead, so skip back past them.
-      if (!isPhone && (event.state as PhoneHistoryState | null)?.jackosPushed) {
+      // Work out the direction: a shallower saved depth than the entry we left means Back.
+      const saved = (event.state ?? {}) as PhoneHistoryState;
+      const savedDepth = saved.jackosDepth ?? 0;
+      const goingBack = savedDepth < entryDepthRef.current;
+      entryDepthRef.current = savedDepth;
+      // Desktop never pushes, so entries left from phone mode are dead: Back skips past them.
+      if (!isPhone && saved.jackosPushed && goingBack) {
         window.history.back();
         return;
       }
-      // Desktop on a real entry: keep the URL and title on the focused window.
+      // Desktop otherwise (Forward included): stay put and point the entry at the focused window.
       if (!isPhone) {
         const latest = latestRef.current;
-        window.history.replaceState(window.history.state, "", latest.path ?? window.location.pathname);
+        const { jackosPushed: _dead, ...state } = (window.history.state ?? {}) as PhoneHistoryState & Record<string, unknown>;
+        window.history.replaceState(state, "", latest.path ?? window.location.pathname);
         document.title = tabTitle(latest.title);
         return;
       }
-      const saved = (event.state ?? {}) as PhoneHistoryState;
-      const savedDepth = saved.jackosDepth ?? 0;
       truncate(savedDepth);
       // Shrinking is handled by the sync effect; only a stale entry needs fixing here.
       const latest = latestRef.current;
