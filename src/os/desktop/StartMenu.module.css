@@ -20,7 +20,7 @@
   color: var(--os-text);
   text-align: left;
   text-decoration: none;
-  cursor: pointer;
+  cursor: var(--os-cursor);
 }
 .item:hover, .item:focus-visible { background: var(--os-title-from); color: #ffffff; outline: none; }
 .divider { margin: 4px 2px; border: 0; border-top: 1px solid var(--os-chrome-shadow); border-bottom: 1px solid var(--os-chrome-light); }

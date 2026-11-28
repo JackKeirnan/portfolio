@@ -23,10 +23,16 @@
   --os-mono: "Lucida Console", "Courier New", monospace;
   --os-font-size: 13px;
   --os-taskbar-height: 36px;
+  /* pixel cursors from pixelarticons (MIT) with white fills; hotspot at the arrow tip / hourglass centre */
+  --os-cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 24 24' shape-rendering='crispEdges'%3E%3Cpath fill='white' d='M8 6h2v2h2v2h2v2h2v2h-4v2h-2v2H8z'/%3E%3Cpath d='M6 4h2v16H6zm2 0h2v2H8zm2 2h2v2h-2zm2 2h2v2h-2zm2 2h2v2h-2zm2 2h2v2h-2zm-8 6h2v2H8zm2-2h2v2h-2zm2-2h6v2h-6z'/%3E%3C/svg%3E") 8 5, default;
+  --os-cursor-busy: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 24 24' shape-rendering='crispEdges'%3E%3Cpath fill='white' d='M10 14v-4H8V8H6V4h2V2h8v2h2v4h-2v2h-2v4h2v2h2v4h-2v2H8v-2H6v-4h2v-2h2Z'/%3E%3Cpath d='M16 22H8v-2h8v2Zm-8-2H6v-4h2v4Zm10 0h-2v-4h2v4Zm-8-4H8v-2h2v2Zm6 0h-2v-2h2v2Zm-6-6h4v4h-4v-4Zm0 0H8V8h2v2Zm6 0h-2V8h2v2ZM8 8H6V4h2v4Zm10 0h-2V4h2v4Zm-2-4H8V2h8v2Z'/%3E%3C/svg%3E") 16 16, wait;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
 html, body { margin: 0; height: 100%; }
+html { cursor: var(--os-cursor); }
+/* hourglass while a window opens; text fields keep their I-beam */
+[data-busy="true"], [data-busy="true"] * { cursor: var(--os-cursor-busy) !important; }
 body {
   font-family: var(--os-font);
   font-size: var(--os-font-size);
@@ -59,7 +65,7 @@ a { color: var(--os-link); }
   font: inherit;
   color: var(--os-text);
   text-decoration: none;
-  cursor: pointer;
+  cursor: var(--os-cursor);
 }
 .os-button:active {
   border-color: var(--os-chrome-dark) var(--os-chrome-light) var(--os-chrome-light) var(--os-chrome-dark);

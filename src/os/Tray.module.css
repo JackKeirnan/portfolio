@@ -1,2 +1,2 @@
 .clock { min-width: 40px; text-align: right; font-variant-numeric: tabular-nums; }
-.sound { padding: 0 4px; background: none; border: 0; font: inherit; color: inherit; cursor: pointer; }
+.sound { padding: 0 4px; background: none; border: 0; font: inherit; color: inherit; cursor: var(--os-cursor); }

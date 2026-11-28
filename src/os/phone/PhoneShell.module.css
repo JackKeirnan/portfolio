@@ -5,8 +5,8 @@
 .app { position: absolute; inset: 0; display: flex; flex-direction: column; background: var(--os-chrome); }
 .grid[hidden], .app[hidden] { display: none; }
 .appTitle { display: flex; align-items: center; gap: 8px; padding: 6px; background: linear-gradient(90deg, var(--os-title-from), var(--os-title-to)); color: #ffffff; font-weight: bold; }
-.back { min-width: 36px; min-height: 32px; font: bold 14px var(--os-font); color: var(--os-text); cursor: pointer; }
+.back { min-width: 36px; min-height: 32px; font: bold 14px var(--os-font); color: var(--os-text); cursor: var(--os-cursor); }
 .appBody { flex: 1; min-height: 0; display: flex; padding: 6px; }
 .panel { flex: 1; min-height: 0; overflow: auto; }
 .bottomBar { display: flex; justify-content: space-around; align-items: center; padding: 4px; border-right: 0; border-bottom: 0; border-left: 0; }
-.home { min-height: 32px; padding: 0 20px; background: var(--os-start); color: #ffffff; font: bold 13px var(--os-font); cursor: pointer; }
+.home { min-height: 32px; padding: 0 20px; background: var(--os-start); color: #ffffff; font: bold 13px var(--os-font); cursor: var(--os-cursor); }

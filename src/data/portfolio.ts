@@ -266,7 +266,7 @@ export const developer: Developer = {
 
     credits: [
         { label: "Design and build", detail: "Jack Keirnan" },
-        { label: "Icons", detail: "pixelarticons by Gerrit Halfmann (MIT licence)", href: "https://github.com/halfmage/pixelarticons" },
+        { label: "Icons and cursors", detail: "pixelarticons by Gerrit Halfmann (MIT licence)", href: "https://github.com/halfmage/pixelarticons" },
         { label: "Sounds", detail: "Generated in the browser with ZzFX by Frank Force (MIT licence)", href: "https://github.com/KilledByAPixel/ZzFX" },
         { label: "Wallpapers", detail: "Made for JackOS" },
         { label: "Fonts", detail: "Tahoma and Verdana from your own system; no webfonts are downloaded." },
