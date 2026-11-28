@@ -59,10 +59,6 @@ export type Developer = {
     portrait: string;
     // path under public/ to the downloadable CV, leave unset to hide the download button
     cvPdf?: string;
-    terminal: {
-        // lines the Terminal's `whoami` command prints
-        whoami: string[];
-    };
     intro: {
         heading: string;
         paragraphs: string[];

@@ -20,8 +20,6 @@
   /* headings inside windows; separate from title bars so dark mode can lighten them */
   --os-heading: #4b1f7a;
   --os-focus: #f2c14e;
-  --os-terminal-bg: #10141c;
-  --os-terminal-text: #8fe3a6;
   --os-font: Tahoma, Verdana, "Segoe UI", sans-serif;
   --os-mono: "Lucida Console", "Courier New", monospace;
   --os-font-size: 13px;
@@ -98,7 +96,7 @@ a { color: var(--os-link); }
 @media (max-aspect-ratio: 1/1) { [data-theme] body::before { background-size: auto, auto, auto 55%; background-position: 0 0, 0 0, 40% bottom; background-repeat: no-repeat; } }
 
 /* still wallpaper: first frame, no steam. Display Settings switch, defaults to the system reduced-motion setting */
-[data-wallpaper="still"] { --os-wallpaper-art: url("/art/fudge-and-ginger.png"); }
+[data-wallpaper="still"] { --os-wallpaper-art: url("/art/fudge-and-ginger.webp"); }
 
 /* dark mode: same purple title bars, night-time chrome and panels, darker wallpaper */
 [data-theme="dark"] {
@@ -120,6 +118,6 @@ a { color: var(--os-link); }
 /* respect reduced-motion - no window or boot animations */
 @media (prefers-reduced-motion: reduce) {
   /* without JS there's no data-wallpaper, so fall back to the still here */
-  :root:not([data-wallpaper]) { --os-wallpaper-art: url("/art/fudge-and-ginger.png"); }
+  :root:not([data-wallpaper]) { --os-wallpaper-art: url("/art/fudge-and-ginger.webp"); }
   *, *::before, *::after { animation: none !important; transition: none !important; }
 }

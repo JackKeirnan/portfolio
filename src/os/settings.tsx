@@ -2,7 +2,7 @@
 
 import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
 import { playSound, type SoundName } from "./sound";
-import { readSetting, STORAGE_KEYS, writeSetting } from "./storage";
+import { readSetting, STORAGE_KEYS, THEME_SCRIPT, writeSetting } from "./storage";
 
 /** visitor prefs shared by the shells and Display Settings */
 export type Settings = {
@@ -27,7 +27,8 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
 
   // load saved choices after mount, storage only exists in the browser
   useEffect(() => {
-    // THEME_SCRIPT already picked these before first paint, just mirror them
+    // THEME_SCRIPT normally ran before first paint; notFound() pages render client-side only, so run it here
+    if (!document.documentElement.dataset.theme) new Function(THEME_SCRIPT)();
     setDarkState(document.documentElement.dataset.theme === "dark");
     setAnimatedWallpaperState(document.documentElement.dataset.wallpaper === "animated");
     // sound stays off unless it was explicitly saved as true

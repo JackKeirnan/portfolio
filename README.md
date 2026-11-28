@@ -17,7 +17,7 @@ Open http://localhost:3000.
 
 - `src/data/portfolio.ts` — all site content: profile, experience and projects
 - `src/os/` — JackOS core: window manager, app registry, routes, shells, theme
-- `src/apps/` — one folder per app (About Me, My Projects, Terminal, ...)
+- `src/apps/` — one folder per app (About Me, My Projects, CV, ...)
 - `src/app/(os)/` — desktop routes; pages only set metadata, the layout mounts JackOS
 - `src/app/plain/` — plain text version of the CV and contact details
 - `public/Images/` — screenshots and portrait

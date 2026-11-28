@@ -57,10 +57,6 @@ describe("portfolio data", () => {
     for (const group of developer.skills.groups) expect(group.label.length).toBeGreaterThan(0);
   });
 
-  it("has whoami text for the terminal", () => {
-    expect(developer.terminal.whoami.length).toBeGreaterThan(0);
-  });
-
   it("points cvPdf at a file in public/ when it is set", () => {
     if (developer.cvPdf) {
       expect(existsSync(path.join(process.cwd(), "public", developer.cvPdf))).toBe(true);

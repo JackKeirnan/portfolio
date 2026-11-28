@@ -1,4 +1,4 @@
 .desktop { position: absolute; inset: 0 0 var(--os-taskbar-height) 0; overflow: hidden; }
-.icons { display: flex; flex-direction: column; flex-wrap: wrap; align-content: flex-start; gap: 8px; height: 100%; width: max-content; padding: 12px; }
+.icons { display: flex; flex-direction: column; flex-wrap: wrap; align-content: flex-start; gap: 8px; height: 100%; width: max-content; padding: 12px; user-select: none; }
 /* drag-to-select box: dotted outline with a faint fill, drawn under any open windows */
 .lasso { position: absolute; z-index: 0; border: 1px dotted #ffffff; background: #ffffff22; pointer-events: none; }

@@ -40,8 +40,12 @@ export const SOUND_PRESETS: Record<SoundName, Note[]> = {
   ],
 };
 
+/** master level on top of each preset's own volume; square waves sound loud, so keep it low and subtle */
+const MASTER_VOLUME = 0.3;
+
 // created on first play so visitors who keep sound off never allocate audio
 let audioContext: AudioContext | null = null;
+let master: GainNode | null = null;
 // each sound is generated once and reused
 const buffers = new Map<SoundName, { at: number; buffer: AudioBuffer }[]>();
 
@@ -66,12 +70,17 @@ export function playSound(name: SoundName): void {
     // create the context on first use and wake it up if autoplay rules started it suspended
     audioContext ??= new AudioContext();
     if (audioContext.state === "suspended") void audioContext.resume();
+    if (!master) {
+      master = audioContext.createGain();
+      master.gain.value = MASTER_VOLUME;
+      master.connect(audioContext.destination);
+    }
     // schedule every note relative to now so multi-note sounds play in one go
     const now = audioContext.currentTime;
     for (const note of buffersFor(audioContext, name)) {
       const source = audioContext.createBufferSource();
       source.buffer = note.buffer;
-      source.connect(audioContext.destination);
+      source.connect(master);
       source.start(now + note.at);
     }
   } catch {

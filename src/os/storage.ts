@@ -6,8 +6,11 @@ export const STORAGE_KEYS = {
   sound: "jackos.sound",
 } as const;
 
-/** inline script that sets <html data-theme data-wallpaper> before first paint: saved choices, else the system settings */
-export const THEME_SCRIPT = `var d=document.documentElement.dataset;function p(k){try{return JSON.parse(localStorage.getItem(k))}catch(e){}}var s=p("${STORAGE_KEYS.dark}"),a=p("${STORAGE_KEYS.animatedWallpaper}");d.theme=(typeof s==="boolean"?s:matchMedia("(prefers-color-scheme: dark)").matches)?"dark":"light";d.wallpaper=(typeof a==="boolean"?a:!matchMedia("(prefers-reduced-motion: reduce)").matches)?"animated":"still"`;
+/**
+ * inline script that sets <html data-theme data-wallpaper> before first paint: saved choices, else the system settings.
+ * skips /plain so it keeps its plain look
+ */
+export const THEME_SCRIPT = `if(location.pathname!=="/plain"){var d=document.documentElement.dataset;function p(k){try{return JSON.parse(localStorage.getItem(k))}catch(e){}}var s=p("${STORAGE_KEYS.dark}"),a=p("${STORAGE_KEYS.animatedWallpaper}");d.theme=(typeof s==="boolean"?s:matchMedia("(prefers-color-scheme: dark)").matches)?"dark":"light";d.wallpaper=(typeof a==="boolean"?a:!matchMedia("(prefers-reduced-motion: reduce)").matches)?"animated":"still"}`;
 
 /**
  * read a saved JSON value. localStorage throws in Safari private mode and

@@ -22,6 +22,9 @@ test.describe("desktop", () => {
     // server gives a 404 and the desktop shows the themed dialog
     expect(response?.status()).toBe(404);
     await expect(page.getByRole("dialog", { name: "File not found" })).toBeVisible();
+    // 404s skip the (os) layout but still get the theme and wallpaper
+    await expect(page.locator("html")).toHaveAttribute("data-theme", /^(light|dark)$/);
+    await expect(page.locator("html")).toHaveAttribute("data-wallpaper", /^(animated|still)$/);
   });
 
   test("double-clicking a desktop icon opens its window and updates the URL", async ({ page }) => {
@@ -110,6 +113,8 @@ test.describe("desktop", () => {
     // name and section headings are there
     await expect(page.getByRole("heading", { level: 1, name: "Jack Keirnan" })).toBeVisible();
     await expect(page.getByRole("heading", { name: "Experience" })).toBeVisible();
+    // no JackOS theme or wallpaper on the plain page
+    await expect(page.locator("html")).not.toHaveAttribute("data-theme");
   });
 });
 
@@ -228,6 +233,19 @@ test.describe("retro extras", () => {
     await expect(page.locator("[data-selected]")).toHaveCount(2);
   });
 
+  test("dragging beside the icons doesn't highlight their labels as text", async ({ page }) => {
+    await skipFirstVisit(page);
+    await page.goto("/");
+    const icon = (await page.getByRole("navigation", { name: "Desktop" }).getByRole("button").nth(0).boundingBox())!;
+    // sweep down past the label column without touching any icon
+    await page.mouse.move(icon.x + icon.width + 80, icon.y);
+    await page.mouse.down();
+    await page.mouse.move(icon.x + icon.width + 10, icon.y + 300, { steps: 5 });
+    await page.mouse.up();
+    expect(await page.evaluate(() => String(window.getSelection()))).toBe("");
+    await expect(page.locator("[data-selected]")).toHaveCount(0);
+  });
+
   test("the screensaver starts after a minute idle and any key wakes the screen", async ({ page }) => {
     await page.clock.install();
     await skipFirstVisit(page);
@@ -278,19 +296,13 @@ test.describe("tablet", () => {
 test.describe("keyboard", () => {
   test.use({ viewport: { width: 1280, height: 800 } });
 
-  test("Esc in the terminal input keeps the window open", async ({ page }) => {
-    // open the Terminal and type in it
+  test("Esc closes the focused window", async ({ page }) => {
     await skipFirstVisit(page);
-    await page.goto("/");
-    await page.getByRole("navigation", { name: "Desktop" }).getByRole("button", { name: "Terminal" }).dblclick();
-    const terminal = page.getByRole("dialog", { name: "Terminal" });
-    await terminal.getByLabel("jack@jackos ~ $").fill("whoami");
-    // Esc while typing leaves the window open, Esc on the window itself closes it
+    await page.goto("/about");
+    const about = page.getByRole("dialog", { name: "About Me" });
+    await about.focus();
     await page.keyboard.press("Escape");
-    await expect(terminal).toBeVisible();
-    await terminal.focus();
-    await page.keyboard.press("Escape");
-    await expect(terminal).toHaveCount(0);
+    await expect(about).toHaveCount(0);
   });
 });
 
