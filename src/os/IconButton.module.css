@@ -9,6 +9,7 @@
   border: 1px dotted transparent;
   font: inherit;
   cursor: var(--os-cursor);
+  user-select: none;
 }
 .label { text-align: center; line-height: 1.2; padding: 1px 3px; overflow-wrap: anywhere; }
 .desktop { color: #ffffff; }

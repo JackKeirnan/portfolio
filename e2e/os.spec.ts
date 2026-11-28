@@ -233,6 +233,21 @@ test.describe("retro extras", () => {
     await expect(page.locator("[data-selected]")).toHaveCount(2);
   });
 
+  test("double-clicking icons opens windows without selecting any text", async ({ page }) => {
+    await skipFirstVisit(page);
+    await page.goto("/");
+    const selection = () => page.evaluate(() => String(window.getSelection()));
+    // desktop icon, then a project icon inside the folder window
+    const desktopIcon = (await page.getByRole("navigation", { name: "Desktop" }).getByRole("button", { name: "My Projects" }).boundingBox())!;
+    await page.mouse.dblclick(desktopIcon.x + desktopIcon.width / 2, desktopIcon.y + desktopIcon.height - 6);
+    await expect(page.getByRole("dialog", { name: "My Projects" })).toBeVisible();
+    expect(await selection()).toBe("");
+    const projectIcon = (await page.getByRole("dialog", { name: "My Projects" }).getByRole("button", { name: "Atelier Lavender" }).boundingBox())!;
+    await page.mouse.dblclick(projectIcon.x + projectIcon.width / 2, projectIcon.y + projectIcon.height - 6);
+    await expect(page.getByRole("dialog", { name: "Atelier Lavender" })).toBeVisible();
+    expect(await selection()).toBe("");
+  });
+
   test("dragging beside the icons doesn't highlight their labels as text", async ({ page }) => {
     await skipFirstVisit(page);
     await page.goto("/");
