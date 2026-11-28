@@ -2,7 +2,7 @@ import { developer } from "@/data/portfolio";
 import { PixelIcon } from "@/os/PixelIcon";
 import styles from "../apps.module.css";
 
-/** About JackOS: who built it and credits for everything it uses, read from portfolio.ts. */
+/** About JackOS - who built it + credits for everything it uses, read from portfolio.ts */
 export function Credits() {
   return (
     <div className={styles.page}>

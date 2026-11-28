@@ -4,12 +4,12 @@ import { useEffect, useState } from "react";
 import { useSettings } from "./settings";
 import styles from "./Tray.module.css";
 
-/** Taskbar/status-bar clock. Empty until mounted so server and client markup match. */
+/** taskbar/status-bar clock, empty until mounted so server and client markup match */
 export function Clock() {
   const [time, setTime] = useState("");
   useEffect(() => {
     const tick = () => setTime(new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }));
-    // Fill the clock now, then refresh often enough that the minute is never stale.
+    // fill the clock now, then refresh often enough that the minute's never stale
     tick();
     const timer = setInterval(tick, 15_000);
     return () => clearInterval(timer);
@@ -17,7 +17,7 @@ export function Clock() {
   return <time className={styles.clock}>{time}</time>;
 }
 
-/** Sound on/off switch shown in the tray and the phone bottom bar. */
+/** sound on/off switch in the tray and the phone bottom bar */
 export function SoundToggle() {
   const { soundOn, setSoundOn } = useSettings();
   return (

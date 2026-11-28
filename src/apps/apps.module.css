@@ -1,4 +1,4 @@
-/* Shared styles for app content inside window panels. */
+/* shared styles for app content inside window panels */
 .page { padding: 12px 14px; line-height: 1.5; }
 .heading { margin: 0 0 8px; font-size: 18px; color: var(--os-title-from); }
 .subheading { margin: 16px 0 6px; padding-bottom: 2px; font-size: 14px; color: var(--os-title-from); border-bottom: 1px solid var(--os-chrome); }

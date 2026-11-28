@@ -13,7 +13,7 @@ import { Terminal } from "@/apps/terminal/Terminal";
 import { Welcome } from "@/apps/welcome/Welcome";
 import type { AppId, AppParams, AppProps } from "./apps";
 
-// Kept apart from apps.ts so the registry stays importable by pure unit tests.
+// kept out of apps.ts so pure unit tests can still import the registry
 const COMPONENTS: Record<AppId, ComponentType<AppProps>> = {
   welcome: Welcome,
   about: About,
@@ -27,7 +27,7 @@ const COMPONENTS: Record<AppId, ComponentType<AppProps>> = {
   notFound: NotFound,
 };
 
-/** Renders the app a window belongs to. */
+/** renders the app a window belongs to */
 export function AppContent({ appId, params }: { appId: AppId; params?: AppParams }) {
   const App = COMPONENTS[appId];
   return <App params={params} />;

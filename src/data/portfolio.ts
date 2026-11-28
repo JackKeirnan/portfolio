@@ -296,6 +296,6 @@ export const projectCategories: ProjectCategory[] = [
 export const getProjectBySlug = (slug: string) =>
     projects.find((project) => project.slug === slug);
 
-// Every screenshot of a project, main image first, for the Project Viewer gallery.
+// every screenshot of a project, main image first, for the Project Viewer gallery
 export const projectScreenshots = (project: ProjectType): string[] =>
     [project.image, ...(project.gallery ?? [])];

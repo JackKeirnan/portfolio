@@ -9,8 +9,8 @@ import { useWindowManager } from "../WindowManagerProvider";
 import styles from "./Window.module.css";
 
 /**
- * Tracks a pointer drag on an element. Pointer capture keeps the drag alive
- * when the cursor leaves the element; listeners are removed on release.
+ * tracks a pointer drag on an element. pointer capture keeps the drag going
+ * when the cursor leaves the element, listeners get removed on release
  */
 function trackDrag(event: ReactPointerEvent<HTMLElement>, onDelta: (dx: number, dy: number) => void) {
   const target = event.currentTarget;
@@ -28,42 +28,42 @@ function trackDrag(event: ReactPointerEvent<HTMLElement>, onDelta: (dx: number, 
   target.addEventListener("pointercancel", onEnd);
 }
 
-/** A draggable, resizable window frame around one app. */
+/** draggable, resizable window frame around one app */
 export function Window({ win, focused, children }: { win: WindowState; focused: boolean; children: ReactNode }) {
   const wm = useWindowManager();
   const rootRef = useRef<HTMLDivElement>(null);
   const title = windowTitle(win.appId, win.params);
   const titleId = `window-title-${win.id}`;
 
-  // Move keyboard focus into the window when it becomes active, unless focus is already inside.
+  // move keyboard focus into the window when it goes active, unless focus is already inside
   useEffect(() => {
     if (focused && !rootRef.current?.contains(document.activeElement)) rootRef.current?.focus();
   }, [focused]);
 
-  /** Drags the window by its title bar; buttons in the bar are excluded. */
+  /** drag the window by its title bar, buttons in the bar don't count */
   function startMove(event: ReactPointerEvent<HTMLDivElement>) {
-    // Ignore maximised windows, non-primary buttons and presses on the controls.
+    // ignore maximised windows, non-primary buttons and presses on the controls
     if (win.maximized || event.button !== 0 || (event.target as HTMLElement).closest("button")) return;
-    // Move relative to where the window was when the drag began.
+    // move relative to where the window was when the drag started
     const { x, y } = win;
     trackDrag(event, (dx, dy) => wm.move(win.id, x + dx, y + dy));
   }
 
-  /** Maximises or restores on a title-bar double-click, ignoring the control buttons. */
+  /** maximise/restore on title bar double-click, ignores the control buttons */
   function onTitleBarDoubleClick(event: ReactMouseEvent<HTMLDivElement>) {
     if ((event.target as HTMLElement).closest("button")) return;
     wm.toggleMaximize(win.id);
   }
 
-  /** Resizes from the bottom-right handle; the press also bubbles up to focus the window. */
+  /** resize from the bottom-right handle, the press also bubbles up to focus the window */
   function startResize(event: ReactPointerEvent<HTMLDivElement>) {
     if (event.button !== 0) return;
-    // Resize relative to the size when the drag began.
+    // resize relative to the size when the drag started
     const { w, h } = win;
     trackDrag(event, (dx, dy) => wm.resize(win.id, w + dx, h + dy));
   }
 
-  // Maximised windows fill the desktop via CSS; others use their stored geometry.
+  // maximised windows fill the desktop via CSS, others use their stored geometry
   const geometry = win.maximized ? {} : { left: win.x, top: win.y, width: win.w, height: win.h };
 
   return (
@@ -79,9 +79,9 @@ export function Window({ win, focused, children }: { win: WindowState; focused: 
         if (!focused) wm.focus(win.id);
       }}
       onKeyDown={(event) => {
-        // Esc closes the focused window, but not while typing: fields keep Esc for themselves.
+        // Esc closes the focused window, but not while typing - fields keep Esc for themselves
         const target = event.target as HTMLElement;
-        // Only text-entry fields count; radios, checkboxes and buttons still let Esc close.
+        // only text-entry fields count - radios, checkboxes and buttons still let Esc close
         const textInput = target instanceof HTMLInputElement && !["checkbox", "radio", "button", "submit", "reset", "range", "color"].includes(target.type);
         const typing = target.isContentEditable || textInput || ["TEXTAREA", "SELECT"].includes(target.tagName);
         if (event.key === "Escape" && !typing) {

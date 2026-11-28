@@ -15,7 +15,7 @@ import { useWindowManager, WindowManagerProvider } from "./WindowManagerProvider
 import { windowSoundFor } from "./windowSounds";
 import styles from "./OS.module.css";
 
-/** Plays a sound for each window open, close, minimise or maximise (silent unless sound is on). */
+/** plays a sound on every window open, close, minimise or maximise (silent unless sound is on) */
 function useWindowSounds() {
   const { state } = useWindowManager();
   const { play } = useSettings();
@@ -27,17 +27,17 @@ function useWindowSounds() {
   }, [state, play]);
 }
 
-/** Picks the desktop or phone shell and runs boot, shutdown and URL sync. */
+/** picks the desktop or phone shell, runs boot, shutdown and URL sync */
 function Shell({ isHome }: { isHome: boolean }) {
   const wm = useWindowManager();
   const { wallpaper, play } = useSettings();
   const { back, home } = useUrlSync();
   const [phase, setPhase] = useState<"desktop" | "boot" | "shutdown">("desktop");
-  // Welcome opens only after the very first boot, not after a joke reboot.
+  // Welcome only opens after the very first boot, not after a joke reboot
   const showWelcomeAfterBoot = useRef(false);
   useWindowSounds();
 
-  // First visit to "/" boots, then opens Welcome. Deep links and returning visitors skip both.
+  // first visit to "/" boots then opens Welcome, deep links and returning visitors skip both
   useEffect(() => {
     if (!isHome || readSetting(STORAGE_KEYS.visited, false)) return;
     writeSetting(STORAGE_KEYS.visited, true);
@@ -47,21 +47,21 @@ function Shell({ isHome }: { isHome: boolean }) {
     }
     showWelcomeAfterBoot.current = true;
     setPhase("boot");
-    // Mount-only: isHome is fixed for the life of the page and wm.open is stable.
+    // mount-only - isHome is fixed for the life of the page and wm.open is stable
   }, []);
 
-  /** Boot finished or skipped. */
+  /** boot finished or skipped */
   const finishBoot = useCallback(() => {
     setPhase("desktop");
     play("startup");
-    // Only the first-ever boot opens Welcome, and only once.
+    // only the first-ever boot opens Welcome, and only once
     if (showWelcomeAfterBoot.current) {
       showWelcomeAfterBoot.current = false;
       wm.open({ appId: "welcome" });
     }
   }, [play, wm]);
 
-  /** Shutdown joke finished: clear the desktop and boot again. */
+  /** shutdown joke done - clear the desktop and boot again */
   const finishShutdown = useCallback(() => {
     wm.closeAll();
     setPhase("boot");
@@ -86,12 +86,12 @@ function Shell({ isHome }: { isHome: boolean }) {
 }
 
 /**
- * JackOS. Mounted once per page; the URL it loads on decides which windows
- * start open. Later URL changes come from the window manager, not the router.
+ * JackOS, mounted once per page. the URL it loads on decides which windows
+ * start open, later URL changes come from the window manager, not the router
  */
 export function OS() {
   const pathname = usePathname();
-  // Read the URL once: replaceState updates pathname, but must not reset windows.
+  // read the URL once - replaceState updates pathname but mustn't reset windows
   const [initial] = useState(() => initialWindowsForPath(pathname));
   const [isHome] = useState(pathname === "/");
 

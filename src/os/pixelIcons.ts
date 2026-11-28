@@ -1,10 +1,10 @@
 /**
- * One icon: a 24x24 pixelarticons glyph drawn in white on a coloured tile.
+ * one icon - a 24x24 pixelarticons glyph drawn in white on a coloured tile
  * Glyphs (c) Gerrit Halfmann, MIT; licence in public/licenses/pixelarticons.txt.
  */
 export type PixelIconDef = { path: string; tile: string };
 
-/** Every icon JackOS shows. Tile colours come from the theme so the set reads as one family. */
+/** every icon JackOS shows. tile colours come from the theme so the set reads as one family */
 export const PIXEL_ICONS = {
   welcome: { tile: "#0f4596", path: "M4 2h16v2H4zm0 18h16v2H4zM2 4h2v16H2zm18 0h2v16h-2zm-9 5h2V7h-2zm0 8h2v-6h-2z" },
   about: { tile: "#1d7f8c", path: "M9 2h6v2H9zm0 8h6v2H9zm6-6h2v6h-2zM7 4h2v6H7zM4 18h2v4H4zm14 0h2v4h-2zM8 14h8v2H8zm-2 2h2v2H6zm10 0h2v2h-2z" },
@@ -17,5 +17,5 @@ export const PIXEL_ICONS = {
   error: { tile: "#d23a1c", path: "M2 10h2v2H2zm0 4h2v-2H2zm20-4h-2v2h2zm0 4h-2v-2h2zM4 8h2v2H4zm0 8h2v-2H4zm16-8h-2v2h2zm0 8h-2v-2h2zM6 6h2v2H6zm0 12h2v-2H6zM18 6h-2v2h2zm0 12h-2v-2h2zM8 4h2v2H8zm0 16h2v-2H8zm8-16h-2v2h2zm0 16h-2v-2h2zM10 2h2v2h-2zm0 20h2v-2h-2zm4-20h-2v2h2zm0 20h-2v-2h2zm-3-5h2v-2h-2zm0-4h2V7h-2z" },
 } satisfies Record<string, PixelIconDef>;
 
-/** Names callers use, so swapping art never touches components. */
+/** names callers use, so swapping art never touches components */
 export type PixelIconName = keyof typeof PIXEL_ICONS;

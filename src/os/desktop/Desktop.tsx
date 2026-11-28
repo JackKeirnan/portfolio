@@ -8,7 +8,7 @@ import { useWindowManager } from "../WindowManagerProvider";
 import { Window } from "./Window";
 import styles from "./Desktop.module.css";
 
-/** Wallpaper area with app icons and every open window. */
+/** wallpaper area with app icons and every open window */
 export function Desktop() {
   const wm = useWindowManager();
   const [selected, setSelected] = useState<string | null>(null);
@@ -17,11 +17,11 @@ export function Desktop() {
     <div
       className={styles.desktop}
       onPointerDown={(event) => {
-        // Clicking empty wallpaper clears the icon selection.
+        // clicking empty wallpaper clears the icon selection
         if (event.target === event.currentTarget) setSelected(null);
       }}
       onContextMenu={(event) => {
-        // Right-click on empty wallpaper opens Display Settings.
+        // right-click on empty wallpaper opens Display Settings
         if ((event.target as HTMLElement).closest("button, [role='dialog']")) return;
         event.preventDefault();
         wm.open({ appId: "display" });

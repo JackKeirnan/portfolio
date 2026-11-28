@@ -1,7 +1,7 @@
 import { developer } from "@/data/portfolio";
 import styles from "../apps.module.css";
 
-/** Contact links as buttons. No form, so no backend or spam handling. */
+/** contact links as buttons. no form so no backend or spam handling */
 export function Contact() {
   const { contact } = developer;
   return (
@@ -10,7 +10,7 @@ export function Contact() {
       <p className={styles.paragraph}>{contact.blurb}</p>
       <div className={styles.buttons}>
         {contact.links.map((link) => {
-          // mailto links stay in the tab; web links open a new one.
+          // mailto links stay in the tab, web links open a new one
           const external = !link.href.startsWith("mailto:");
           return (
             <a

@@ -1,7 +1,7 @@
 import { developer } from "@/data/portfolio";
 import styles from "../apps.module.css";
 
-/** Education entries as a small timeline. */
+/** education entries as a small timeline */
 export function EducationList() {
   return (
     <>

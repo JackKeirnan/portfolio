@@ -1,4 +1,4 @@
 .root { position: fixed; inset: 0; overflow: hidden; }
-/* Visible only when focused, for keyboard and screen-reader users. */
+/* only visible when focused, for keyboard and screen-reader users */
 .skipLink { position: absolute; top: -40px; left: 8px; z-index: 30000; padding: 6px 10px; background: var(--os-panel); color: var(--os-link); }
 .skipLink:focus { top: 8px; }

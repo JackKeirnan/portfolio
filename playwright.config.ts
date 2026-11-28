@@ -1,6 +1,6 @@
 import { defineConfig } from "@playwright/test";
 
-// Smoke tests run against a production build, the way Vercel serves the site.
+// smoke tests run against a prod build, same as Vercel serves it
 export default defineConfig({
   testDir: "e2e",
   use: { baseURL: "http://localhost:3100" },

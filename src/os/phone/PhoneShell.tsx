@@ -9,7 +9,7 @@ import { stackOrder } from "../windowManager";
 import { useWindowManager } from "../WindowManagerProvider";
 import styles from "./PhoneShell.module.css";
 
-/** Phone-OS mode: icon grid home screen; apps open full-screen as a stack. */
+/** phone mode - icon grid home screen, apps open full-screen as a stack */
 export function PhoneShell({ onBack, onHome }: { onBack: () => void; onHome: () => void }) {
   const wm = useWindowManager();
   const stack = stackOrder(wm.state);
@@ -36,7 +36,7 @@ export function PhoneShell({ onBack, onHome }: { onBack: () => void; onHome: () 
           ))}
         </nav>
 
-        {/* Lower screens stay mounted (hidden) so going back keeps their state. */}
+        {/* lower screens stay mounted (hidden) so going back keeps their state */}
         {stack.map((win) => {
           const title = windowTitle(win.appId, win.params);
           const titleId = `phone-title-${win.id}`;

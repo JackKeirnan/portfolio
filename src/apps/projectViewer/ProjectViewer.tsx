@@ -8,14 +8,14 @@ import { PixelIcon } from "@/os/PixelIcon";
 import { NotFound } from "../notFound/NotFound";
 import styles from "../apps.module.css";
 
-/** One project: screenshot gallery, description, tech tags and live link. */
+/** one project - screenshot gallery, description, tech tags and live link */
 export function ProjectViewer({ params }: AppProps) {
   const project = getProjectBySlug(params?.slug ?? "");
   const [shown, setShown] = useState(0);
-  // Remember failures per image so one broken shot doesn't hide the others.
+  // track failures per image so one broken shot doesn't hide the rest
   const [failed, setFailed] = useState<ReadonlySet<string>>(new Set());
 
-  // A stale or hand-typed slug shows the same File not found as the URL route.
+  // stale or hand-typed slug gets the same File not found as the URL route
   if (!project) return <NotFound />;
 
   const screenshots = projectScreenshots(project);
@@ -24,7 +24,7 @@ export function ProjectViewer({ params }: AppProps) {
 
   return (
     <article className={styles.page}>
-      {/* A broken screenshot falls back to an icon instead of a broken-image box. */}
+      {/* broken screenshot falls back to an icon instead of a broken-image box */}
       {failed.has(current) ? (
         <div className={styles.shotFallback}><PixelIcon name="document" size={48} /></div>
       ) : (

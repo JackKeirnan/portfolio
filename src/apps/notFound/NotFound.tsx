@@ -4,7 +4,7 @@ import { PixelIcon } from "@/os/PixelIcon";
 import { useWindowManager } from "@/os/WindowManagerProvider";
 import styles from "../apps.module.css";
 
-/** Shown for unknown URLs and missing projects. */
+/** shown for unknown URLs and missing projects */
 export function NotFound() {
   const wm = useWindowManager();
   return (

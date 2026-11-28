@@ -7,16 +7,16 @@ import { IconButton } from "@/os/IconButton";
 import { useWindowManager } from "@/os/WindowManagerProvider";
 import styles from "../apps.module.css";
 
-/** The active category tab: every project, or one category. */
+/** active category tab - every project or just one category */
 type Filter = "All" | ProjectCategory;
 
-/** Folder view of every enabled project, with category filter buttons. */
+/** folder view of every enabled project with category filter buttons */
 export function Projects() {
   const wm = useWindowManager();
   const [filter, setFilter] = useState<Filter>("All");
   const [selected, setSelected] = useState<string | null>(null);
 
-  // Only offer filter buttons for categories that have at least one project.
+  // only show filter buttons for categories with at least one project
   const tabs: Filter[] = ["All", ...projectCategories.filter((category) => projects.some((p) => p.category === category))];
   const shown = filter === "All" ? projects : projects.filter((p) => p.category === filter);
 
@@ -41,7 +41,7 @@ export function Projects() {
           <IconButton
             key={project.slug}
             variant="folder"
-            // Games get a controller icon so they stand out in the folder.
+            // games get a controller icon so they stand out in the folder
             icon={project.category === "Game Dev" ? "gamepad" : "document"}
             label={project.title}
             selected={selected === project.slug}

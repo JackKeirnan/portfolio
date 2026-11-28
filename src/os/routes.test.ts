@@ -31,7 +31,7 @@ describe("routes", () => {
     expect(pathForWindow({ appId: "terminal" })).toBe("/");
     expect(pathForWindow(null)).toBe("/");
     expect(pathForWindow({ appId: "notFound" })).toBeNull();
-    // A 404 window remembers the URL it was opened for, so refocusing it restores that URL.
+    // a 404 window remembers the URL it was opened for, so refocusing it puts that URL back
     expect(pathForWindow({ appId: "notFound", params: { path: "/work/typo" } })).toBe("/work/typo");
   });
 });

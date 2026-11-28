@@ -1,4 +1,4 @@
-/* body has overflow: hidden for the desktop, so this page scrolls itself. */
+/* body has overflow: hidden for the desktop so this page scrolls itself */
 .scroll { height: 100%; overflow: auto; background: var(--os-panel); }
 .page { max-width: 720px; margin: 0 auto; padding: 24px 16px 48px; font: 16px/1.6 Verdana, Tahoma, sans-serif; color: var(--os-text); }
 .page h1 { margin-bottom: 0; color: var(--os-title-from); }

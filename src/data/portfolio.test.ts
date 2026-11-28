@@ -3,7 +3,7 @@ import path from "node:path";
 import { describe, expect, it } from "vitest";
 import { developer, projects, projectScreenshots } from "./portfolio";
 
-// Guards the content file that every JackOS app reads from.
+// guards the content file every JackOS app reads from
 describe("portfolio data", () => {
   it("gives every enabled project a unique kebab-case slug", () => {
     const slugs = projects.map((project) => project.slug);

@@ -1,30 +1,30 @@
-// Projects are grouped under these headings in the My Projects window.
+// projects get grouped under these headings in the My Projects window
 export type ProjectCategory = "Freelance" | "University" | "Game Dev" | "Personal";
 
 export type ProjectType = {
     id: number;
     slug: string;
     image: string;
-    // Extra screenshots shown after `image` in the Project Viewer gallery.
+    // extra screenshots shown after `image` in the Project Viewer gallery
     gallery?: string[];
     title: string;
     description: string;
     longdescription: string[];
     languages: string[];
-    // Grouping/banner for the project (shown in the My Projects window and on the project detail window).
+    // grouping/banner for the project (shown in the My Projects window and the project detail window)
     category: ProjectCategory;
     // Optional live deployment link.
     liveUrl?: string;
-    // Optional public source repo; shown as "View on GitHub".
+    // optional public source repo, shows as "View on GitHub"
     repoUrl?: string;
-    // Someone the project was made with; shown as "Made with <name>" and linked when href is set.
+    // someone the project was made with, shows as "Made with <name>" and links if href is set
     collaborator?: { name: string; href?: string };
     // Toggle visibility. Defaults to shown; set to false to hide everywhere.
     enabled?: boolean;
 };
 
 export type SkillGroup = {
-    // Short heading for the group, e.g. "Languages"; shown in About Me and /plain.
+    // short heading for the group e.g. "Languages", shown in About Me and /plain
     label: string;
     text: string;
 };
@@ -46,7 +46,7 @@ export type ContactLink = {
     href: string;
 };
 
-/** One line in the About JackOS credits; href links to the source or licence. */
+/** one line in the About JackOS credits, href links to the source or licence */
 export type Credit = {
     label: string;
     detail: string;
@@ -57,10 +57,10 @@ export type Developer = {
     name: string;
     title: string;
     portrait: string;
-    // Path under public/ to the downloadable CV. Unset hides the download button.
+    // path under public/ to the downloadable CV, leave unset to hide the download button
     cvPdf?: string;
     terminal: {
-        // Lines printed by the Terminal app's `whoami` command.
+        // lines the Terminal's `whoami` command prints
         whoami: string[];
     };
     intro: {
@@ -88,7 +88,7 @@ export type Developer = {
         blurb: string;
         links: ContactLink[];
     };
-    // Shown in About JackOS and on /plain. Add any third-party asset here.
+    // shown in About JackOS and on /plain, add any third-party asset here
     credits: Credit[];
     footer: string;
 };

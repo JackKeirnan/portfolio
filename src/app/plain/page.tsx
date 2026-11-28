@@ -5,7 +5,7 @@ import styles from "./plain.module.css";
 
 export const metadata: Metadata = pageMetadata("Plain view | Jack Keirnan", "Jack Keirnan's CV, projects and contact details as a simple text page.");
 
-/** Fallback for screen readers and hurried recruiters: everything, no desktop. */
+/** fallback for screen readers and recruiters in a hurry - everything, no desktop */
 export default function PlainPage() {
   const { name, title, intro, about, cvPdf, experience, education, skills, contact, credits, footer } = developer;
   return (

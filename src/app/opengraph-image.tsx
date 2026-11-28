@@ -1,13 +1,13 @@
 import { ImageResponse } from "next/og";
 
-// Social preview size recommended by Open Graph and X/Twitter.
+// social preview size Open Graph and X/Twitter recommend
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 export const alt = "JackOS – Jack Keirnan's portfolio as an early-2000s desktop";
 
-/** Social preview for every page: a JackOS window on the aurora wallpaper, built at build time. */
+/** social preview for every page - a JackOS window on the aurora wallpaper, made at build time */
 export default function OpenGraphImage() {
-  // Window chrome reuses the theme colours so the preview looks like the site.
+  // window chrome reuses the theme colours so the preview looks like the site
   const bevel = { borderStyle: "solid", borderWidth: 4, borderColor: "#ffffff #3b3326 #3b3326 #ffffff" } as const;
   return new ImageResponse(
     (

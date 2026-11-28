@@ -2,21 +2,21 @@ import type { SoundName } from "./sound";
 import type { WMState } from "./windowManager";
 
 /**
- * Picks the sound for one window-manager change, or null for silent ones
- * (moves, focus). Pure, so the rules are unit-tested apart from audio.
+ * picks the sound for one window-manager change, or null for silent ones
+ * (moves, focus). pure so the rules get unit-tested without audio
  */
 export function windowSoundFor(previous: WMState, next: WMState): SoundName | null {
-  // Index the old windows so each new one can be compared with its past self.
+  // index the old windows so each new one can be compared to its past self
   const before = new Map(previous.windows.map((win) => [win.id, win]));
   const after = new Set(next.windows.map((win) => win.id));
 
-  // A new window: File not found gets the error sound, everything else opens.
+  // new window - File not found gets the error sound, everything else gets the open sound
   const opened = next.windows.find((win) => !before.has(win.id));
   if (opened) return opened.appId === "notFound" ? "error" : "open";
 
   if (previous.windows.some((win) => !after.has(win.id))) return "close";
 
-  // Same windows: look for minimise, restore and maximise changes.
+  // same windows - look for minimise, restore and maximise changes
   for (const win of next.windows) {
     const old = before.get(win.id);
     if (!old) continue;

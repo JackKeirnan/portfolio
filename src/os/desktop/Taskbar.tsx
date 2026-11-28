@@ -9,12 +9,12 @@ import { useWindowManager } from "../WindowManagerProvider";
 import { StartMenu } from "./StartMenu";
 import styles from "./Taskbar.module.css";
 
-/** Bottom bar: JackOS menu button, one button per open window, and the tray. */
+/** bottom bar - JackOS menu button, one button per open window, and the tray */
 export function Taskbar({ onShutDown }: { onShutDown: () => void }) {
   const wm = useWindowManager();
   const { play } = useSettings();
   const [menuOpen, setMenuOpen] = useState(false);
-  // Stable so StartMenu's outside-click effect is not re-subscribed every render.
+  // stable so StartMenu's outside-click effect doesn't re-subscribe every render
   const closeMenu = useCallback(() => setMenuOpen(false), []);
 
   return (
@@ -26,7 +26,7 @@ export function Taskbar({ onShutDown }: { onShutDown: () => void }) {
         aria-haspopup="menu"
         aria-expanded={menuOpen}
         onClick={() => {
-          // Tick only when the menu opens, not when it closes.
+          // tick only when the menu opens, not when it closes
           if (!menuOpen) play("menu");
           setMenuOpen(!menuOpen);
         }}
@@ -37,7 +37,7 @@ export function Taskbar({ onShutDown }: { onShutDown: () => void }) {
 
       <div className={styles.tasks} aria-label="Open windows" role="group">
         {wm.state.windows.map((win) => {
-          // Clicking the active window's button minimises it; otherwise it is brought forward.
+          // clicking the active window's button minimises it, otherwise it comes to the front
           const active = wm.state.focusedId === win.id && !win.minimized;
           const title = windowTitle(win.appId, win.params);
           return (

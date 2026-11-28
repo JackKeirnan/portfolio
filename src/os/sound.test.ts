@@ -17,7 +17,7 @@ describe("sounds", () => {
     for (const name of SOUND_NAMES) {
       const samples = zzfxGenerate(...SOUND_PRESETS[name][0].params);
       const peak = Math.max(...samples.map(Math.abs));
-      // A square wave sits at +/- peak outside its short release; a sine almost never does.
+      // a square wave sits at +/- peak outside its short release, a sine almost never does
       const atPeak = samples.filter((value) => Math.abs(Math.abs(value) - peak) < 1e-9).length;
       expect(atPeak / samples.length, name).toBeGreaterThan(0.5);
     }
@@ -33,7 +33,7 @@ describe("sounds", () => {
       for (const note of SOUND_PRESETS[name]) {
         const samples = zzfxGenerate(...note.params);
         expect(samples.length, name).toBeGreaterThan(0);
-        // UI sounds stay under a second so they never drag behind the action.
+        // UI sounds stay under a second so they never lag behind the action
         expect(samples.length / ZZFX_SAMPLE_RATE + note.at, name).toBeLessThan(1);
         expect(samples.every((value) => Number.isFinite(value) && Math.abs(value) <= 1), name).toBe(true);
       }

@@ -4,14 +4,14 @@ import { Component, type ReactNode } from "react";
 import styles from "@/apps/apps.module.css";
 import { PixelIcon } from "./PixelIcon";
 
-/** The window title shown in the error, how to close the window, and the app to guard. */
+/** window title for the error, how to close the window, and the app to guard */
 type Props = { title: string; onClose: () => void; children: ReactNode };
-/** Whether a child has thrown and the error view should show. */
+/** whether a child threw and the error view should show */
 type State = { failed: boolean };
 
 /**
- * Keeps one crashing app from taking down the desktop: that window shows a
- * themed error instead, and the rest of JackOS keeps running.
+ * stops one crashing app taking down the desktop - that window shows a
+ * themed error instead and the rest of JackOS keeps running
  */
 export class WindowErrorBoundary extends Component<Props, State> {
   state: State = { failed: false };
@@ -20,7 +20,7 @@ export class WindowErrorBoundary extends Component<Props, State> {
     return { failed: true };
   }
 
-  /** Logs the crash so it still shows up in the browser console. */
+  /** log the crash so it still shows up in the browser console */
   componentDidCatch(error: unknown) {
     console.error(error);
   }

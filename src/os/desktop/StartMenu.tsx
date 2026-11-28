@@ -6,17 +6,17 @@ import { PixelIcon } from "../PixelIcon";
 import { useWindowManager } from "../WindowManagerProvider";
 import styles from "./StartMenu.module.css";
 
-/** The JackOS menu: every app, Plain view, and Shut down. */
+/** the JackOS menu - every app, Plain view, and Shut down */
 export function StartMenu({ onClose, onShutDown }: { onClose: () => void; onShutDown: () => void }) {
   const wm = useWindowManager();
   const menuRef = useRef<HTMLDivElement>(null);
 
-  // Focus the first item so the menu is usable from the keyboard straight away.
+  // focus the first item so the menu works from the keyboard straight away
   useEffect(() => {
     menuRef.current?.querySelector<HTMLElement>("[role='menuitem']")?.focus();
   }, []);
 
-  // Close on any click outside the menu (the Start button toggles it itself).
+  // close on any click outside the menu (Start button toggles it itself)
   useEffect(() => {
     const onPointerDown = (event: PointerEvent) => {
       const target = event.target as HTMLElement;
@@ -26,17 +26,17 @@ export function StartMenu({ onClose, onShutDown }: { onClose: () => void; onShut
     return () => document.removeEventListener("pointerdown", onPointerDown);
   }, [onClose]);
 
-  /** Arrow keys move between items; Esc closes and returns focus. */
+  /** arrow keys move between items, Esc closes and gives focus back */
   function onKeyDown(event: KeyboardEvent<HTMLDivElement>) {
     const items = Array.from(menuRef.current?.querySelectorAll<HTMLElement>("[role='menuitem']") ?? []);
     const index = items.indexOf(document.activeElement as HTMLElement);
     if (event.key === "ArrowDown" || event.key === "ArrowUp") {
-      // Move focus one item, wrapping at both ends.
+      // move focus one item, wraps at both ends
       event.preventDefault();
       const step = event.key === "ArrowDown" ? 1 : -1;
       items[(index + step + items.length) % items.length]?.focus();
     } else if (event.key === "Escape") {
-      // Close the menu and give focus back to the Start button.
+      // close the menu and give focus back to the Start button
       onClose();
       document.querySelector<HTMLElement>("[data-start-button]")?.focus();
     }

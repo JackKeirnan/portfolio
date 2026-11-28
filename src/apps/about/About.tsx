@@ -3,10 +3,10 @@ import { developer } from "@/data/portfolio";
 import { EducationList } from "../shared/EducationList";
 import styles from "../apps.module.css";
 
-/** Portrait, intro, background, skills and education. */
+/** portrait, intro, background, skills and education */
 export function About() {
   const { name, title, portrait, intro, about, skills, education } = developer;
-  // The first intro paragraph sits beside the portrait; the rest flow below.
+  // first intro paragraph sits next to the portrait, the rest flow below
   const [lead, ...restOfIntro] = intro.paragraphs;
 
   return (

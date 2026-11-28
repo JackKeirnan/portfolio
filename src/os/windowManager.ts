@@ -1,9 +1,9 @@
 import { getAppMeta, type AppId, type AppParams, type OpenRequest } from "./apps";
 
-/** Usable desktop area in px (browser window minus the taskbar). */
+/** usable desktop area in px (browser window minus the taskbar) */
 export type Viewport = { width: number; height: number };
 
-/** One open window. Position and size are ignored in phone mode. */
+/** one open window, position and size get ignored in phone mode */
 export type WindowState = {
   id: string;
   appId: AppId;
@@ -17,10 +17,10 @@ export type WindowState = {
   maximized: boolean;
 };
 
-/** Everything the window manager tracks. */
+/** everything the window manager tracks */
 export type WMState = { windows: WindowState[]; focusedId: string | null };
 
-/** Every change the window manager supports. Viewport-dependent actions carry it so the reducer stays pure. */
+/** every change the window manager supports. viewport-dependent actions carry it so the reducer stays pure */
 export type WMAction =
   | { type: "open"; request: OpenRequest; viewport: Viewport }
   | { type: "close"; id: string }
@@ -33,28 +33,28 @@ export type WMAction =
   | { type: "closeAll" }
   | { type: "truncate"; keep: number };
 
-// Used for server rendering and the first client render, so both match.
+// used for server render and first client render so both match
 export const DEFAULT_VIEWPORT: Viewport = { width: 1280, height: 764 };
 export const MIN_WINDOW_SIZE = { w: 240, h: 160 };
 export const TITLE_BAR_HEIGHT = 28;
-// A window can slide off-screen, but this much of it always stays grabbable.
+// a window can slide off-screen but this much of it always stays grabbable
 export const MIN_VISIBLE_WIDTH = 80;
 export const EMPTY_STATE: WMState = { windows: [], focusedId: null };
 
-// New windows start right of the desktop icon column and cascade.
+// new windows start right of the desktop icon column and cascade
 const ICON_COLUMN_WIDTH = 104;
 const TOP_MARGIN = 16;
 const CASCADE_STEP = 24;
 
-/** Window id: the app id, plus the instance key's value for per-item apps. */
+/** window id - the app id, plus the instance key's value for per-item apps */
 export function windowId(request: OpenRequest): string {
-  // Per-item apps (like projects) name the param that makes each window unique.
+  // per-item apps (like projects) name the param that makes each window unique
   const key = getAppMeta(request.appId).instanceKey;
   const value = key ? request.params?.[key] : undefined;
   return value ? `${request.appId}:${value}` : request.appId;
 }
 
-/** Keeps a size between the minimum and the viewport. */
+/** keeps a size between the minimum and the viewport */
 function clampSize(w: number, h: number, viewport: Viewport) {
   return {
     w: Math.max(MIN_WINDOW_SIZE.w, Math.min(w, viewport.width)),
@@ -62,7 +62,7 @@ function clampSize(w: number, h: number, viewport: Viewport) {
   };
 }
 
-/** Keeps enough of the title bar on screen to drag the window back. */
+/** keeps enough of the title bar on screen to drag the window back */
 function clampPosition(x: number, y: number, w: number, viewport: Viewport) {
   return {
     x: Math.min(Math.max(x, MIN_VISIBLE_WIDTH - w), viewport.width - MIN_VISIBLE_WIDTH),
@@ -70,31 +70,31 @@ function clampPosition(x: number, y: number, w: number, viewport: Viewport) {
   };
 }
 
-/** Next z-index above every open window. */
+/** next z-index above every open window */
 function nextZ(windows: WindowState[]): number {
   return windows.reduce((max, w) => Math.max(max, w.z), 0) + 1;
 }
 
-/** Id of the highest visible window, which should get focus next. */
+/** id of the highest visible window, which should get focus next */
 function topVisibleId(windows: WindowState[]): string | null {
   const visible = windows.filter((w) => !w.minimized).sort((a, b) => b.z - a.z);
   return visible[0]?.id ?? null;
 }
 
-/** Windows from bottom to top. Phone mode treats this as its navigation stack. */
+/** windows from bottom to top, phone mode uses this as its nav stack */
 export function stackOrder(state: WMState): WindowState[] {
   return [...state.windows].sort((a, b) => a.z - b.z);
 }
 
-/** Applies one action. Unknown window ids leave the state untouched. */
+/** applies one action, unknown window ids leave the state alone */
 export function wmReducer(state: WMState, action: WMAction): WMState {
   switch (action.type) {
     case "open": {
-      // An app that is already open is focused, not duplicated.
+      // an app that's already open gets focused, not duplicated
       const id = windowId(action.request);
       if (state.windows.some((w) => w.id === id)) return wmReducer(state, { type: "focus", id });
 
-      // Size from the registry, then cascade, keeping the whole window in view when it fits.
+      // size from the registry, then cascade, keeping the whole window in view if it fits
       const meta = getAppMeta(action.request.appId);
       const size = clampSize(meta.defaultSize.w, meta.defaultSize.h, action.viewport);
       const step = CASCADE_STEP * (state.windows.length % 8);
@@ -118,7 +118,7 @@ export function wmReducer(state: WMState, action: WMAction): WMState {
     case "focus": {
       const target = state.windows.find((w) => w.id === action.id);
       if (!target) return state;
-      // Raise above everything and restore it if minimised.
+      // raise above everything and restore it if minimised
       const z = nextZ(state.windows);
       return {
         windows: state.windows.map((w) => (w.id === action.id ? { ...w, z, minimized: false } : w)),
@@ -144,7 +144,7 @@ export function wmReducer(state: WMState, action: WMAction): WMState {
     case "toggleMaximize": {
       const target = state.windows.find((w) => w.id === action.id);
       if (!target) return state;
-      // Maximising also brings the window to the front.
+      // maximising also brings the window to the front
       const focused = wmReducer(state, { type: "focus", id: action.id });
       return {
         ...focused,
@@ -154,7 +154,7 @@ export function wmReducer(state: WMState, action: WMAction): WMState {
 
     case "move": {
       if (!state.windows.some((w) => w.id === action.id)) return state;
-      // Clamp the dragged position so the title bar stays reachable.
+      // clamp the dragged position so the title bar stays reachable
       return {
         ...state,
         windows: state.windows.map((w) =>
@@ -165,7 +165,7 @@ export function wmReducer(state: WMState, action: WMAction): WMState {
 
     case "resize": {
       if (!state.windows.some((w) => w.id === action.id)) return state;
-      // Clamp the size, then re-clamp the position: a wider-to-narrower resize moves the left bound.
+      // clamp the size, then re-clamp the position - a wider-to-narrower resize moves the left bound
       return {
         ...state,
         windows: state.windows.map((w) => {
@@ -177,7 +177,7 @@ export function wmReducer(state: WMState, action: WMAction): WMState {
     }
 
     case "fit": {
-      // Re-clamp everything after the browser window changes size.
+      // re-clamp everything after the browser window resizes
       return {
         ...state,
         windows: state.windows.map((w) => {
@@ -191,7 +191,7 @@ export function wmReducer(state: WMState, action: WMAction): WMState {
       return EMPTY_STATE;
 
     case "truncate": {
-      // Keep the bottom `keep` windows of the stack; used by phone back navigation.
+      // keep the bottom `keep` windows of the stack, used by phone back nav
       const kept = stackOrder(state).slice(0, Math.max(0, action.keep));
       if (kept.length === state.windows.length) return state;
       return { windows: kept, focusedId: topVisibleId(kept) };
@@ -199,7 +199,7 @@ export function wmReducer(state: WMState, action: WMAction): WMState {
   }
 }
 
-/** State for the windows a URL asks for, opened in order. */
+/** state for the windows a URL asks for, opened in order */
 export function initialState(requests: OpenRequest[], viewport: Viewport = DEFAULT_VIEWPORT): WMState {
   return requests.reduce((state, request) => wmReducer(state, { type: "open", request, viewport }), EMPTY_STATE);
 }

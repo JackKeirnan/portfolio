@@ -4,7 +4,7 @@ import { useSettings } from "@/os/settings";
 import { WALLPAPERS } from "@/os/wallpapers";
 import styles from "../apps.module.css";
 
-/** Wallpaper picker and sound switch; choices persist via the settings provider. */
+/** wallpaper picker + sound switch, choices get saved through the settings provider */
 export function DisplaySettings() {
   const settings = useSettings();
   return (

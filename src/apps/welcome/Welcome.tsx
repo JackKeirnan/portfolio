@@ -5,7 +5,7 @@ import type { AppId } from "@/os/apps";
 import { useWindowManager } from "@/os/WindowManagerProvider";
 import styles from "../apps.module.css";
 
-// The fast path for recruiters: the four things most visitors want.
+// fast path for recruiters - the four things most visitors want
 const QUICK_LINKS: { appId: AppId; label: string }[] = [
   { appId: "about", label: "About Me" },
   { appId: "projects", label: "My Projects" },
@@ -13,7 +13,7 @@ const QUICK_LINKS: { appId: AppId; label: string }[] = [
   { appId: "contact", label: "Contact" },
 ];
 
-/** First-visit window: a short intro and one-click links to the key sections. */
+/** first-visit window - short intro + one-click links to the key sections */
 export function Welcome() {
   const wm = useWindowManager();
   const firstName = developer.name.split(" ")[0];

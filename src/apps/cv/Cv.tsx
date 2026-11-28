@@ -2,7 +2,7 @@ import { developer } from "@/data/portfolio";
 import { EducationList } from "../shared/EducationList";
 import styles from "../apps.module.css";
 
-/** Experience timeline, education and the PDF download (hidden until a PDF is set). */
+/** experience timeline, education and the PDF download (hidden until a PDF is set) */
 export function Cv() {
   const { experience, education, cvPdf } = developer;
   return (

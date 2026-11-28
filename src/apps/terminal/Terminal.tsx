@@ -8,7 +8,7 @@ import styles from "../apps.module.css";
 
 const PROMPT = "jack@jackos ~ $";
 const BANNER = ["JackOS Terminal", "Type 'help' to see what I can do.", ""];
-// Tappable shortcuts on phones, where typing is awkward.
+// tappable shortcuts on phones since typing is awkward there
 const QUICK_COMMANDS = ["help", "whoami", "ls projects", "contact", "clear"];
 
 const CONTEXT: TerminalContext = {
@@ -17,7 +17,7 @@ const CONTEXT: TerminalContext = {
   contact: developer.contact.links.map(({ label, href }) => ({ label, href })),
 };
 
-/** A small fake shell; `open` drives the real window manager. */
+/** small fake shell, `open` drives the real window manager */
 export function Terminal() {
   const wm = useWindowManager();
   const [lines, setLines] = useState<string[]>(BANNER);
@@ -29,10 +29,10 @@ export function Terminal() {
     endRef.current?.scrollIntoView({ block: "end" });
   }, [lines]);
 
-  /** Echoes a command, prints its output, then applies any action. */
+  /** echo the command, print its output, then apply any action */
   function run(command: string) {
     const result = runCommand(command, CONTEXT);
-    // Clear wipes the screen without echoing anything.
+    // clear wipes the screen without echoing anything
     if (result.action?.type === "clear") {
       setLines([]);
       return;
@@ -48,9 +48,9 @@ export function Terminal() {
   }
 
   return (
-    // Clicking anywhere in the terminal focuses the input, like a real console.
+    // clicking anywhere in the terminal focuses the input like a real console
     <div className={styles.terminal} onClick={() => inputRef.current?.focus()}>
-      {/* role="log" announces only appended lines; blank lines keep their height. */}
+      {/* role="log" only announces appended lines, blank lines keep their height */}
       <div className={styles.terminalOutput} role="log">
         {lines.map((line, index) => <div key={index}>{line || " "}</div>)}
       </div>

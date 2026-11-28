@@ -3,13 +3,13 @@
 import { useEffect, useRef } from "react";
 import styles from "./BootScreen.module.css";
 
-/** Which sequence to show, whether the boot is the short returning-visitor one, and the completion callback. */
+/** which sequence to show, whether it's the short returning-visitor boot, and the done callback */
 type Props = { mode: "boot" | "shutdown"; short: boolean; onDone: () => void };
 
-/** Full-screen boot or shutdown sequence. Boot can be skipped with any key, click or tap. */
+/** full-screen boot or shutdown sequence, boot can be skipped with any key, click or tap */
 export function BootScreen({ mode, short, onDone }: Props) {
   const duration = mode === "boot" && short ? 1000 : 2000;
-  // Timer and skip can both fire; only the first one counts.
+  // timer and skip can both fire, only the first one counts
   const doneRef = useRef(false);
   const onDoneRef = useRef(onDone);
   onDoneRef.current = onDone;
@@ -22,7 +22,7 @@ export function BootScreen({ mode, short, onDone }: Props) {
       onDoneRef.current();
     };
     const timer = setTimeout(finish, duration);
-    // Only the boot is skippable; the shutdown joke is short anyway.
+    // only boot is skippable, the shutdown joke is short anyway
     if (mode === "boot") {
       window.addEventListener("keydown", finish);
       window.addEventListener("pointerdown", finish);

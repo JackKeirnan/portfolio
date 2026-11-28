@@ -5,10 +5,10 @@ import {
 } from "./windowManager";
 
 const viewport: Viewport = { width: 1280, height: 764 };
-/** Opens an app in the test viewport and returns the new state. */
+/** opens an app in the test viewport and gives back the new state */
 const open = (state: WMState, appId: Parameters<typeof windowId>[0]["appId"], params?: Record<string, string>) =>
   wmReducer(state, { type: "open", request: { appId, params }, viewport });
-/** Finds a window by id; the non-null assertion makes a missing one fail loudly. */
+/** find a window by id, the non-null assertion makes a missing one fail loudly */
 const win = (state: WMState, id: string) => state.windows.find((w) => w.id === id)!;
 
 describe("window manager", () => {

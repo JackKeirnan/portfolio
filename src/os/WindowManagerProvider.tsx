@@ -5,15 +5,15 @@ import type { OpenRequest } from "./apps";
 import { useIsPhone } from "./media";
 import { initialState, wmReducer, type Viewport, type WMState } from "./windowManager";
 
-/** Must match --os-taskbar-height in theme.css. */
+/** has to match --os-taskbar-height in theme.css */
 export const TASKBAR_HEIGHT = 36;
 
-/** Current usable desktop area: the browser window minus the taskbar. */
+/** current usable desktop area - browser window minus the taskbar */
 export function getViewport(): Viewport {
   return { width: window.innerWidth, height: window.innerHeight - TASKBAR_HEIGHT };
 }
 
-/** The window-changing calls apps can make; each dispatches one reducer action. */
+/** window-changing calls apps can make, each dispatches one reducer action */
 type Actions = {
   open(request: OpenRequest): void;
   close(id: string): void;
@@ -26,18 +26,18 @@ type Actions = {
   truncate(keep: number): void;
 };
 
-/** What apps and shells use to read and change windows. */
+/** what apps and shells use to read and change windows */
 export type WindowManager = Actions & { state: WMState; isPhone: boolean };
 
 const WindowManagerContext = createContext<WindowManager | null>(null);
 
-/** Owns window state for one JackOS instance; `initial` comes from the URL. */
+/** owns window state for one JackOS instance, `initial` comes from the URL */
 export function WindowManagerProvider({ initial, children }: { initial: OpenRequest[]; children: ReactNode }) {
   const [state, dispatch] = useReducer(wmReducer, initial, initialState);
-  // Phone flag is false on the first render, so it matches server markup.
+  // false on first render so it matches the server html
   const isPhone = useIsPhone();
 
-  // Actions never change identity, so effects can depend on them safely.
+  // actions never change identity so effects can safely depend on them
   const actions = useMemo<Actions>(
     () => ({
       open: (request) => dispatch({ type: "open", request, viewport: getViewport() }),
@@ -53,7 +53,7 @@ export function WindowManagerProvider({ initial, children }: { initial: OpenRequ
     [],
   );
 
-  // Re-fit windows to the real viewport after hydration and on every resize.
+  // re-fit windows to the real viewport after hydration and on every resize
   useEffect(() => {
     const fit = () => dispatch({ type: "fit", viewport: getViewport() });
     fit();
@@ -65,7 +65,7 @@ export function WindowManagerProvider({ initial, children }: { initial: OpenRequ
   return <WindowManagerContext.Provider value={value}>{children}</WindowManagerContext.Provider>;
 }
 
-/** Reads the window manager; must be used inside WindowManagerProvider. */
+/** needs to be inside WindowManagerProvider */
 export function useWindowManager(): WindowManager {
   const manager = useContext(WindowManagerContext);
   if (!manager) throw new Error("useWindowManager must be used inside WindowManagerProvider");

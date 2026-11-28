@@ -1,13 +1,13 @@
 import { APP_ALIASES, getAppMeta, type OpenRequest } from "@/os/apps";
 
-/** Content the terminal can print, passed in so the parser stays pure and testable. */
+/** stuff the terminal can print, passed in so the parser stays pure + testable */
 export type TerminalContext = {
   projects: { slug: string; title: string }[];
   whoami: string[];
   contact: { label: string; href: string }[];
 };
 
-/** Output lines plus an optional side effect for the Terminal component to apply. */
+/** output lines + an optional side effect for the Terminal component to apply */
 export type TerminalResult = {
   lines: string[];
   action?: { type: "open"; request: OpenRequest } | { type: "clear" };
@@ -25,13 +25,13 @@ const HELP_LINES = [
 ];
 
 /**
- * Handles `open <name>`: an app alias first, then a project slug.
- * Never throws; unknown names return an explanation line.
+ * handles `open <name>` - app alias first, then a project slug
+ * never throws, unknown names get an explanation line
  */
 function openCommand(target: string | undefined, context: TerminalContext): TerminalResult {
   if (!target) return { lines: ["Usage: open <name>. Try 'open about' or 'ls projects'."] };
 
-  // Own-property check so names like "constructor" or "__proto__" are not treated as aliases.
+  // own-property check so names like "constructor" or "__proto__" don't count as aliases
   const appId = Object.hasOwn(APP_ALIASES, target) ? APP_ALIASES[target] : undefined;
   if (appId) {
     return { lines: [`Opening ${getAppMeta(appId).title}...`], action: { type: "open", request: { appId } } };
@@ -49,8 +49,8 @@ function openCommand(target: string | undefined, context: TerminalContext): Term
 }
 
 /**
- * Parses and runs one line of terminal input. Never throws.
- * Returns printed lines plus an optional action for the Terminal component.
+ * parse + run one line of terminal input, never throws
+ * gives back printed lines + an optional action for the Terminal component
  */
 export function runCommand(input: string, context: TerminalContext): TerminalResult {
   const words = input.trim().toLowerCase().split(/\s+/).filter(Boolean);
@@ -63,7 +63,7 @@ export function runCommand(input: string, context: TerminalContext): TerminalRes
     case "whoami":
       return { lines: context.whoami };
     case "ls":
-      // Bare `ls` and `ls projects` both list projects.
+      // bare `ls` and `ls projects` both list projects
       if (args.length === 0 || args[0] === "projects") {
         return { lines: context.projects.map((p) => `  ${p.slug.padEnd(30)} ${p.title}`) };
       }
@@ -71,10 +71,10 @@ export function runCommand(input: string, context: TerminalContext): TerminalRes
     case "open":
       return openCommand(args[0], context);
     case "contact":
-      // Strip the mailto: prefix so the address reads as plain text.
+      // strip the mailto: prefix so the address reads as plain text
       return { lines: context.contact.map((c) => `  ${c.label.padEnd(10)} ${c.href.replace(/^mailto:/, "")}`) };
     case "credits":
-      // Same as `open credits`, so the window opens from one short word.
+      // same as `open credits`, just one short word to open the window
       return openCommand("credits", context);
     case "clear":
       return { lines: [], action: { type: "clear" } };

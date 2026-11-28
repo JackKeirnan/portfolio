@@ -4,7 +4,7 @@ import { windowSoundFor } from "./windowSounds";
 
 const viewport: Viewport = { width: 1280, height: 764 };
 
-/** Opens an app on top of a state, for building before/after pairs. */
+/** opens an app on top of a state, for building before/after pairs */
 const open = (state: WMState, appId: "about" | "contact" | "notFound") =>
   wmReducer(state, { type: "open", request: { appId }, viewport });
 

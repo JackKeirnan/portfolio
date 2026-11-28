@@ -1,4 +1,4 @@
-/* Raised tile: light top-left edge, dark bottom-right, like the window bevels. */
+/* raised tile - light top-left edge, dark bottom-right, same as the window bevels */
 .tile {
   display: inline-flex;
   flex: none;
