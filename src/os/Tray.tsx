@@ -8,7 +8,6 @@ import styles from "./Tray.module.css";
 export function Clock() {
   const [time, setTime] = useState("");
   useEffect(() => {
-    // Format the current time as HH:MM in the visitor's locale.
     const tick = () => setTime(new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }));
     // Fill the clock now, then refresh often enough that the minute is never stale.
     tick();

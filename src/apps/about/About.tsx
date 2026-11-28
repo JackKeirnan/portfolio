@@ -5,12 +5,10 @@ import styles from "../apps.module.css";
 
 /** Portrait, intro, background, skills and education. */
 export function About() {
-  // Pull the sections out of the shared portfolio data.
   const { name, title, portrait, intro, about, skills, education } = developer;
   // The first intro paragraph sits beside the portrait; the rest flow below.
   const [lead, ...restOfIntro] = intro.paragraphs;
 
-  // Portrait row, remaining paragraphs, then skills and education.
   return (
     <div className={styles.page}>
       <div className={styles.row}>

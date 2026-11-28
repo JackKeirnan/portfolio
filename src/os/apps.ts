@@ -68,6 +68,5 @@ export function getAppMeta(appId: AppId): AppMeta {
 export function windowTitle(appId: AppId, params?: AppParams): string {
   // Project windows look up their name; a missing slug falls back to "Project".
   if (appId === "projectViewer") return getProjectBySlug(params?.slug ?? "")?.title ?? "Project";
-  // Every other window uses the static title from the registry.
   return getAppMeta(appId).title;
 }

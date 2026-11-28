@@ -21,10 +21,8 @@ function useWindowSounds() {
   const { play } = useSettings();
   const previous = useRef(state);
   useEffect(() => {
-    // Compare with the last state so each change gets its own sound (or none).
     const sound = windowSoundFor(previous.current, state);
     if (sound) play(sound);
-    // Remember this state for the next change.
     previous.current = state;
   }, [state, play]);
 }
@@ -54,7 +52,6 @@ function Shell({ isHome }: { isHome: boolean }) {
 
   /** Boot finished or skipped. */
   const finishBoot = useCallback(() => {
-    // Show the desktop and play the startup jingle.
     setPhase("desktop");
     play("startup");
     // Only the first-ever boot opens Welcome, and only once.
@@ -66,7 +63,6 @@ function Shell({ isHome }: { isHome: boolean }) {
 
   /** Shutdown joke finished: clear the desktop and boot again. */
   const finishShutdown = useCallback(() => {
-    // Close every window so the reboot starts from an empty desktop.
     wm.closeAll();
     setPhase("boot");
   }, [wm]);

@@ -29,7 +29,6 @@ const HELP_LINES = [
  * Never throws; unknown names return an explanation line.
  */
 function openCommand(target: string | undefined, context: TerminalContext): TerminalResult {
-  // No target given, so explain the usage.
   if (!target) return { lines: ["Usage: open <name>. Try 'open about' or 'ls projects'."] };
 
   // Own-property check so names like "constructor" or "__proto__" are not treated as aliases.
@@ -38,7 +37,6 @@ function openCommand(target: string | undefined, context: TerminalContext): Term
     return { lines: [`Opening ${getAppMeta(appId).title}...`], action: { type: "open", request: { appId } } };
   }
 
-  // Not an app alias, so try a project slug.
   const project = context.projects.find((p) => p.slug === target);
   if (project) {
     return {
@@ -47,7 +45,6 @@ function openCommand(target: string | undefined, context: TerminalContext): Term
     };
   }
 
-  // Neither an app nor a project matched.
   return { lines: [`open: no app or project called '${target}'. Try 'ls projects'.`] };
 }
 
@@ -56,7 +53,6 @@ function openCommand(target: string | undefined, context: TerminalContext): Term
  * Returns printed lines plus an optional action for the Terminal component.
  */
 export function runCommand(input: string, context: TerminalContext): TerminalResult {
-  // Case and extra spaces do not matter.
   const words = input.trim().toLowerCase().split(/\s+/).filter(Boolean);
   if (words.length === 0) return { lines: [] };
   const [command, ...args] = words;

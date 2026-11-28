@@ -15,10 +15,8 @@ export function useIsPhone(): boolean {
     // Watch the width query so rotating or resizing the window switches modes.
     const query = window.matchMedia(PHONE_QUERY);
     const update = () => setIsPhone(query.matches);
-    // Read the current value once, then follow changes.
     update();
     query.addEventListener("change", update);
-    // Stop listening when the component unmounts.
     return () => query.removeEventListener("change", update);
   }, []);
   return isPhone;

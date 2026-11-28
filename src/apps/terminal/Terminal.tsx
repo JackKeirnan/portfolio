@@ -25,29 +25,23 @@ export function Terminal() {
   const inputRef = useRef<HTMLInputElement>(null);
   const endRef = useRef<HTMLDivElement>(null);
 
-  // Keep the newest output in view.
   useEffect(() => {
     endRef.current?.scrollIntoView({ block: "end" });
   }, [lines]);
 
   /** Echoes a command, prints its output, then applies any action. */
   function run(command: string) {
-    // Interpret the command against the portfolio data.
     const result = runCommand(command, CONTEXT);
     // Clear wipes the screen without echoing anything.
     if (result.action?.type === "clear") {
       setLines([]);
       return;
     }
-    // Append the echoed prompt line and the output.
     setLines((previous) => [...previous, `${PROMPT} ${command}`, ...result.lines]);
-    // Open commands also drive the real window manager.
     if (result.action?.type === "open") wm.open(result.action.request);
   }
 
-  /** Runs the typed command and clears the field. */
   function onSubmit(event: FormEvent) {
-    // Stop the form reloading the page, then run and reset the field.
     event.preventDefault();
     run(input);
     setInput("");

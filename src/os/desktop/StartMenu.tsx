@@ -6,11 +6,6 @@ import { PixelIcon } from "../PixelIcon";
 import { useWindowManager } from "../WindowManagerProvider";
 import styles from "./StartMenu.module.css";
 
-/** Returns focus to the Start button, e.g. after Esc. */
-function focusStartButton() {
-  document.querySelector<HTMLElement>("[data-start-button]")?.focus();
-}
-
 /** The JackOS menu: every app, Plain view, and Shut down. */
 export function StartMenu({ onClose, onShutDown }: { onClose: () => void; onShutDown: () => void }) {
   const wm = useWindowManager();
@@ -33,7 +28,6 @@ export function StartMenu({ onClose, onShutDown }: { onClose: () => void; onShut
 
   /** Arrow keys move between items; Esc closes and returns focus. */
   function onKeyDown(event: KeyboardEvent<HTMLDivElement>) {
-    // Work out which menu item has focus now.
     const items = Array.from(menuRef.current?.querySelectorAll<HTMLElement>("[role='menuitem']") ?? []);
     const index = items.indexOf(document.activeElement as HTMLElement);
     if (event.key === "ArrowDown" || event.key === "ArrowUp") {
@@ -44,7 +38,7 @@ export function StartMenu({ onClose, onShutDown }: { onClose: () => void; onShut
     } else if (event.key === "Escape") {
       // Close the menu and give focus back to the Start button.
       onClose();
-      focusStartButton();
+      document.querySelector<HTMLElement>("[data-start-button]")?.focus();
     }
   }
 

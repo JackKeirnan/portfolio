@@ -16,10 +16,8 @@ const QUICK_LINKS: { appId: AppId; label: string }[] = [
 /** First-visit window: a short intro and one-click links to the key sections. */
 export function Welcome() {
   const wm = useWindowManager();
-  // Greet by first name only.
   const firstName = developer.name.split(" ")[0];
 
-  // Greeting, quick-link buttons, then a tip that depends on phone or desktop.
   return (
     <div className={styles.page}>
       <h1 className={styles.heading}>{developer.intro.heading} I&apos;m {firstName}.</h1>

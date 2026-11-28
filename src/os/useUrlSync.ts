@@ -53,7 +53,6 @@ export function useUrlSync(): { back: () => void; home: () => void } {
 
   // Browser back/forward: phones restore the saved stack depth; desktops skip phone entries and re-sync.
   useEffect(() => {
-    /** Phone: truncates to the entry's saved depth. Desktop: skips dead phone entries, then re-syncs URL and title. */
     const onPopState = (event: PopStateEvent) => {
       // Work out the direction: a shallower saved depth than the entry we left means Back.
       const saved = (event.state ?? {}) as PhoneHistoryState;

@@ -50,7 +50,6 @@ function buffersFor(context: AudioContext, name: SoundName) {
   let notes = buffers.get(name);
   if (!notes) {
     notes = SOUND_PRESETS[name].map((note) => {
-      // Copy ZzFX's samples into a mono buffer at its sample rate.
       const samples = zzfxGenerate(...note.params);
       const buffer = context.createBuffer(1, samples.length, ZZFX_SAMPLE_RATE);
       buffer.getChannelData(0).set(samples);

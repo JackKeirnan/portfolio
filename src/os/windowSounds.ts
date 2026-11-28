@@ -14,7 +14,6 @@ export function windowSoundFor(previous: WMState, next: WMState): SoundName | nu
   const opened = next.windows.find((win) => !before.has(win.id));
   if (opened) return opened.appId === "notFound" ? "error" : "open";
 
-  // A window that is no longer there was closed.
   if (previous.windows.some((win) => !after.has(win.id))) return "close";
 
   // Same windows: look for minimise, restore and maximise changes.

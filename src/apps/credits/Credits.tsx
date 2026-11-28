@@ -6,7 +6,6 @@ import styles from "../apps.module.css";
 export function Credits() {
   return (
     <div className={styles.page}>
-      {/* System-info style header: logo icon beside the name and version. */}
       <div className={styles.row}>
         <PixelIcon name="welcome" size={48} />
         <div>
@@ -15,7 +14,6 @@ export function Credits() {
         </div>
       </div>
 
-      {/* One entry per credit; linked ones open their licence in a new tab. */}
       <h2 className={styles.subheading}>Credits</h2>
       <ul className={styles.list}>
         {developer.credits.map((credit) => (

@@ -33,8 +33,7 @@ const WindowManagerContext = createContext<WindowManager | null>(null);
 
 /** Owns window state for one JackOS instance; `initial` comes from the URL. */
 export function WindowManagerProvider({ initial, children }: { initial: OpenRequest[]; children: ReactNode }) {
-  // Build the first state lazily from the URL-provided requests, once.
-  const [state, dispatch] = useReducer(wmReducer, initial, (requests) => initialState(requests));
+  const [state, dispatch] = useReducer(wmReducer, initial, initialState);
   // Phone flag is false on the first render, so it matches server markup.
   const isPhone = useIsPhone();
 
@@ -62,14 +61,12 @@ export function WindowManagerProvider({ initial, children }: { initial: OpenRequ
     return () => window.removeEventListener("resize", fit);
   }, []);
 
-  // Rebuild the context value only when state or phone mode changes.
   const value = useMemo<WindowManager>(() => ({ ...actions, state, isPhone }), [actions, state, isPhone]);
   return <WindowManagerContext.Provider value={value}>{children}</WindowManagerContext.Provider>;
 }
 
 /** Reads the window manager; must be used inside WindowManagerProvider. */
 export function useWindowManager(): WindowManager {
-  // Null means no provider sits above this component.
   const manager = useContext(WindowManagerContext);
   if (!manager) throw new Error("useWindowManager must be used inside WindowManagerProvider");
   return manager;

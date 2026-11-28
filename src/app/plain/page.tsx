@@ -7,9 +7,7 @@ export const metadata: Metadata = pageMetadata("Plain view | Jack Keirnan", "Jac
 
 /** Fallback for screen readers and hurried recruiters: everything, no desktop. */
 export default function PlainPage() {
-  // Pull every section out of the shared portfolio data.
   const { name, title, intro, about, cvPdf, experience, education, skills, contact, credits, footer } = developer;
-  // One flat page: header and intro, then each section as a heading and list.
   return (
     <div className={styles.scroll}>
       <main className={styles.page}>
@@ -43,7 +41,6 @@ export default function PlainPage() {
           {projects.map((project) => (
             <li key={project.slug}>
               <a href={`/work/${project.slug}`}>{project.title}</a>: {project.description}
-              {/* Credit the collaborator like the project window does, linking their site when there is one. */}
               {project.collaborator && (
                 <>
                   {" Made with "}

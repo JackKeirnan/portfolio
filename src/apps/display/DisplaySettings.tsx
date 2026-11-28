@@ -6,9 +6,7 @@ import styles from "../apps.module.css";
 
 /** Wallpaper picker and sound switch; choices persist via the settings provider. */
 export function DisplaySettings() {
-  // Read and write the persisted display settings.
   const settings = useSettings();
-  // One radio per wallpaper, then the sound checkbox.
   return (
     <div className={styles.page}>
       <fieldset className={styles.fieldset}>

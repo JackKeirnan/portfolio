@@ -16,7 +16,6 @@ type State = { failed: boolean };
 export class WindowErrorBoundary extends Component<Props, State> {
   state: State = { failed: false };
 
-  /** Switches this window to its error view. */
   static getDerivedStateFromError(): State {
     return { failed: true };
   }
@@ -26,7 +25,6 @@ export class WindowErrorBoundary extends Component<Props, State> {
     console.error(error);
   }
 
-  /** Renders the app, or the error view after a crash. */
   render() {
     if (!this.state.failed) return this.props.children;
     return (

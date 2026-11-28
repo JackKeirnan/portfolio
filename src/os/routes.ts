@@ -1,7 +1,6 @@
 import { getProjectBySlug } from "@/data/portfolio";
 import type { AppId, OpenRequest } from "./apps";
 
-// Section URLs and the app each one opens.
 const SECTION_ROUTES: Record<string, AppId> = {
   "/about": "about",
   "/work": "projects",
@@ -27,7 +26,6 @@ export function initialWindowsForPath(pathname: string): OpenRequest[] {
   // Home opens no windows; the desktop is the landing view.
   if (path === "/" || path === "") return [];
 
-  // Fixed section routes map straight to their app.
   const sectionApp = SECTION_ROUTES[path];
   if (sectionApp) return [{ appId: sectionApp }];
 
@@ -42,9 +40,7 @@ export function initialWindowsForPath(pathname: string): OpenRequest[] {
 
 /** URL that represents a window, so copying the address bar shares it. Null keeps the current URL. */
 export function pathForWindow(request: OpenRequest | null): string | null {
-  // No window at all means the plain home URL.
   if (!request) return "/";
-  // Map each app to its URL; apps without a route fall through to home.
   switch (request.appId) {
     case "about":
       return "/about";

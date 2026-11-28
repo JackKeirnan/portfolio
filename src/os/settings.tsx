@@ -32,25 +32,21 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
     setSoundOnState(readSetting<unknown>(STORAGE_KEYS.sound, false) === true);
   }, []);
 
-  // Rebuild the value only when a choice changes, so consumers do not re-render needlessly.
   const value = useMemo<Settings>(
     () => ({
       wallpaper,
       soundOn,
       setWallpaper(id) {
-        // Update the screen first, then persist the choice.
         setWallpaperState(id);
         writeSetting(STORAGE_KEYS.wallpaper, id);
       },
       setSoundOn(on) {
-        // Update the state and persist it.
         setSoundOnState(on);
         writeSetting(STORAGE_KEYS.sound, on);
         // Audible confirmation that sound now works.
         if (on) playSound("open");
       },
       play(name) {
-        // Respect the visitor's choice: silent unless sound is on.
         if (soundOn) playSound(name);
       },
     }),
@@ -62,7 +58,6 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
 
 /** Reads settings; must be used inside SettingsProvider. */
 export function useSettings(): Settings {
-  // Fetch the provider's value; null means no provider wraps this component.
   const settings = useContext(SettingsContext);
   // Fail loudly during development rather than returning empty defaults.
   if (!settings) throw new Error("useSettings must be used inside SettingsProvider");

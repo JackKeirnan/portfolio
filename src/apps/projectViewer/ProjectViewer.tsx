@@ -39,7 +39,6 @@ export function ProjectViewer({ params }: AppProps) {
         />
       )}
 
-      {/* Thumbnails only when there is more than one shot; pressed one is on show. */}
       {screenshots.length > 1 && (
         <div role="group" aria-label="Screenshots" className={styles.thumbs}>
           {screenshots.map((src, index) => (
@@ -64,7 +63,6 @@ export function ProjectViewer({ params }: AppProps) {
       <h1 className={styles.heading}>{project.title}</h1>
       <p className={styles.meta}>
         {project.category}
-        {/* Credit whoever it was made with, linking their site when there is one. */}
         {project.collaborator && (
           <>
             {" · Made with "}
@@ -80,7 +78,6 @@ export function ProjectViewer({ params }: AppProps) {
         {project.languages.map((language) => <span key={language} className={styles.tag}>{language}</span>)}
       </div>
       {project.longdescription.map((paragraph) => <p key={paragraph} className={styles.paragraph}>{paragraph}</p>)}
-      {/* Links only appear for projects that have them; both open in a new tab. */}
       {(project.liveUrl || project.repoUrl) && (
         <div className={styles.buttons}>
           {project.liveUrl && (

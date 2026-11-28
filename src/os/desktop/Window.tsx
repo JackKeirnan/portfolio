@@ -57,7 +57,6 @@ export function Window({ win, focused, children }: { win: WindowState; focused: 
 
   /** Resizes from the bottom-right handle; the press also bubbles up to focus the window. */
   function startResize(event: ReactPointerEvent<HTMLDivElement>) {
-    // Primary button only.
     if (event.button !== 0) return;
     // Resize relative to the size when the drag began.
     const { w, h } = win;
