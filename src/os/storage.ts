@@ -2,11 +2,12 @@
 export const STORAGE_KEYS = {
   visited: "jackos.visited",
   dark: "jackos.dark",
+  animatedWallpaper: "jackos.animatedWallpaper",
   sound: "jackos.sound",
 } as const;
 
-/** inline script that sets <html data-theme> before first paint: saved choice, else system dark mode */
-export const THEME_SCRIPT = `try{var s=JSON.parse(localStorage.getItem("${STORAGE_KEYS.dark}"))}catch(e){}document.documentElement.dataset.theme=(typeof s==="boolean"?s:matchMedia("(prefers-color-scheme: dark)").matches)?"dark":"light"`;
+/** inline script that sets <html data-theme data-wallpaper> before first paint: saved choices, else the system settings */
+export const THEME_SCRIPT = `var d=document.documentElement.dataset;function p(k){try{return JSON.parse(localStorage.getItem(k))}catch(e){}}var s=p("${STORAGE_KEYS.dark}"),a=p("${STORAGE_KEYS.animatedWallpaper}");d.theme=(typeof s==="boolean"?s:matchMedia("(prefers-color-scheme: dark)").matches)?"dark":"light";d.wallpaper=(typeof a==="boolean"?a:!matchMedia("(prefers-reduced-motion: reduce)").matches)?"animated":"still"`;
 
 /**
  * read a saved JSON value. localStorage throws in Safari private mode and

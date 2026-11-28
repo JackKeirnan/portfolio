@@ -8,6 +8,8 @@ import { readSetting, STORAGE_KEYS, writeSetting } from "./storage";
 export type Settings = {
   dark: boolean;
   setDark(on: boolean): void;
+  animatedWallpaper: boolean;
+  setAnimatedWallpaper(on: boolean): void;
   soundOn: boolean;
   setSoundOn(on: boolean): void;
   // only plays if the visitor turned sound on
@@ -16,16 +18,18 @@ export type Settings = {
 
 const SettingsContext = createContext<Settings | null>(null);
 
-/** holds + saves dark mode and sound choices, sound is off by default */
+/** holds + saves dark mode, wallpaper motion and sound choices, sound is off by default */
 export function SettingsProvider({ children }: { children: ReactNode }) {
   // start from defaults so server and client markup match, then load saved choices
   const [dark, setDarkState] = useState(false);
+  const [animatedWallpaper, setAnimatedWallpaperState] = useState(false);
   const [soundOn, setSoundOnState] = useState(false);
 
   // load saved choices after mount, storage only exists in the browser
   useEffect(() => {
-    // THEME_SCRIPT already picked the theme before first paint, just mirror it
+    // THEME_SCRIPT already picked these before first paint, just mirror them
     setDarkState(document.documentElement.dataset.theme === "dark");
+    setAnimatedWallpaperState(document.documentElement.dataset.wallpaper === "animated");
     // sound stays off unless it was explicitly saved as true
     setSoundOnState(readSetting<unknown>(STORAGE_KEYS.sound, false) === true);
   }, []);
@@ -33,11 +37,17 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
   const value = useMemo<Settings>(
     () => ({
       dark,
+      animatedWallpaper,
       soundOn,
       setDark(on) {
         setDarkState(on);
         document.documentElement.dataset.theme = on ? "dark" : "light";
         writeSetting(STORAGE_KEYS.dark, on);
+      },
+      setAnimatedWallpaper(on) {
+        setAnimatedWallpaperState(on);
+        document.documentElement.dataset.wallpaper = on ? "animated" : "still";
+        writeSetting(STORAGE_KEYS.animatedWallpaper, on);
       },
       setSoundOn(on) {
         setSoundOnState(on);
@@ -49,7 +59,7 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
         if (soundOn) playSound(name);
       },
     }),
-    [dark, soundOn],
+    [dark, animatedWallpaper, soundOn],
   );
 
   return <SettingsContext.Provider value={value}>{children}</SettingsContext.Provider>;

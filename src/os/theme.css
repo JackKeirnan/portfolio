@@ -26,6 +26,8 @@
   --os-mono: "Lucida Console", "Courier New", monospace;
   --os-font-size: 13px;
   --os-taskbar-height: 36px;
+  --os-wallpaper-art: url("/art/fudge-and-ginger.gif");
+  --os-wallpaper-dim: transparent;
   /* pixel cursors from Kenney's Cursor Pixel Pack (CC0), scaled 2x; hotspots sit on the tip / centre */
   --os-cursor: url("/cursors/arrow.png") 4 0, default;
   --os-cursor-hand: url("/cursors/hand.png") 11 0, pointer;
@@ -82,8 +84,21 @@ a { color: var(--os-link); }
 .os-steady-bold { display: inline-grid; justify-items: center; }
 .os-steady-bold::after { content: attr(data-label); font-weight: bold; height: 0; overflow: hidden; visibility: hidden; }
 
-/* data-theme sits on <html>, set by the (os) layout's THEME_SCRIPT; /plain has none so keeps the plain body */
-[data-theme="light"] body { background: linear-gradient(180deg, #24103a 0%, #4b2a6b 60%, #7a4f9e 100%); }
+/* data-theme sits on <html> (THEME_SCRIPT), so /plain has no wallpaper. Fudge and Ginger art,
+   hard pixels at any size; the left edge is shaded so icon labels stay readable */
+[data-theme] body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(90deg, #00000066, transparent 200px), linear-gradient(var(--os-wallpaper-dim), var(--os-wallpaper-dim)), var(--os-wallpaper-art) center / cover #24103a;
+  image-rendering: pixelated;
+}
+/* tall screens: cover would zoom in too far, so the scene sits at the bottom under plum */
+@media (max-aspect-ratio: 1/1) { [data-theme] body::before { background-size: auto, auto, auto 55%; background-position: 0 0, 0 0, 40% bottom; background-repeat: no-repeat; } }
+
+/* still wallpaper: first frame, no steam. Display Settings switch, defaults to the system reduced-motion setting */
+[data-wallpaper="still"] { --os-wallpaper-art: url("/art/fudge-and-ginger.png"); }
 
 /* dark mode: same purple title bars, night-time chrome and panels, darker wallpaper */
 [data-theme="dark"] {
@@ -97,11 +112,14 @@ a { color: var(--os-link); }
   --os-muted: #b7aacb;
   --os-link: #c9a3f0;
   --os-heading: #d6b8f5;
+  /* evening: same room, dimmed purple */
+  --os-wallpaper-dim: #14082ab3;
   color-scheme: dark;
 }
-[data-theme="dark"] body { background: linear-gradient(180deg, #0a0512 0%, #1c0d2e 60%, #33194d 100%); }
 
 /* respect reduced-motion - no window or boot animations */
 @media (prefers-reduced-motion: reduce) {
+  /* without JS there's no data-wallpaper, so fall back to the still here */
+  :root:not([data-wallpaper]) { --os-wallpaper-art: url("/art/fudge-and-ginger.png"); }
   *, *::before, *::after { animation: none !important; transition: none !important; }
 }

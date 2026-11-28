@@ -167,6 +167,21 @@ test.describe("retro extras", () => {
     await expect(page.locator("[data-theme]")).toHaveAttribute("data-theme", "dark");
   });
 
+  test("reduced motion shows a still wallpaper until the visitor switches animation on", async ({ page }) => {
+    await skipFirstVisit(page);
+    await page.emulateMedia({ reducedMotion: "reduce" });
+    await page.goto("/");
+    const html = page.locator("html");
+    await expect(html).toHaveAttribute("data-wallpaper", "still");
+    await page.mouse.click(700, 400, { button: "right" });
+    await page.getByRole("menuitem", { name: "Display Settings..." }).click();
+    await page.getByRole("dialog", { name: "Display Settings" }).getByLabel("Animated wallpaper").check();
+    await expect(html).toHaveAttribute("data-wallpaper", "animated");
+    // the choice beats the system setting on the next visit
+    await page.reload();
+    await expect(html).toHaveAttribute("data-wallpaper", "animated");
+  });
+
   test("a saved dark mode applies before the app's JavaScript runs", async ({ page }) => {
     await skipFirstVisit(page);
     await page.addInitScript(() => window.localStorage.setItem("jackos.dark", "true"));
