@@ -1,4 +1,4 @@
-import { readFileSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import path from "node:path";
 import { describe, expect, it } from "vitest";
 import { PIXEL_ICONS } from "./pixelIcons";
@@ -6,6 +6,10 @@ import { PIXEL_ICONS } from "./pixelIcons";
 /** reads one --os-* colour token straight from theme.css */
 const css = readFileSync(path.join(process.cwd(), "src/os/theme.css"), "utf8");
 const token = (name: string) => css.match(new RegExp(`--os-${name}:\\s*(#[0-9a-f]{6})`))![1];
+/** the same token as dark mode sets it, falling back to the light value when dark mode doesn't override it */
+const darkBlock = css.slice(css.indexOf('[data-theme="dark"]'));
+const darkToken = (name: string) =>
+  darkBlock.slice(0, darkBlock.indexOf("}")).match(new RegExp(`--os-${name}:\\s*(#[0-9a-f]{6})`))?.[1] ?? token(name);
 
 /** WCAG contrast ratio between two #rrggbb colours */
 function contrast(a: string, b: string): number {
@@ -29,15 +33,34 @@ describe("theme contrast (WCAG AA, 4.5:1)", () => {
     expect(contrast("#ffffff", token("start"))).toBeGreaterThanOrEqual(4.5);
   });
 
-  it("keeps body, muted and link text readable on panels and chrome", () => {
-    for (const text of ["text", "muted", "link"]) {
+  it("keeps body, muted, link and heading text readable on panels and chrome", () => {
+    for (const text of ["text", "muted", "link", "heading"]) {
       expect(contrast(token(text), token("panel")), `${text} on panel`).toBeGreaterThanOrEqual(4.5);
       expect(contrast(token(text), token("chrome")), `${text} on chrome`).toBeGreaterThanOrEqual(4.5);
+    }
+  });
+
+  it("keeps dark mode text readable on its panels, chrome and pressed buttons", () => {
+    for (const text of ["text", "muted", "link", "heading"]) {
+      for (const surface of ["panel", "chrome", "panel-raised"]) {
+        expect(contrast(darkToken(text), darkToken(surface)), `${text} on dark ${surface}`).toBeGreaterThanOrEqual(4.5);
+      }
     }
   });
 
   it("keeps white glyphs visible on every icon tile", () => {
     // icons are decorative, so the 3:1 non-text contrast level applies
     for (const [name, icon] of Object.entries(PIXEL_ICONS)) expect(contrast("#ffffff", icon.tile), name).toBeGreaterThanOrEqual(3);
+  });
+});
+
+describe("cursors", () => {
+  it("points every cursor token at a file in public/cursors and ships Kenney's licence", () => {
+    for (const name of ["cursor", "cursor-hand", "cursor-busy"]) {
+      const file = css.match(new RegExp(`--os-${name}:\\s*url\\("([^"]+)"\\)`))?.[1];
+      expect(file, name).toMatch(/^\/cursors\/[a-z]+\.png$/);
+      expect(existsSync(path.join(process.cwd(), "public", file!)), file).toBe(true);
+    }
+    expect(existsSync(path.join(process.cwd(), "public/licenses/kenney-cursor-pixel-pack.txt"))).toBe(true);
   });
 });

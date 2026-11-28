@@ -1,28 +1,19 @@
 "use client";
 
 import { useSettings } from "@/os/settings";
-import { WALLPAPERS } from "@/os/wallpapers";
 import styles from "../apps.module.css";
 
-/** wallpaper picker + sound switch, choices get saved through the settings provider */
+/** dark mode + sound switches, choices get saved through the settings provider */
 export function DisplaySettings() {
   const settings = useSettings();
   return (
     <div className={styles.page}>
       <fieldset className={styles.fieldset}>
-        <legend>Wallpaper</legend>
-        {WALLPAPERS.map((wallpaper) => (
-          <label key={wallpaper.id} className={styles.option}>
-            <input
-              type="radio"
-              name="wallpaper"
-              value={wallpaper.id}
-              checked={settings.wallpaper === wallpaper.id}
-              onChange={() => settings.setWallpaper(wallpaper.id)}
-            />
-            {wallpaper.label}
-          </label>
-        ))}
+        <legend>Appearance</legend>
+        <label className={styles.option}>
+          <input type="checkbox" checked={settings.dark} onChange={(event) => settings.setDark(event.target.checked)} />
+          Dark mode
+        </label>
       </fieldset>
       <fieldset className={styles.fieldset}>
         <legend>Sound</legend>

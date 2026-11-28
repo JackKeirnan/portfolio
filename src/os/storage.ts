@@ -1,9 +1,12 @@
 /** keys for everything JackOS remembers between visits */
 export const STORAGE_KEYS = {
   visited: "jackos.visited",
-  wallpaper: "jackos.wallpaper",
+  dark: "jackos.dark",
   sound: "jackos.sound",
 } as const;
+
+/** inline script that sets <html data-theme> before first paint: saved choice, else system dark mode */
+export const THEME_SCRIPT = `try{var s=JSON.parse(localStorage.getItem("${STORAGE_KEYS.dark}"))}catch(e){}document.documentElement.dataset.theme=(typeof s==="boolean"?s:matchMedia("(prefers-color-scheme: dark)").matches)?"dark":"light"`;
 
 /**
  * read a saved JSON value. localStorage throws in Safari private mode and

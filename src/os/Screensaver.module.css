@@ -1,0 +1,4 @@
+/* sits above everything, including the taskbar and boot screen layer below it */
+.screen { position: fixed; inset: 0; z-index: 30001; background: #000000; overflow: hidden; }
+.logo { position: absolute; top: 0; left: 0; font: bold 40px var(--os-font); color: #ffffff; will-change: transform; }
+.logo span { color: #c9a3f0; }

@@ -6,6 +6,7 @@ import { BootScreen } from "./BootScreen";
 import { Desktop } from "./desktop/Desktop";
 import { Taskbar } from "./desktop/Taskbar";
 import { prefersReducedMotion } from "./media";
+import { IDLE_MS, Screensaver, useIdle } from "./Screensaver";
 import { PhoneShell } from "./phone/PhoneShell";
 import { initialWindowsForPath } from "./routes";
 import { SettingsProvider, useSettings } from "./settings";
@@ -15,27 +16,39 @@ import { useWindowManager, WindowManagerProvider } from "./WindowManagerProvider
 import { windowSoundFor } from "./windowSounds";
 import styles from "./OS.module.css";
 
-/** plays a sound on every window open, close, minimise or maximise (silent unless sound is on) */
-function useWindowSounds() {
+/** window sounds, plus a brief busy flag after an open so the hourglass shows */
+function useWindowFeedback(): boolean {
   const { state } = useWindowManager();
   const { play } = useSettings();
   const previous = useRef(state);
+  const [busy, setBusy] = useState(false);
+  // in a ref so a move or focus right after the open can't cancel the reset
+  const busyTimer = useRef<ReturnType<typeof setTimeout>>(undefined);
   useEffect(() => {
     const sound = windowSoundFor(previous.current, state);
     if (sound) play(sound);
     previous.current = state;
+    if (sound !== "open" && sound !== "error") return;
+    setBusy(true);
+    clearTimeout(busyTimer.current);
+    busyTimer.current = setTimeout(() => setBusy(false), 350);
   }, [state, play]);
+  useEffect(() => () => clearTimeout(busyTimer.current), []);
+  return busy;
 }
 
 /** picks the desktop or phone shell, runs boot, shutdown and URL sync */
 function Shell({ isHome }: { isHome: boolean }) {
   const wm = useWindowManager();
-  const { wallpaper, play } = useSettings();
+  const { play } = useSettings();
   const { back, home } = useUrlSync();
   const [phase, setPhase] = useState<"desktop" | "boot" | "shutdown">("desktop");
   // Welcome only opens after the very first boot, not after a joke reboot
   const showWelcomeAfterBoot = useRef(false);
-  useWindowSounds();
+  const busy = useWindowFeedback();
+  // screensaver only on the desktop, never mid-boot, and not for visitors who asked for less motion
+  const [calm] = useState(() => typeof window !== "undefined" && prefersReducedMotion());
+  const idle = useIdle(IDLE_MS, !wm.isPhone && phase === "desktop" && !calm);
 
   // first visit to "/" boots then opens Welcome, deep links and returning visitors skip both
   useEffect(() => {
@@ -68,7 +81,7 @@ function Shell({ isHome }: { isHome: boolean }) {
   }, [wm]);
 
   return (
-    <div className={styles.root} data-wallpaper={wallpaper}>
+    <div className={styles.root} data-busy={busy}>
       <a className={styles.skipLink} href="/plain">Skip to plain text version</a>
       {wm.isPhone ? (
         <PhoneShell onBack={back} onHome={home} />
@@ -78,6 +91,7 @@ function Shell({ isHome }: { isHome: boolean }) {
           <Taskbar onShutDown={() => setPhase("shutdown")} />
         </>
       )}
+      {idle && <Screensaver />}
       {phase !== "desktop" && (
         <BootScreen mode={phase} short={wm.isPhone} onDone={phase === "boot" ? finishBoot : finishShutdown} />
       )}

@@ -53,6 +53,8 @@ test.describe("desktop", () => {
     // open About and grab its title bar
     await page.goto("/about");
     const dialog = page.getByRole("dialog", { name: "About Me" });
+    // wait for the zoom-open animation to finish so the window is at its real size and place
+    await page.waitForFunction(() => document.getAnimations().every((animation) => animation.playState !== "running"));
     const bar = dialog.locator("[data-titlebar]");
     const start = (await bar.boundingBox())!;
     // drag the bar almost off the right edge of the screen
@@ -108,6 +110,140 @@ test.describe("desktop", () => {
     // name and section headings are there
     await expect(page.getByRole("heading", { level: 1, name: "Jack Keirnan" })).toBeVisible();
     await expect(page.getByRole("heading", { name: "Experience" })).toBeVisible();
+  });
+});
+
+test.describe("retro extras", () => {
+  test.use({ viewport: { width: 1280, height: 800 } });
+
+  test("right-clicking the wallpaper opens the desktop menu", async ({ page }) => {
+    await skipFirstVisit(page);
+    await page.goto("/");
+    await page.mouse.click(700, 400, { button: "right" });
+    const menu = page.getByRole("menu", { name: "Desktop menu" });
+    await expect(menu).toBeVisible();
+    // its Display Settings item opens that window and closes the menu
+    await menu.getByRole("menuitem", { name: "Display Settings..." }).click();
+    await expect(page.getByRole("dialog", { name: "Display Settings" })).toBeVisible();
+    await expect(menu).toHaveCount(0);
+  });
+
+  test("a left-click anywhere else closes the desktop menu", async ({ page }) => {
+    await skipFirstVisit(page);
+    await page.goto("/");
+    const menu = page.getByRole("menu", { name: "Desktop menu" });
+    // wallpaper click
+    await page.mouse.click(700, 400, { button: "right" });
+    await expect(menu).toBeVisible();
+    await page.mouse.click(400, 600);
+    await expect(menu).toHaveCount(0);
+    // taskbar click
+    await page.mouse.click(700, 400, { button: "right" });
+    await expect(menu).toBeVisible();
+    await page.getByRole("button", { name: /♪/ }).click();
+    await expect(menu).toHaveCount(0);
+  });
+
+  test("dark mode switches on from Display Settings and is remembered", async ({ page }) => {
+    await skipFirstVisit(page);
+    await page.emulateMedia({ colorScheme: "light" });
+    await page.goto("/");
+    const desktop = page.locator("[data-theme]");
+    await expect(desktop).toHaveAttribute("data-theme", "light");
+    // open Display Settings from the desktop menu and tick Dark mode
+    await page.mouse.click(700, 400, { button: "right" });
+    await page.getByRole("menuitem", { name: "Display Settings..." }).click();
+    await page.getByRole("dialog", { name: "Display Settings" }).getByLabel("Dark mode").check();
+    await expect(desktop).toHaveAttribute("data-theme", "dark");
+    // the choice survives a reload
+    await page.reload();
+    await expect(desktop).toHaveAttribute("data-theme", "dark");
+  });
+
+  test("dark mode follows the system setting until the visitor picks one", async ({ page }) => {
+    await skipFirstVisit(page);
+    await page.emulateMedia({ colorScheme: "dark" });
+    await page.goto("/");
+    await expect(page.locator("[data-theme]")).toHaveAttribute("data-theme", "dark");
+  });
+
+  test("a saved dark mode applies before the app's JavaScript runs", async ({ page }) => {
+    await skipFirstVisit(page);
+    await page.addInitScript(() => window.localStorage.setItem("jackos.dark", "true"));
+    // block the app bundles so only the inline theme script can set the theme
+    await page.route("**/_next/static/chunks/**", (route) => route.abort());
+    await page.goto("/");
+    await expect(page.locator("html")).toHaveAttribute("data-theme", "dark");
+  });
+
+  test("the hourglass clears even if the new window is dragged straight away", async ({ page }) => {
+    await skipFirstVisit(page);
+    await page.goto("/");
+    await page.getByRole("navigation", { name: "Desktop" }).getByRole("button", { name: "My Projects" }).dblclick();
+    const bar = page.getByRole("dialog", { name: "My Projects" }).locator("[data-titlebar]");
+    const start = (await bar.boundingBox())!;
+    await page.mouse.move(start.x + 40, start.y + 10);
+    await page.mouse.down();
+    await page.mouse.move(start.x + 80, start.y + 40, { steps: 3 });
+    await page.mouse.up();
+    await expect(page.locator("[data-busy]")).toHaveAttribute("data-busy", "false");
+  });
+
+  test("Tab out of the desktop menu closes it", async ({ page }) => {
+    await skipFirstVisit(page);
+    await page.goto("/");
+    await page.mouse.click(700, 400, { button: "right" });
+    const menu = page.getByRole("menu", { name: "Desktop menu" });
+    await expect(menu).toBeVisible();
+    await page.keyboard.press("Tab");
+    await expect(menu).toHaveCount(0);
+  });
+
+  test("dragging on the wallpaper selects the icons it covers", async ({ page }) => {
+    await skipFirstVisit(page);
+    await page.goto("/");
+    const icons = page.getByRole("navigation", { name: "Desktop" }).getByRole("button");
+    const first = (await icons.nth(0).boundingBox())!;
+    const second = (await icons.nth(1).boundingBox())!;
+    // start right of the icon column and sweep left across the first two icons
+    await page.mouse.move(first.x + first.width + 40, first.y + 5);
+    await page.mouse.down();
+    await page.mouse.move(first.x + 10, second.y + second.height - 5, { steps: 5 });
+    await page.mouse.up();
+    await expect(page.locator("[data-selected]")).toHaveCount(2);
+  });
+
+  test("the screensaver starts after a minute idle and any key wakes the screen", async ({ page }) => {
+    await page.clock.install();
+    await skipFirstVisit(page);
+    await page.goto("/");
+    await expect(page.getByRole("navigation", { name: "Desktop" })).toBeVisible();
+    await page.clock.fastForward(61_000);
+    const saver = page.getByTestId("screensaver");
+    await expect(saver).toBeVisible();
+    await page.keyboard.press("Shift");
+    await expect(saver).toHaveCount(0);
+  });
+
+  test("the key that wakes the screensaver doesn't reach the page", async ({ page }) => {
+    await page.clock.install();
+    await skipFirstVisit(page);
+    await page.goto("/about");
+    const about = page.getByRole("dialog", { name: "About Me" });
+    await about.focus();
+    await page.clock.fastForward(61_000);
+    await expect(page.getByTestId("screensaver")).toBeVisible();
+    // Esc would close the focused window if it got through
+    await page.keyboard.press("Escape");
+    await expect(page.getByTestId("screensaver")).toHaveCount(0);
+    await expect(about).toBeVisible();
+  });
+
+  test("first boot shows the BIOS memory line and a tip", async ({ page }) => {
+    await page.goto("/");
+    const boot = page.getByTestId("boot-screen");
+    await expect(boot.getByText(/JackOS BIOS v1\.0 - Memory test/)).toBeVisible();
+    await expect(boot.getByText(/^Tip: /)).toBeVisible();
   });
 });
 
