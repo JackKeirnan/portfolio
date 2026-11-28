@@ -64,3 +64,11 @@ describe("cursors", () => {
     expect(existsSync(path.join(process.cwd(), "public/licenses/kenney-cursor-pixel-pack.txt"))).toBe(true);
   });
 });
+
+describe("wallpaper", () => {
+  it("points the animated art and its reduced-motion still at files in public/art", () => {
+    const files = [...css.matchAll(/--os-wallpaper-art:\s*url\("([^"]+)"\)/g)].map((match) => match[1]);
+    expect(files).toEqual(["/art/fudge-and-ginger.gif", "/art/fudge-and-ginger.png"]);
+    for (const file of files) expect(existsSync(path.join(process.cwd(), "public", file)), file).toBe(true);
+  });
+});
