@@ -228,6 +228,19 @@ test.describe("retro extras", () => {
     await expect(page.locator("[data-selected]")).toHaveCount(2);
   });
 
+  test("dragging beside the icons doesn't highlight their labels as text", async ({ page }) => {
+    await skipFirstVisit(page);
+    await page.goto("/");
+    const icon = (await page.getByRole("navigation", { name: "Desktop" }).getByRole("button").nth(0).boundingBox())!;
+    // sweep down past the label column without touching any icon
+    await page.mouse.move(icon.x + icon.width + 80, icon.y);
+    await page.mouse.down();
+    await page.mouse.move(icon.x + icon.width + 10, icon.y + 300, { steps: 5 });
+    await page.mouse.up();
+    expect(await page.evaluate(() => String(window.getSelection()))).toBe("");
+    await expect(page.locator("[data-selected]")).toHaveCount(0);
+  });
+
   test("the screensaver starts after a minute idle and any key wakes the screen", async ({ page }) => {
     await page.clock.install();
     await skipFirstVisit(page);
